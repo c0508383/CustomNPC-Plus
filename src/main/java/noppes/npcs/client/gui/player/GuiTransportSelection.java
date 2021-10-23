@@ -92,7 +92,6 @@ public class GuiTransportSelection extends GuiNPCInterface implements ITopButton
 	}
 	@Override
 	public void setSelected(String selected) {
-		// TODO Auto-generated method stub
 		
 	}
 

@@ -76,7 +76,6 @@ public class GuiNpcDimension extends GuiNPCInterface implements IScrollData{
     }
 	@Override
 	public void save() {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override

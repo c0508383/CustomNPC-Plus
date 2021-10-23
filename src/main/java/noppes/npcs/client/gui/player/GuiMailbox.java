@@ -120,7 +120,6 @@ public class GuiMailbox extends GuiNPCInterface implements IGuiData, ICustomScro
     }
 	@Override
 	public void save() {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override

@@ -128,7 +128,6 @@ public class GuiNPCManageTransporters extends GuiNPCInterface implements IScroll
 
 	@Override
 	public void setSelected(String selected) {
-		// TODO Auto-generated method stub
 		
 	}
 
