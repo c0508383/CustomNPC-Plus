@@ -1,14 +1,14 @@
 package noppes.npcs.client.gui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.client.gui.GuiButton;
 import noppes.npcs.EventScriptContainer;
 import noppes.npcs.client.gui.util.GuiCustomScroll;
 import noppes.npcs.client.gui.util.GuiNpcButton;
 import noppes.npcs.client.gui.util.GuiNpcLabel;
 import noppes.npcs.client.gui.util.SubGuiInterface;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventGuiScriptList extends SubGuiInterface{
     private GuiCustomScroll scroll1;

@@ -5,19 +5,18 @@
 
 package noppes.npcs;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.*;
-import javax.script.Compilable;
-import javax.script.CompiledScript;
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-
 import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.nbt.NBTTagCompound;
 import noppes.npcs.constants.EnumScriptType;
 import noppes.npcs.controllers.IScriptHandler;
 import noppes.npcs.controllers.ScriptController;
+
+import javax.script.CompiledScript;
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.*;
 
 public class EventScriptContainer {
     public static EventScriptContainer Current;

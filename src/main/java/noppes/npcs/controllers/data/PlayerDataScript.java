@@ -5,28 +5,20 @@
 
 package noppes.npcs.controllers.data;
 
-import java.lang.reflect.Array;
-import java.util.*;
-import java.util.Map.Entry;
-
 import com.google.common.base.Preconditions;
+import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
-import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.world.WorldServer;
 import noppes.npcs.EventHooks;
 import noppes.npcs.EventScriptContainer;
 import noppes.npcs.NBTTags;
-import noppes.npcs.controllers.PlayerData;
-import noppes.npcs.scripted.NpcAPI;
-import noppes.npcs.scripted.entity.ScriptPlayer;
 import noppes.npcs.constants.EnumScriptType;
 import noppes.npcs.controllers.IScriptHandler;
 import noppes.npcs.controllers.ScriptController;
-import noppes.npcs.scripted.ScriptWorld;
+import noppes.npcs.scripted.NpcAPI;
 import noppes.npcs.scripted.event.PlayerEvent;
 import noppes.npcs.scripted.interfaces.IPlayer;
 import noppes.npcs.scripted.interfaces.IWorld;
@@ -34,6 +26,9 @@ import noppes.npcs.scripted.wrapper.WrapperNpcAPI;
 
 import javax.annotation.CheckForNull;
 import javax.script.ScriptEngine;
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class PlayerDataScript implements IScriptHandler {
     public List<EventScriptContainer> scripts = new ArrayList();

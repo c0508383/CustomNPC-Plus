@@ -3,8 +3,8 @@ package noppes.npcs.containers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.MathHelper;
-import noppes.npcs.scripted.interfaces.IContainer;
 import noppes.npcs.scripted.ScriptContainer;
+import noppes.npcs.scripted.interfaces.IContainer;
 
 public class ContainerNpcInterface extends Container{
 	private int posX, posZ;

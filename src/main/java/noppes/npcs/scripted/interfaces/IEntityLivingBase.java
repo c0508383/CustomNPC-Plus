@@ -1,8 +1,8 @@
 package noppes.npcs.scripted.interfaces;
 
 import net.minecraft.entity.EntityLivingBase;
-import noppes.npcs.scripted.entity.ScriptEntity;
 import noppes.npcs.scripted.ScriptItemStack;
+import noppes.npcs.scripted.entity.ScriptEntity;
 import noppes.npcs.scripted.entity.ScriptLivingBase;
 
 public interface IEntityLivingBase<T extends EntityLivingBase> extends IEntity<T> {

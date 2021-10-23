@@ -5,17 +5,18 @@
 
 package noppes.npcs.entity.data;
 
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import noppes.npcs.EventHooks;
+import noppes.npcs.controllers.PlayerData;
+import noppes.npcs.entity.EntityNPCInterface;
+import noppes.npcs.scripted.CustomNPCsException;
+import noppes.npcs.scripted.interfaces.ITimers;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import noppes.npcs.EventHooks;
-import noppes.npcs.entity.EntityNPCInterface;
-import noppes.npcs.scripted.interfaces.ITimers;
-import noppes.npcs.controllers.PlayerData;
-import noppes.npcs.scripted.CustomNPCsException;
 
 public class DataTimers implements ITimers {
     private Object parent;

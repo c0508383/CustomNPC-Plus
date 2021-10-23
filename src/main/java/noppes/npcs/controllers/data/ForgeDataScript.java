@@ -5,15 +5,7 @@
 
 package noppes.npcs.controllers.data;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.Map.Entry;
-
 import cpw.mods.fml.common.eventhandler.Event;
-import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
 import noppes.npcs.EventHooks;
 import noppes.npcs.EventScriptContainer;
@@ -24,6 +16,8 @@ import noppes.npcs.controllers.ScriptController;
 import noppes.npcs.scripted.wrapper.WrapperNpcAPI;
 
 import javax.script.ScriptEngine;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class ForgeDataScript implements IScriptHandler {
     private List<EventScriptContainer> scripts = new ArrayList();
