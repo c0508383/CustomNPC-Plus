@@ -72,11 +72,9 @@ public class TranslateUtil {
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		} catch (UnsupportedAudioFileException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
+////			e.printStackTrace();
 //		} catch (LineUnavailableException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
+////			e.printStackTrace();
 //		}
 //	}
 
