@@ -119,9 +119,9 @@ public class ScriptItemStack implements IItemStack {
 		if(tag == null)
 			return null;
 		if(tag instanceof NBTPrimitive)
-			return ((NBTPrimitive)tag).func_150286_g();
+			return ((NBTPrimitive)tag).func_150286_g(); //getDouble
 		if(tag instanceof NBTTagString)
-			return ((NBTTagString)tag).func_150285_a_();
+			return ((NBTTagString)tag).func_150285_a_(); //getString
 		return tag;
 	}
 	

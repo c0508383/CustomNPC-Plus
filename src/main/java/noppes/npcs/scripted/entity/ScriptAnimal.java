@@ -17,6 +17,6 @@ public class ScriptAnimal<T extends EntityAnimal> extends ScriptLiving<T> implem
 
 	@Override
 	public boolean typeOf(int type){
-		return type == EntityType.ANIMAL?true:super.typeOf(type);
+		return type == EntityType.ANIMAL || super.typeOf(type);
 	}
 }

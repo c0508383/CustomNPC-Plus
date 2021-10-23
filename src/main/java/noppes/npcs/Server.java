@@ -1,6 +1,5 @@
 package noppes.npcs;
 
-import com.google.common.base.Charsets;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import io.netty.buffer.ByteBuf;
@@ -15,6 +14,7 @@ import net.minecraft.village.MerchantRecipeList;
 import noppes.npcs.constants.EnumPacketClient;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -114,7 +114,7 @@ public class Server {
 	}
 	
 	public static void writeString(ByteBuf buffer, String s){
-        byte[] bytes = s.getBytes(Charsets.UTF_8);
+        byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
 		buffer.writeShort((short)bytes.length);
 		buffer.writeBytes(bytes);
 	}
@@ -123,7 +123,7 @@ public class Server {
 		try{
 			byte[] bytes = new byte[buffer.readShort()];
 			buffer.readBytes(bytes);
-			return new String(bytes, Charsets.UTF_8);
+			return new String(bytes, StandardCharsets.UTF_8);
 		}
 		catch(IndexOutOfBoundsException ex){
 			return null;

@@ -122,7 +122,7 @@ public class TextContainer {
     }
 
     public boolean compareMarkUps(TextContainer.MarkUp mu1, TextContainer.MarkUp mu2) {
-        return mu1 == null?true:mu1.start > mu2.start;
+        return mu1 == null || mu1.start > mu2.start;
     }
 
     public void addMakeUp(int start, int end, char c, int level) {

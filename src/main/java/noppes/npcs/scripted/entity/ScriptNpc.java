@@ -207,7 +207,7 @@ public class ScriptNpc<T extends EntityNPCInterface> extends ScriptLiving<T> imp
 
 	@Override
 	public boolean typeOf(int type){
-		return type == EntityType.NPC?true:super.typeOf(type);
+		return type == EntityType.NPC || super.typeOf(type);
 	}
 	
 	/**

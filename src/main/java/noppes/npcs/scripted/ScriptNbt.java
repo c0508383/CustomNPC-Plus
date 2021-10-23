@@ -4,8 +4,6 @@ import net.minecraft.nbt.*;
 import noppes.npcs.scripted.interfaces.INbt;
 import noppes.npcs.util.NBTJsonUtil;
 
-import java.util.Iterator;
-
 public class ScriptNbt implements INbt {
     private NBTTagCompound compound;
 
@@ -189,14 +187,13 @@ public class ScriptNbt implements INbt {
     }
 
     public boolean isEqual(INbt nbt) {
-        return nbt == null?false:this.compound.equals(nbt.getMCNBT());
+        return nbt != null && this.compound.equals(nbt.getMCNBT());
     }
 
     public void clear() {
-        Iterator var1 = this.compound.func_150296_c().iterator();
 
-        while(var1.hasNext()) {
-            String name = (String)var1.next();
+        for (Object o : this.compound.func_150296_c()) {
+            String name = (String) o;
             this.compound.removeTag(name);
         }
 

@@ -44,24 +44,24 @@ public class ServerEventsHandler {
 	public static EntityVillager Merchant;
 	public static Entity mounted;
 	
-//	private HashMap<String, Integer> exps = new HashMap<String, Integer>();
-//
-//	@SubscribeEvent
-//	public void onUpdate(LivingUpdateEvent event){
-//		if(!(event.entityLiving instanceof EntityPlayer))
-//			return;
-//		EntityPlayer player = (EntityPlayer) event.entityLiving;
-//		if(exps.containsKey(player.getCommandSenderName())){
-//			int prevExp = exps.get(player.getCommandSenderName());
-//			if(prevExp > player.experienceTotal){				
-//				player.addChatMessage(new ChatComponentText("Omg exp was gotten:" + (player.experienceTotal - prevExp)));
-//			}
-//			else if(prevExp < player.experienceTotal){				
-//				player.addChatMessage(new ChatComponentText("Omg exp was lost:" + (prevExp - player.experienceTotal)));
-//			}
-//		}
-//		exps.put(player.getCommandSenderName(), player.experienceTotal);
-//	}
+	/*private HashMap<String, Integer> exps = new HashMap<String, Integer>();
+
+	@SubscribeEvent
+	public void onUpdate(LivingUpdateEvent event){
+		if(!(event.entityLiving instanceof EntityPlayer))
+			return;
+		EntityPlayer player = (EntityPlayer) event.entityLiving;
+		if(exps.containsKey(player.getCommandSenderName())){
+			int prevExp = exps.get(player.getCommandSenderName());
+			if(prevExp > player.experienceTotal){
+				player.addChatMessage(new ChatComponentText("Omg exp was gotten:" + (player.experienceTotal - prevExp)));
+			}
+			else if(prevExp < player.experienceTotal){
+				player.addChatMessage(new ChatComponentText("Omg exp was lost:" + (prevExp - player.experienceTotal)));
+			}
+		}
+		exps.put(player.getCommandSenderName(), player.experienceTotal);
+	}*/
 
 	@SubscribeEvent
 	public void invoke(EntityInteractEvent event) {

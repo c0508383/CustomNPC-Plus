@@ -69,7 +69,7 @@ public class ScriptLivingBase<T extends EntityLivingBase> extends ScriptEntity<T
 
 	@Override
 	public boolean typeOf(int type){
-		return type == EntityType.LIVING?true:super.typeOf(type);
+		return type == EntityType.LIVING || super.typeOf(type);
 	}
 	/**
 	 * @param entity Entity to check

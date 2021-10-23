@@ -210,7 +210,7 @@ public class MarkovDictionary {
 
 		ResourceLocation resource = new ResourceLocation("customnpcs:markovnames/" + dictionaryFile);
 
-		BufferedReader readIn = new BufferedReader(new InputStreamReader(getResource(resource), "UTF-8"));
+		BufferedReader readIn = new BufferedReader(new InputStreamReader(getResource(resource), StandardCharsets.UTF_8));
 		// Thread.currentThread().getContextClassLoader().getResourceAsStream("path/to/resource/file.ext");
 
 		for (String line = readIn.readLine(); line != null; line = readIn.readLine()) {

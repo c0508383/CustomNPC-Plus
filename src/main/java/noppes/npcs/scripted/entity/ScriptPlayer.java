@@ -130,7 +130,7 @@ public class ScriptPlayer<T extends EntityPlayerMP> extends ScriptLivingBase<T> 
 
 	@Override
 	public boolean typeOf(int type){
-		return type == EntityType.PLAYER?true:super.typeOf(type);
+		return type == EntityType.PLAYER || super.typeOf(type);
 	}
 	/**
 	 * @param faction The faction id

@@ -3,12 +3,12 @@ package noppes.npcs.util;
 import com.google.common.io.Files;
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import net.minecraft.nbt.*;
-import org.apache.commons.io.Charsets;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,7 +90,7 @@ public class NBTJsonUtil {
 			if(list.func_150303_d() == 3){
 				int[] arr = new int[list.tagCount()];
 				for(int i = 0; list.tagCount() > 0 ; i++){
-					arr[i] = ((NBTTagInt)list.removeTag(0)).func_150287_d();
+					arr[i] = ((NBTTagInt)list.removeTag(0)).func_150287_d(); //getInt()
 				}
 				return new NBTTagIntArray(arr);
 			}
@@ -157,7 +157,7 @@ public class NBTJsonUtil {
 		if(!name.isEmpty())
 			name = "\"" + name + "\": ";
 		if(base.getId() == 8){//NBTTagString
-			String data = ((NBTTagString)base).func_150285_a_();
+			String data = ((NBTTagString)base).func_150285_a_(); //getString
 			data = data.replace("\"", "\\\""); //replace " with \"
 			list.add(new JsonLine(name + "\"" + data + "\""));
 		}
@@ -296,14 +296,14 @@ public class NBTJsonUtil {
 
 	
 	public static NBTTagCompound LoadFile(File file) throws IOException, JsonException {
-		return Convert(Files.toString(file, Charsets.UTF_8));
+		return Convert(Files.toString(file, StandardCharsets.UTF_8));
 	}
 	
 	public static void SaveFile(File file, NBTTagCompound compound) throws IOException, JsonException {
 		String json = Convert(compound);
 		OutputStreamWriter writer = null;
 		try{
-			writer = new OutputStreamWriter(new FileOutputStream(file), Charsets.UTF_8);
+			writer = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
 			writer.write(json);
 			
 		}
