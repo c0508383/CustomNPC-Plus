@@ -20,7 +20,7 @@ import org.lwjgl.opengl.GL12;
 public class BlockPedestalRenderer extends BlockRendererInterface{
 
 	private final ModelPedestal model = new ModelPedestal();
-	private final static ResourceLocation resource = new ResourceLocation("customnpcs:textures/models/npcPedestal.png");
+	private static final ResourceLocation resource = new ResourceLocation("customnpcs:textures/models/npcPedestal.png");
     
     public BlockPedestalRenderer(){
 		((BlockRotated)CustomItems.pedestal).renderId = RenderingRegistry.getNextAvailableRenderId();

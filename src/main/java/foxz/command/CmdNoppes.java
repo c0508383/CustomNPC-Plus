@@ -51,7 +51,7 @@ public class CmdNoppes extends ChMcLogger {
 		SlayMap.put("items", EntityItem.class);
 		SlayMap.put("xporbs", EntityXPOrb.class);
 		SlayMap.put("npcs", EntityNPCInterface.class);
-		
+
 		HashMap<String,Class<?>> list = new HashMap<String,Class<?>>(EntityList.stringToClassMapping);		
 		for(String name : list.keySet()){
 			Class<?> cls = list.get(name);
@@ -213,13 +213,13 @@ public class CmdNoppes extends ChMcLogger {
     @Override
 	public List addTabCompletion(ICommandSender par1, String[] args) {
     	if(args[0].equalsIgnoreCase("slay")){
-			return CommandBase.getListOfStringsMatchingLastWord(args, SlayMap.keySet().toArray(new String[SlayMap.size()]));
+			return CommandBase.getListOfStringsMatchingLastWord(args, SlayMap.keySet().toArray(new String[0]));
     	}
 		if(args[0].equalsIgnoreCase("npc") && args.length == 3){
 			return cmdnpc.addTabCompletion(par1, Arrays.copyOfRange(args, 1, args.length));
 		}
 		if(args[0].equalsIgnoreCase("faction") && args.length == 4){
-			return CommandBase.getListOfStringsMatchingLastWord(args, new String[]{"add", "subtract", "set", "reset", "drop", "create"});
+			return CommandBase.getListOfStringsMatchingLastWord(args, "add", "subtract", "set", "reset", "drop", "create");
 		}
     	return super.addTabCompletion(par1, args);
     }

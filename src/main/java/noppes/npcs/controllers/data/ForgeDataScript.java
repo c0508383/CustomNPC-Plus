@@ -60,24 +60,20 @@ public class ForgeDataScript implements IScriptHandler {
                     }
                 }
 
-                Iterator var3 = this.scripts.iterator();
+            for (EventScriptContainer script : this.scripts) {
+                script.setEngine(scriptLanguage);
+                if (script.engine == null)
+                    return;
 
-                while (var3.hasNext()) {
-                    EventScriptContainer script = (EventScriptContainer) var3.next();
+                Event result = (Event) script.engine.get("event");
+                if (result == null)
+                    script.engine.put("event", event);
+                script.engine.put("API", new WrapperNpcAPI());
 
-                    script.setEngine(scriptLanguage);
-                    if(script.engine == null)
-                        return;
+                ScriptEngine engine = script.engine;
 
-                    Event result = (Event) script.engine.get("event");
-                    if(result == null)
-                        script.engine.put("event", event);
-                    script.engine.put("API", new WrapperNpcAPI());
-
-                    ScriptEngine engine = script.engine;
-
-                    script.run(type, event);
-                }
+                script.run(type, event);
+            }
             //});
         }
     }
@@ -117,16 +113,13 @@ public class ForgeDataScript implements IScriptHandler {
     public Map<Long, String> getConsoleText() {
         TreeMap map = new TreeMap();
         int tab = 0;
-        Iterator var3 = this.getScripts().iterator();
 
-        while(var3.hasNext()) {
-            EventScriptContainer script = (EventScriptContainer)var3.next();
+        for (EventScriptContainer script : this.getScripts()) {
             ++tab;
-            Iterator var5 = script.console.entrySet().iterator();
 
-            while(var5.hasNext()) {
-                Entry entry = (Entry)var5.next();
-                map.put(entry.getKey(), " tab " + tab + ":\n" + (String)entry.getValue());
+            for (Entry<Long, String> longStringEntry : script.console.entrySet()) {
+                Entry entry = (Entry) longStringEntry;
+                map.put(entry.getKey(), " tab " + tab + ":\n" + (String) entry.getValue());
             }
         }
 
@@ -134,10 +127,8 @@ public class ForgeDataScript implements IScriptHandler {
     }
 
     public void clearConsole() {
-        Iterator var1 = this.getScripts().iterator();
 
-        while(var1.hasNext()) {
-            EventScriptContainer script = (EventScriptContainer)var1.next();
+        for (EventScriptContainer script : this.getScripts()) {
             script.console.clear();
         }
 

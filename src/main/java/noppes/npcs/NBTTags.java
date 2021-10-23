@@ -394,10 +394,9 @@ public class NBTTags {
 		if(map == null) {
 			return nbttaglist;
 		} else {
-			Iterator var2 = map.keySet().iterator();
 
-			while(var2.hasNext()) {
-				long slot = ((Long)var2.next()).longValue();
+			for (Long aLong : map.keySet()) {
+				long slot = aLong.longValue();
 				NBTTagCompound nbttagcompound = new NBTTagCompound();
 				nbttagcompound.setLong("Long", slot);
 				nbttagcompound.setString("String", (String) map.get(Long.valueOf(slot)));
@@ -423,10 +422,8 @@ public class NBTTags {
 
 	public static NBTTagList NBTScript(List<EventScriptContainer> scripts) {
 		NBTTagList list = new NBTTagList();
-		Iterator var2 = scripts.iterator();
 
-		while(var2.hasNext()) {
-			EventScriptContainer script = (EventScriptContainer)var2.next();
+		for (EventScriptContainer script : scripts) {
 			NBTTagCompound compound = new NBTTagCompound();
 			script.writeToNBT(compound);
 			list.appendTag(compound);

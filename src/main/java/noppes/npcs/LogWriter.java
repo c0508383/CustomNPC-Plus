@@ -6,9 +6,9 @@ import java.util.Date;
 import java.util.logging.*;
 
 public class LogWriter {
-	private final static String name = "CustomNPCs";
-	private final static Logger logger = Logger.getLogger(name);
-	private final static SimpleDateFormat dateformat = new SimpleDateFormat("HH:mm:ss");
+	private static final String name = "CustomNPCs";
+	private static final Logger logger = Logger.getLogger(name);
+	private static final SimpleDateFormat dateformat = new SimpleDateFormat("HH:mm:ss");
 	private static Handler handler;
 	static {
 		try {

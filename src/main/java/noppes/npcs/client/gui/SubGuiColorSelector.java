@@ -16,7 +16,7 @@ import java.io.InputStream;
 
 public class SubGuiColorSelector extends SubGuiInterface implements ITextfieldListener{
 
-	private final static ResourceLocation resource = new ResourceLocation("customnpcs:textures/gui/color.png");
+	private static final ResourceLocation resource = new ResourceLocation("customnpcs:textures/gui/color.png");
 	
 	private int colorX, colorY;
 	

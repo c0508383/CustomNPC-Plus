@@ -67,12 +67,7 @@ public class EntityAIWander extends EntityAIBase
     }
     private EntityNPCInterface getNearbyNPC() {
 		List<EntityNPCInterface> list = entity.worldObj.getEntitiesWithinAABBExcludingEntity(entity, entity.boundingBox.expand(entity.ai.walkingRange, entity.ai.walkingRange > 7?7:entity.ai.walkingRange, entity.ai.walkingRange), selector);
-		Iterator<EntityNPCInterface> ita = list.iterator();
-		while(ita.hasNext()){
-			EntityNPCInterface npc = ita.next();
-			if(!npc.ai.stopAndInteract || npc.isAttacking() || !npc.isEntityAlive() || entity.faction.isAggressiveToNpc(npc))
-				ita.remove();
-		}
+        list.removeIf(npc -> !npc.ai.stopAndInteract || npc.isAttacking() || !npc.isEntityAlive() || entity.faction.isAggressiveToNpc(npc));
 		
 		if(list.isEmpty())
 			return null;

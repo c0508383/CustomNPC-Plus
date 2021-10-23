@@ -57,9 +57,8 @@ public class ModelScaleRenderer extends ModelRenderer {
         GL11.glCallList(this.displayList);
         if (this.childModels != null)
         {
-            for (int i = 0; i < this.childModels.size(); ++i)
-            {
-                ((ModelRenderer)this.childModels.get(i)).render(par1);
+            for (Object childModel : this.childModels) {
+                ((ModelRenderer) childModel).render(par1);
             }
         }
         GL11.glPopMatrix();
@@ -96,9 +95,8 @@ public class ModelScaleRenderer extends ModelRenderer {
         GL11.glCallList(this.displayList);
         if (this.childModels != null)
         {
-            for (int i = 0; i < this.childModels.size(); ++i)
-            {
-                ((ModelRenderer)this.childModels.get(i)).render(par1);
+            for (Object childModel : this.childModels) {
+                ((ModelRenderer) childModel).render(par1);
             }
         }
         GL11.glPopMatrix();
@@ -113,9 +111,8 @@ public class ModelScaleRenderer extends ModelRenderer {
         GL11.glNewList(this.displayList, GL11.GL_COMPILE);
         Tessellator tessellator = Tessellator.instance;
 
-        for (int i = 0; i < this.cubeList.size(); ++i)
-        {
-            ((ModelBox)this.cubeList.get(i)).render(tessellator, par1);
+        for (Object o : this.cubeList) {
+            ((ModelBox) o).render(tessellator, par1);
         }
 
         GL11.glEndList();

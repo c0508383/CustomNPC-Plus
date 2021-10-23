@@ -19,7 +19,7 @@ import java.io.InputStream;
 public class GuiModelColor extends GuiModelInterface implements ITextfieldListener{
 
 	private GuiScreen parent;
-	private final static ResourceLocation color = new ResourceLocation("customnpcs:textures/gui/color.png");
+	private static final ResourceLocation color = new ResourceLocation("customnpcs:textures/gui/color.png");
 	
 	private int colorX, colorY;
 	

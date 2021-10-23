@@ -21,7 +21,6 @@ import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.roles.RoleCompanion;
 
 import java.io.IOException;
-import java.util.Iterator;
 
 public class PacketHandlerPlayer{
 	
@@ -151,14 +150,8 @@ public class PacketHandlerPlayer{
 			long time = buffer.readLong();
 			String username = Server.readString(buffer);
 			PlayerMailData data = PlayerDataController.instance.getPlayerData(player).mailData;
-			
-			Iterator<PlayerMail> it = data.playermail.iterator();
-			while(it.hasNext()){
-				PlayerMail mail = it.next();
-				if(mail.time == time && mail.sender.equals(username)){
-					it.remove();
-				}
-			}
+
+			data.playermail.removeIf(mail -> mail.time == time && mail.sender.equals(username));
 			Server.sendData(player, EnumPacketClient.GUI_DATA, data.saveNBTData(new NBTTagCompound()));
 		}
 		else if(type == EnumPlayerPacket.MailSend){
@@ -194,11 +187,9 @@ public class PacketHandlerPlayer{
 			String username = Server.readString(buffer);
 			player.closeContainer();
 			PlayerMailData data = PlayerDataController.instance.getPlayerData(player).mailData;
-			
-			Iterator<PlayerMail> it = data.playermail.iterator();
-			while(it.hasNext()){
-				PlayerMail mail = it.next();
-				if(mail.time == time && mail.sender.equals(username)){
+
+			for (PlayerMail mail : data.playermail) {
+				if (mail.time == time && mail.sender.equals(username)) {
 					ContainerMail.staticmail = mail;
 					player.openGui(CustomNpcs.instance, EnumGuiType.PlayerMailman.ordinal(), player.worldObj, 0, 0, 0);
 					break;
@@ -209,13 +200,11 @@ public class PacketHandlerPlayer{
 			long time = buffer.readLong();
 			String username = Server.readString(buffer);
 			PlayerMailData data = PlayerDataController.instance.getPlayerData(player).mailData;
-			
-			Iterator<PlayerMail> it = data.playermail.iterator();
-			while(it.hasNext()){
-				PlayerMail mail = it.next();
-				if(mail.time == time && mail.sender.equals(username)){
+
+			for (PlayerMail mail : data.playermail) {
+				if (mail.time == time && mail.sender.equals(username)) {
 					mail.beenRead = true;
-					if(mail.hasQuest())
+					if (mail.hasQuest())
 						PlayerQuestController.addActiveQuest(mail.getQuest(), player);
 				}
 			}

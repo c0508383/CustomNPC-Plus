@@ -164,7 +164,7 @@ public class JobItemGiver extends JobInterface{
 		if(isOnTimer()){
 			if(!data.hasInteractedBefore(this))
 				return true;
-			return data.getTime(this) + (cooldown*1000) < System.currentTimeMillis();
+			return data.getTime(this) + (cooldown* 1000L) < System.currentTimeMillis();
 		}
 		else if(isGiveOnce()){
 			return !data.hasInteractedBefore(this);

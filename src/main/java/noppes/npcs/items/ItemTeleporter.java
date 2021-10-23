@@ -67,14 +67,14 @@ public class ItemTeleporter extends Item{
         float f9 = 1.0F;
         List list = par3EntityPlayer.worldObj.getEntitiesWithinAABBExcludingEntity(par3EntityPlayer, par3EntityPlayer.boundingBox.addCoord(vec32.xCoord * d3, vec32.yCoord * d3, vec32.zCoord * d3).expand((double)f9, (double)f9, (double)f9));
 
-        for (int i = 0; i < list.size(); ++i){
-            Entity entity = (Entity)list.get(i);
+        for (Object o : list) {
+            Entity entity = (Entity) o;
 
-            if (entity.canBeCollidedWith()){
+            if (entity.canBeCollidedWith()) {
                 float f10 = entity.getCollisionBorderSize();
-                AxisAlignedBB axisalignedbb = entity.boundingBox.expand((double)f10, (double)f10, (double)f10);
+                AxisAlignedBB axisalignedbb = entity.boundingBox.expand((double) f10, (double) f10, (double) f10);
 
-                if (axisalignedbb.isVecInside(vec3)){
+                if (axisalignedbb.isVecInside(vec3)) {
                     flag = true;
                 }
             }

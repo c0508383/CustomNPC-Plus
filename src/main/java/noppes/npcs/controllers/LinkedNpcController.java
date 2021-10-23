@@ -178,11 +178,7 @@ public class LinkedNpcController {
 		save();
 	}
 	public void removeData(String name) {
-		Iterator<LinkedData> ita = list.iterator();
-		while(ita.hasNext()){
-			if(ita.next().name.equalsIgnoreCase(name))
-				ita.remove();
-		}
+		list.removeIf(linkedData -> linkedData.name.equalsIgnoreCase(name));
 		save();
 	}
 	

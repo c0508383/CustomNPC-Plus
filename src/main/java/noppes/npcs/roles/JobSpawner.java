@@ -267,14 +267,8 @@ public class JobSpawner extends JobInterface{
 			if(!PixelmonHelper.canBattle(player, npc))
 				return;
 			cooldown.put(player.getCommandSenderName(), System.currentTimeMillis());
-			
-			Iterator<Entry<String,Long>> ita = cooldown.entrySet().iterator();
-			
-			while(ita.hasNext()){
-				Entry<String, Long> entry = ita.next();
-				if(!isOnCooldown(entry.getKey()))
-					ita.remove();
-			}
+
+			cooldown.entrySet().removeIf(entry -> !isOnCooldown(entry.getKey()));
 		} 
 		else if (base instanceof EntityLiving)
 			((EntityLiving) base).setAttackTarget(target);

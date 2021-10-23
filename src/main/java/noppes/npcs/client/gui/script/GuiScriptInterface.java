@@ -154,9 +154,8 @@ public class GuiScriptInterface extends GuiNPCInterface implements GuiYesNoCallb
                     if(c.isEmpty()) {
                         c.add(infoClass);
                     }
-                    Iterator var10 = c.iterator();
-                    while(var10.hasNext()) {
-                        Class c1 = (Class) var10.next();
+                    for (Object o : c) {
+                        Class c1 = (Class) o;
                         if (!EntityEvent.EntityConstructing.class.isAssignableFrom(c1) && !WorldEvent.PotentialSpawns.class.isAssignableFrom(c1) && !TickEvent.RenderTickEvent.class.isAssignableFrom(c1) && !TickEvent.ClientTickEvent.class.isAssignableFrom(c1) && !FMLNetworkEvent.ClientCustomPacketEvent.class.isAssignableFrom(c1) && !ItemTooltipEvent.class.isAssignableFrom(c1) && Event.class.isAssignableFrom(c1) && !Modifier.isAbstract(c1.getModifiers()) && Modifier.isPublic(c1.getModifiers())) {
                             String eventName = c1.getName();
                             int i = eventName.lastIndexOf(".");
@@ -242,11 +241,10 @@ public class GuiScriptInterface extends GuiNPCInterface implements GuiYesNoCallb
     private String getConsoleText() {
         Map<Long, String> map = this.handler.getConsoleText();
         StringBuilder builder = new StringBuilder();
-        Iterator var3 = map.entrySet().iterator();
 
-        while(var3.hasNext()) {
-            Entry<Long, String> entry = (Entry)var3.next();
-            builder.insert(0, new Date((Long)entry.getKey()) + (String)entry.getValue() + "\n");
+        for (Entry<Long, String> longStringEntry : map.entrySet()) {
+            Entry<Long, String> entry = (Entry) longStringEntry;
+            builder.insert(0, new Date((Long) entry.getKey()) + (String) entry.getValue() + "\n");
         }
 
         return builder.toString();

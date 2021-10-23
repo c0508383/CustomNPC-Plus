@@ -51,17 +51,14 @@ public class NPCSpawning {
         }
         ArrayList<ChunkCoordIntPair> tmp = new ArrayList(eligibleChunksForSpawning);
         Collections.shuffle(tmp);
-        Iterator<ChunkCoordIntPair> iterator = tmp.iterator();
 
-        while (iterator.hasNext()){
-            ChunkCoordIntPair chunkcoordintpair1 = iterator.next();
-
+        for (ChunkCoordIntPair chunkcoordintpair1 : tmp) {
             ChunkPosition chunkposition = getChunk(world, chunkcoordintpair1.chunkXPos, chunkcoordintpair1.chunkZPos);
             int j1 = chunkposition.chunkPosX;
             int k1 = chunkposition.chunkPosY;
             int l1 = chunkposition.chunkPosZ;
 
-            for(int i = 0; i < 3; i++){
+            for (int i = 0; i < 3; i++) {
                 int x = j1;
                 int y = k1;
                 int z = l1;
@@ -70,16 +67,15 @@ public class NPCSpawning {
                 x += world.rand.nextInt(b1) - world.rand.nextInt(b1);
                 y += world.rand.nextInt(1) - world.rand.nextInt(1);
                 z += world.rand.nextInt(b1) - world.rand.nextInt(b1);
-                
 
-                
+
                 Block block = world.getBlock(x, y, z);
 
-    			String name = world.getBiomeGenForCoords(x, z).biomeName;
-    			SpawnData data = SpawnController.instance.getRandomSpawnData(name, block.getMaterial() == Material.air);
+                String name = world.getBiomeGenForCoords(x, z).biomeName;
+                SpawnData data = SpawnController.instance.getRandomSpawnData(name, block.getMaterial() == Material.air);
                 if (data == null || !canCreatureTypeSpawnAtLocation(data, world, x, y, z) || world.getClosestPlayer(x, y, z, 24.0D) != null)
-                	continue;
-                
+                    continue;
+
                 spawnData(data, world, x, y, z);
             }
         }

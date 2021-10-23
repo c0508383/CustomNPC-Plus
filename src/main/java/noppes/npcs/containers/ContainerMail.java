@@ -91,14 +91,12 @@ public class ContainerMail extends ContainerNpcInterface{
         super.onContainerClosed(player);
         if(!canEdit && !player.worldObj.isRemote){
 			PlayerMailData data = PlayerDataController.instance.getPlayerData(player).mailData;
-			Iterator<PlayerMail> it = data.playermail.iterator();
-			while(it.hasNext()){
-				PlayerMail mail = it.next();
-				if(mail.time == this.mail.time && mail.sender.equals(this.mail.sender)){
-					mail.readNBT(this.mail.writeNBT());
-					break;
-				}
-			}
+            for (PlayerMail mail : data.playermail) {
+                if (mail.time == this.mail.time && mail.sender.equals(this.mail.sender)) {
+                    mail.readNBT(this.mail.writeNBT());
+                    break;
+                }
+            }
         }
     }
 

@@ -84,10 +84,9 @@ public class PlayerDataScript implements IScriptHandler {
                 //ScriptController.Instance.playerScripts.errored.clear();
                 if(this.player != null) {
                     this.scripts.clear();
-                    Iterator i = ScriptController.Instance.playerScripts.scripts.iterator();
 
-                    while(i.hasNext()) {
-                        script = (EventScriptContainer)i.next();
+                    for (EventScriptContainer eventScriptContainer : ScriptController.Instance.playerScripts.scripts) {
+                        script = eventScriptContainer;
                         EventScriptContainer s = new EventScriptContainer(this);
                         s.readFromNBT(script.writeToNBT(new NBTTagCompound()));
 
@@ -130,12 +129,10 @@ public class PlayerDataScript implements IScriptHandler {
                         ScriptController.Instance.playerScripts.errored.add(var7);
                     }
 
-                    Iterator var8 = script.console.entrySet().iterator();
-
-                    while(var8.hasNext()) {
-                        Entry<Long, String> entry = (Entry)var8.next();
+                    for (Entry<Long, String> longStringEntry : script.console.entrySet()) {
+                        Entry<Long, String> entry = (Entry) longStringEntry;
                         if (!ScriptController.Instance.playerScripts.console.containsKey(entry.getKey())) {
-                            ScriptController.Instance.playerScripts.console.put(entry.getKey(), " tab " + (var7 + 1) + ":\n" + (String)entry.getValue());
+                            ScriptController.Instance.playerScripts.console.put(entry.getKey(), " tab " + (var7 + 1) + ":\n" + (String) entry.getValue());
                         }
                     }
 

@@ -58,10 +58,8 @@ public class DataTimers implements ITimers {
 
     public void writeToNBT(NBTTagCompound compound) {
         NBTTagList list = new NBTTagList();
-        Iterator var3 = this.timers.values().iterator();
 
-        while(var3.hasNext()) {
-            DataTimers.Timer timer = (DataTimers.Timer)var3.next();
+        for (Timer timer : this.timers.values()) {
             NBTTagCompound c = new NBTTagCompound();
             c.setInteger("ID", timer.id);
             c.setInteger("TimerTicks", timer.id);
@@ -88,10 +86,9 @@ public class DataTimers implements ITimers {
     }
 
     public void update() {
-        Iterator var1 = (new ArrayList(this.timers.values())).iterator();
 
-        while(var1.hasNext()) {
-            DataTimers.Timer timer = (DataTimers.Timer)var1.next();
+        for (Object o : new ArrayList(this.timers.values())) {
+            Timer timer = (Timer) o;
             timer.update();
         }
     }

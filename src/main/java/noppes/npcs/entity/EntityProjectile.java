@@ -284,29 +284,25 @@ public class EntityProjectile extends EntityThrowable {
 	            List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
 	            double d0 = 0.0D;
 	            EntityLivingBase entityliving = this.getThrower();
-	
-	            for (int k = 0; k < list.size(); ++k)
-	            {
-	                Entity entity1 = (Entity)list.get(k);
-	
-	                if (entity1.canBeCollidedWith() && (!entity1.isEntityEqual(this.thrower) || this.ticksInAir >= 25))
-	                {
-	                    float f = 0.3F;
-	                    AxisAlignedBB axisalignedbb = entity1.boundingBox.expand((double)f, (double)f, (double)f);
-	                    MovingObjectPosition movingobjectposition1 = axisalignedbb.calculateIntercept(vec3, vec31);
-	
-	                    if (movingobjectposition1 != null)
-	                    {
-	                        double d1 = vec3.distanceTo(movingobjectposition1.hitVec);
-	
-	                        if (d1 < d0 || d0 == 0.0D)
-	                        {
-	                            entity = entity1;
-	                            d0 = d1;
-	                        }
-	                    }
-	                }
-	            }
+
+				for (Object o : list) {
+					Entity entity1 = (Entity) o;
+
+					if (entity1.canBeCollidedWith() && (!entity1.isEntityEqual(this.thrower) || this.ticksInAir >= 25)) {
+						float f = 0.3F;
+						AxisAlignedBB axisalignedbb = entity1.boundingBox.expand((double) f, (double) f, (double) f);
+						MovingObjectPosition movingobjectposition1 = axisalignedbb.calculateIntercept(vec3, vec31);
+
+						if (movingobjectposition1 != null) {
+							double d1 = vec3.distanceTo(movingobjectposition1.hitVec);
+
+							if (d1 < d0 || d0 == 0.0D) {
+								entity = entity1;
+								d0 = d1;
+							}
+						}
+					}
+				}
 	
 	            if (entity != null)
 	            {
@@ -565,14 +561,13 @@ public class EntityProjectile extends EntityThrowable {
     	        explosion.doExplosionB(worldObj.isRemote);
     			//this.worldObj.newExplosion(null, this.posX, this.posY, this.posZ, this.explosiveRadius, this.effect == EnumPotionType.Fire, this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing") && explosiveDamage);
                 if(!worldObj.isRemote){
-                	Iterator iterator = worldObj.playerEntities.iterator();
 
-	                while (iterator.hasNext()){
-	                    EntityPlayer entityplayer = (EntityPlayer)iterator.next();
-	                    if (entityplayer.getDistanceSq(posX, posY, posZ) < 4096.0D){
-	                        ((EntityPlayerMP)entityplayer).playerNetServerHandler.sendPacket(new S27PacketExplosion(posX, posY, posZ, explosiveRadius, explosion.affectedBlockPositions, (Vec3)explosion.func_77277_b().get(entityplayer)));
-	                    }
-	                }
+					for (Object o : worldObj.playerEntities) {
+						EntityPlayer entityplayer = (EntityPlayer) o;
+						if (entityplayer.getDistanceSq(posX, posY, posZ) < 4096.0D) {
+							((EntityPlayerMP) entityplayer).playerNetServerHandler.sendPacket(new S27PacketExplosion(posX, posY, posZ, explosiveRadius, explosion.affectedBlockPositions, (Vec3) explosion.func_77277_b().get(entityplayer)));
+						}
+					}
                 }
     			if (this.explosiveRadius != 0 && (this.isArrow() || this.sticksToWalls())) 
     				this.setDead();
@@ -615,39 +610,31 @@ public class EntityProjectile extends EntityThrowable {
 
     			if (list1 != null && !list1.isEmpty())
     			{
-    				Iterator iterator = list1.iterator();
 
-                    while (iterator.hasNext())
-                    {
-                        EntityLivingBase entitylivingbase = (EntityLivingBase)iterator.next();
-                        double d0 = this.getDistanceSqToEntity(entitylivingbase);
+					for (Object o : list1) {
+						EntityLivingBase entitylivingbase = (EntityLivingBase) o;
+						double d0 = this.getDistanceSqToEntity(entitylivingbase);
 
-                        if (d0 < 16.0D)
-                        {
-                            double d1 = 1.0D - Math.sqrt(d0) / 4.0D;
+						if (d0 < 16.0D) {
+							double d1 = 1.0D - Math.sqrt(d0) / 4.0D;
 
-                            if (entitylivingbase == movingobjectposition.entityHit)
-                            {
-                                d1 = 1.0D;
-                            }
+							if (entitylivingbase == movingobjectposition.entityHit) {
+								d1 = 1.0D;
+							}
 
-                            int i = this.getPotionEffect(effect);
+							int i = this.getPotionEffect(effect);
 
-                            if (Potion.potionTypes[i].isInstant())
-                            {
-                                Potion.potionTypes[i].affectEntity(this.getThrower(), entitylivingbase, this.amplify, d1);
-                            }
-                            else
-                            {
-                                int j = (int)(d1 * (double)this.duration + 0.5D);
+							if (Potion.potionTypes[i].isInstant()) {
+								Potion.potionTypes[i].affectEntity(this.getThrower(), entitylivingbase, this.amplify, d1);
+							} else {
+								int j = (int) (d1 * (double) this.duration + 0.5D);
 
-                                if (j > 20)
-                                {
-                                    entitylivingbase.addPotionEffect(new PotionEffect(i, j, this.amplify));
-                                }
-                            }
-                        }
-                    }
+								if (j > 20) {
+									entitylivingbase.addPotionEffect(new PotionEffect(i, j, this.amplify));
+								}
+							}
+						}
+					}
                 }
     			this.worldObj.playAuxSFX(2002, (int)Math.round(this.posX), (int)Math.round(this.posY), (int)Math.round(this.posZ), this.getPotionColor(this.effect));
     		}
