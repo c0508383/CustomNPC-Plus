@@ -1,7 +1,3 @@
-// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) braces deadcode 
-
 package noppes.npcs.client.fx;
 
 import net.minecraft.client.particle.EntityPortalFX;
@@ -9,9 +5,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.util.MathHelper;
 
-
-// Referenced classes of package net.minecraft.src:
-//            EntityFX, World, Tessellator
 
 public class EntityElementalStaffFX extends EntityPortalFX
 {
