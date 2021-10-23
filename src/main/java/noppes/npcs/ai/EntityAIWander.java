@@ -10,7 +10,6 @@ import noppes.npcs.constants.AiMutex;
 import noppes.npcs.controllers.Line;
 import noppes.npcs.entity.EntityNPCInterface;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class EntityAIWander extends EntityAIBase

@@ -15,7 +15,6 @@ import noppes.npcs.scripted.interfaces.ITimers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class DataTimers implements ITimers {

@@ -7,8 +7,6 @@ import noppes.npcs.controllers.PlayerDataController;
 import noppes.npcs.controllers.PlayerMail;
 import noppes.npcs.controllers.PlayerMailData;
 
-import java.util.Iterator;
-
 public class ContainerMail extends ContainerNpcInterface{
     private static final String __OBFID = "CL_00001742";
 	public static PlayerMail staticmail = new PlayerMail();

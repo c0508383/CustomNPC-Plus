@@ -12,7 +12,6 @@ import noppes.npcs.entity.EntityNPCInterface;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.*;
-import java.util.Map.Entry;
 
 public class JobSpawner extends JobInterface{
 	public NBTTagCompound compound6;

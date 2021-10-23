@@ -29,7 +29,6 @@ import noppes.npcs.constants.EnumParticleType;
 import noppes.npcs.constants.EnumPotionType;
 import noppes.npcs.util.IProjectileCallback;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 

@@ -16,8 +16,11 @@ import noppes.npcs.controllers.ScriptController;
 import noppes.npcs.scripted.wrapper.WrapperNpcAPI;
 
 import javax.script.ScriptEngine;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 public class ForgeDataScript implements IScriptHandler {
     private List<EventScriptContainer> scripts = new ArrayList();
