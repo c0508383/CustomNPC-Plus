@@ -313,7 +313,7 @@ public class StringCache
         @Override
         public int compareTo(Glyph o)
         {
-            return (stringIndex == o.stringIndex) ? 0 : (stringIndex < o.stringIndex) ? -1 : 1;
+            return Integer.compare(stringIndex, o.stringIndex);
         }
     }
 

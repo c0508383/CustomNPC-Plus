@@ -1,5 +1,6 @@
 package noppes.npcs.scripted.entity;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,6 +15,7 @@ import noppes.npcs.NoppesStringUtils;
 import noppes.npcs.NoppesUtilPlayer;
 import noppes.npcs.Server;
 import noppes.npcs.constants.EnumPacketClient;
+import noppes.npcs.constants.EnumQuestType;
 import noppes.npcs.controllers.*;
 import noppes.npcs.scripted.ScriptItemStack;
 import noppes.npcs.scripted.ScriptPixelmonPlayerData;
@@ -212,18 +214,19 @@ public class ScriptPlayer<T extends EntityPlayerMP> extends ScriptLivingBase<T> 
 		else{
 			for(int i = 0; i < player.inventory.mainInventory.length; i++){
 				ItemStack is = player.inventory.mainInventory[i];
-	            if (is != null && is.isItemEqual(item.item)){
-	            	if(amount > is.stackSize){
-	                	player.inventory.mainInventory[i] = null;
-	                	amount -= is.stackSize;
-	            	}
-	            	else{
-	            		is.splitStack(amount);
-	            		break;
-	            	}
-	            }
+				if (is != null && is.isItemEqual(item.item)){
+					if(amount > is.stackSize){
+						player.inventory.mainInventory[i] = null;
+						amount -= is.stackSize;
+					}
+					else{
+						is.splitStack(amount);
+						break;
+					}
+				}
 			}
 		}
+		this.updatePlayerInventory();
 		return true;
 	}
 
@@ -250,12 +253,14 @@ public class ScriptPlayer<T extends EntityPlayerMP> extends ScriptLivingBase<T> 
 	public boolean giveItem(ScriptItemStack item, int amount){
 		if(item != null && item.getMCItemStack() != null) {
 			item.setStackSize(amount);
-			return this.player.inventory.addItemStackToInventory(item.getMCItemStack());
+			boolean bool = this.player.inventory.addItemStackToInventory(item.getMCItemStack());
+			this.updatePlayerInventory();
+			return bool;
 		} else {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * @since 1.7.10c
 	 * @param id The items name
@@ -266,7 +271,7 @@ public class ScriptPlayer<T extends EntityPlayerMP> extends ScriptLivingBase<T> 
 	public boolean giveItem(String id, int damage, int amount){
 		Item item = (Item)Item.itemRegistry.getObject(id);
 		if(item == null)
-			return false;		
+			return false;
 		return player.inventory.addItemStackToInventory(new ItemStack(item, amount, damage));
 	}
 	
@@ -348,5 +353,10 @@ public class ScriptPlayer<T extends EntityPlayerMP> extends ScriptLivingBase<T> 
 
 	public ITimers getTimers() {
 		return PlayerDataController.instance.getPlayerData(player).timers;
+	}
+	public void updatePlayerInventory() {
+		((EntityPlayerMP)this.entity).inventoryContainer.detectAndSendChanges();
+		PlayerQuestData playerdata = PlayerDataController.instance.getPlayerData(player).questData;
+		playerdata.checkQuestCompletion((EntityPlayer) this.entity, EnumQuestType.Item);
 	}
 }
