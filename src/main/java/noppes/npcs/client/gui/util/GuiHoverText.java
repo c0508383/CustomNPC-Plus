@@ -34,8 +34,6 @@ public class GuiHoverText extends GuiScreen{
         }
     }
 	public boolean inArea(int x, int y, int width, int height, int mouseX, int mouseY){
-		if(mouseX < x || mouseX > x + width || mouseY < y || mouseY > y + height)
-			return false;
-		return true;
+		return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
 	}
 }

@@ -90,9 +90,8 @@ public class ClientTickHandler{
 		int[] var2 = this.ignoreKeys;
 		int var3 = var2.length;
 
-		for(int var4 = 0; var4 < var3; ++var4) {
-			int i = var2[var4];
-			if(i == key) {
+		for (int i : var2) {
+			if (i == key) {
 				return true;
 			}
 		}

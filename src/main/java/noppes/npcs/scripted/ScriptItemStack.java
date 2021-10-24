@@ -196,9 +196,7 @@ public class ScriptItemStack implements IItemStack {
 	 */
 	public boolean isBlock(){
 		Block block = Block.getBlockFromItem(item.getItem());
-		if(block == null || block == Blocks.air)
-			return false;
-		return true;
+		return block != null && block != Blocks.air;
 	}
 
 	public INbt getNbt() {

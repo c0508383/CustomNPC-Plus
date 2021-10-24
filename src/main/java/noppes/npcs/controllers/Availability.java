@@ -203,9 +203,7 @@ public class Availability implements ICompatibilty {
 		boolean hasRead = PlayerDataController.instance.getPlayerData(player).dialogData.dialogsRead.contains(id);
 		if(hasRead && en == EnumAvailabilityDialog.After)
 			return true;
-		else if(!hasRead && en == EnumAvailabilityDialog.Before)
-			return true;
-		return false;
+		else return !hasRead && en == EnumAvailabilityDialog.Before;
 	}
 	
 	public boolean questAvailable(int id, EnumAvailabilityQuest en, EntityPlayer player){
@@ -217,9 +215,7 @@ public class Availability implements ICompatibilty {
 			return true;
 		else if(en == EnumAvailabilityQuest.Active && PlayerQuestController.isQuestActive(player, id))
 			return true;
-		else if(en == EnumAvailabilityQuest.NotActive && !PlayerQuestController.isQuestActive(player, id))
-			return true;
-		return false;
+		else return en == EnumAvailabilityQuest.NotActive && !PlayerQuestController.isQuestActive(player, id);
 	}
 	@Override
 	public int getVersion() {

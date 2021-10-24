@@ -490,15 +490,13 @@ public class RoleCompanion extends RoleInterface {
 		if(item == null || !(item.getItem() instanceof ItemSword))
 			return 0;
 		HashMultimap map = (HashMultimap) item.getAttributeModifiers();
-        Iterator iterator = map.entries().iterator();
-        while (iterator.hasNext())
-        {
-            Entry entry = (Entry)iterator.next();
-            if(entry.getKey().equals(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName())){
-                AttributeModifier mod = (AttributeModifier) entry.getValue();
-                return mod.getAmount();
-            }
-        }
+		for (Object o : map.entries()) {
+			Entry entry = (Entry) o;
+			if (entry.getKey().equals(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName())) {
+				AttributeModifier mod = (AttributeModifier) entry.getValue();
+				return mod.getAmount();
+			}
+		}
 		return 0;
 	}
 	
