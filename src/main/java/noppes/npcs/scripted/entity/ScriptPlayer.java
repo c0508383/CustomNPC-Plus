@@ -1,5 +1,6 @@
 package noppes.npcs.scripted.entity;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,7 +15,15 @@ import noppes.npcs.NoppesStringUtils;
 import noppes.npcs.NoppesUtilPlayer;
 import noppes.npcs.Server;
 import noppes.npcs.constants.EnumPacketClient;
-import noppes.npcs.controllers.*;
+import noppes.npcs.constants.EnumQuestType;
+import noppes.npcs.controllers.PixelmonHelper;
+import noppes.npcs.controllers.PlayerData;
+import noppes.npcs.controllers.PlayerDataController;
+import noppes.npcs.controllers.PlayerDialogData;
+import noppes.npcs.controllers.PlayerQuestData;
+import noppes.npcs.controllers.Quest;
+import noppes.npcs.controllers.QuestController;
+import noppes.npcs.controllers.QuestData;
 import noppes.npcs.scripted.ScriptItemStack;
 import noppes.npcs.scripted.ScriptPixelmonPlayerData;
 import noppes.npcs.scripted.constants.EntityType;
@@ -130,7 +139,7 @@ public class ScriptPlayer<T extends EntityPlayerMP> extends ScriptLivingBase<T> 
 
 	@Override
 	public boolean typeOf(int type){
-		return type == EntityType.PLAYER?true:super.typeOf(type);
+		return type == EntityType.PLAYER || super.typeOf(type);
 	}
 	/**
 	 * @param faction The faction id
@@ -224,6 +233,7 @@ public class ScriptPlayer<T extends EntityPlayerMP> extends ScriptLivingBase<T> 
 	            }
 			}
 		}
+		this.updatePlayerInventory();
 		return true;
 	}
 
@@ -250,7 +260,9 @@ public class ScriptPlayer<T extends EntityPlayerMP> extends ScriptLivingBase<T> 
 	public boolean giveItem(ScriptItemStack item, int amount){
 		if(item != null && item.getMCItemStack() != null) {
 			item.setStackSize(amount);
-			return this.player.inventory.addItemStackToInventory(item.getMCItemStack());
+			boolean bool = this.player.inventory.addItemStackToInventory(item.getMCItemStack());
+			this.updatePlayerInventory();
+			return bool;
 		} else {
 			return false;
 		}
@@ -348,5 +360,11 @@ public class ScriptPlayer<T extends EntityPlayerMP> extends ScriptLivingBase<T> 
 
 	public ITimers getTimers() {
 		return PlayerDataController.instance.getPlayerData(player).timers;
+	}
+
+	public void updatePlayerInventory() {
+		((EntityPlayerMP)this.entity).inventoryContainer.detectAndSendChanges();
+		PlayerQuestData playerdata = PlayerDataController.instance.getPlayerData(player).questData;
+		playerdata.checkQuestCompletion((EntityPlayer) this.entity, EnumQuestType.Item);
 	}
 }
