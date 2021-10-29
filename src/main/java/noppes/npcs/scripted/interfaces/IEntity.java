@@ -277,6 +277,12 @@ public interface IEntity<T extends Entity> {
      */
     void knockback(int power, float direction);
 
+    public void knockback(int xpower, int ypower, int zpower, float direction);
+
+    public void setImmune(int ticks);
+
+    public boolean hasCollided();
+
     /**
      * @since 1.7.10c
      * @return Returns whether or not this entity is sneaking
