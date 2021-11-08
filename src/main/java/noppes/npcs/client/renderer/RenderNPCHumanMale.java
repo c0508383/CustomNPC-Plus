@@ -179,7 +179,7 @@ public class RenderNPCHumanMale extends RenderNPCInterface
         		npc.textureCloakLocation = new ResourceLocation(npc.display.cloakTexture);
         	}
         	bindTexture((ResourceLocation) npc.textureCloakLocation);
-            //AbstractClientPlayer.func_110307_b(, null);
+            //AbstractClientPlayer.getDownloadImageCape(, null);
             GL11.glPushMatrix();
             GL11.glTranslatef(0.0F, 0.0F, 0.125F);
             double d = (npc.field_20066_r + (npc.field_20063_u - npc.field_20066_r) * (double)f) - (npc.prevPosX + (npc.posX - npc.prevPosX) * (double)f);

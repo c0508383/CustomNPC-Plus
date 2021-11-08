@@ -151,7 +151,7 @@ public class GuiMerchantAdd extends GuiContainer
             }
             catch (Exception exception)
             {
-                //field_147039_u.error("Couldn\'t send trade info", exception);
+                //logger.error("Couldn\'t send trade info", exception);
             }
             finally
             {
