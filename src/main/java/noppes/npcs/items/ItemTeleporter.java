@@ -1,8 +1,7 @@
 package noppes.npcs.items;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,8 +19,9 @@ import noppes.npcs.CustomItems;
 import noppes.npcs.CustomNpcs;
 import noppes.npcs.constants.EnumGuiType;
 import noppes.npcs.entity.EntityNPCInterface;
-
-import java.util.List;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 
 public class ItemTeleporter extends Item{
@@ -67,14 +67,14 @@ public class ItemTeleporter extends Item{
         float f9 = 1.0F;
         List list = par3EntityPlayer.worldObj.getEntitiesWithinAABBExcludingEntity(par3EntityPlayer, par3EntityPlayer.boundingBox.addCoord(vec32.xCoord * d3, vec32.yCoord * d3, vec32.zCoord * d3).expand((double)f9, (double)f9, (double)f9));
 
-        for (Object o : list) {
-            Entity entity = (Entity) o;
+        for (int i = 0; i < list.size(); ++i){
+            Entity entity = (Entity)list.get(i);
 
-            if (entity.canBeCollidedWith()) {
+            if (entity.canBeCollidedWith()){
                 float f10 = entity.getCollisionBorderSize();
-                AxisAlignedBB axisalignedbb = entity.boundingBox.expand((double) f10, (double) f10, (double) f10);
+                AxisAlignedBB axisalignedbb = entity.boundingBox.expand((double)f10, (double)f10, (double)f10);
 
-                if (axisalignedbb.isVecInside(vec3)) {
+                if (axisalignedbb.isVecInside(vec3)){
                     flag = true;
                 }
             }

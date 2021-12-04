@@ -1,8 +1,10 @@
 package noppes.npcs;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
 import io.netty.buffer.ByteBuf;
+
+import java.io.IOException;
+import java.util.Iterator;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemEditableBook;
@@ -14,13 +16,17 @@ import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.tileentity.TileEntity;
 import noppes.npcs.blocks.tiles.TileBigSign;
 import noppes.npcs.blocks.tiles.TileBook;
-import noppes.npcs.constants.*;
+import noppes.npcs.constants.EnumCompanionTalent;
+import noppes.npcs.constants.EnumGuiType;
+import noppes.npcs.constants.EnumPacketClient;
+import noppes.npcs.constants.EnumPlayerPacket;
+import noppes.npcs.constants.EnumRoleType;
 import noppes.npcs.containers.ContainerMail;
 import noppes.npcs.controllers.*;
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.roles.RoleCompanion;
-
-import java.io.IOException;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
 
 public class PacketHandlerPlayer{
 	
@@ -150,8 +156,14 @@ public class PacketHandlerPlayer{
 			long time = buffer.readLong();
 			String username = Server.readString(buffer);
 			PlayerMailData data = PlayerDataController.instance.getPlayerData(player).mailData;
-
-			data.playermail.removeIf(mail -> mail.time == time && mail.sender.equals(username));
+			
+			Iterator<PlayerMail> it = data.playermail.iterator();
+			while(it.hasNext()){
+				PlayerMail mail = it.next();
+				if(mail.time == time && mail.sender.equals(username)){
+					it.remove();
+				}
+			}
 			Server.sendData(player, EnumPacketClient.GUI_DATA, data.saveNBTData(new NBTTagCompound()));
 		}
 		else if(type == EnumPlayerPacket.MailSend){
@@ -187,9 +199,11 @@ public class PacketHandlerPlayer{
 			String username = Server.readString(buffer);
 			player.closeContainer();
 			PlayerMailData data = PlayerDataController.instance.getPlayerData(player).mailData;
-
-			for (PlayerMail mail : data.playermail) {
-				if (mail.time == time && mail.sender.equals(username)) {
+			
+			Iterator<PlayerMail> it = data.playermail.iterator();
+			while(it.hasNext()){
+				PlayerMail mail = it.next();
+				if(mail.time == time && mail.sender.equals(username)){
 					ContainerMail.staticmail = mail;
 					player.openGui(CustomNpcs.instance, EnumGuiType.PlayerMailman.ordinal(), player.worldObj, 0, 0, 0);
 					break;
@@ -200,11 +214,13 @@ public class PacketHandlerPlayer{
 			long time = buffer.readLong();
 			String username = Server.readString(buffer);
 			PlayerMailData data = PlayerDataController.instance.getPlayerData(player).mailData;
-
-			for (PlayerMail mail : data.playermail) {
-				if (mail.time == time && mail.sender.equals(username)) {
+			
+			Iterator<PlayerMail> it = data.playermail.iterator();
+			while(it.hasNext()){
+				PlayerMail mail = it.next();
+				if(mail.time == time && mail.sender.equals(username)){
 					mail.beenRead = true;
-					if (mail.hasQuest())
+					if(mail.hasQuest())
 						PlayerQuestController.addActiveQuest(mail.getQuest(), player);
 				}
 			}

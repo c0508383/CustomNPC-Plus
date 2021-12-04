@@ -3,6 +3,7 @@ package tconstruct.client.tabs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.client.C0DPacketCloseWindow;
 import noppes.npcs.CustomItems;
 import noppes.npcs.client.gui.player.GuiQuestLog;
 

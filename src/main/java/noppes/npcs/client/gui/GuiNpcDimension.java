@@ -1,14 +1,21 @@
 package noppes.npcs.client.gui;
 
+import java.util.HashMap;
+import java.util.Vector;
+
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiYesNo;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.StatCollector;
 import noppes.npcs.client.Client;
 import noppes.npcs.client.NoppesUtil;
-import noppes.npcs.client.gui.util.*;
+import noppes.npcs.client.gui.util.GuiCustomScroll;
+import noppes.npcs.client.gui.util.GuiNPCInterface;
+import noppes.npcs.client.gui.util.GuiNpcButton;
+import noppes.npcs.client.gui.util.GuiNpcLabel;
+import noppes.npcs.client.gui.util.IScrollData;
 import noppes.npcs.constants.EnumPacketServer;
-
-import java.util.HashMap;
-import java.util.Vector;
+import noppes.npcs.entity.EntityNPCInterface;
 
 public class GuiNpcDimension extends GuiNPCInterface implements IScrollData{
     

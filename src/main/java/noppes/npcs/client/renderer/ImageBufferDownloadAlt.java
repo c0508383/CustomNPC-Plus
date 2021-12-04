@@ -1,10 +1,11 @@
 package noppes.npcs.client.renderer;
 
-import net.minecraft.client.renderer.ImageBufferDownload;
-
-import java.awt.*;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.awt.image.ImageObserver;
+
+import net.minecraft.client.renderer.ImageBufferDownload;
 
 public class ImageBufferDownloadAlt extends ImageBufferDownload {
     private int imageData[];

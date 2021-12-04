@@ -1,6 +1,5 @@
 package noppes.npcs.client.renderer.blocks;
 
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -12,8 +11,11 @@ import noppes.npcs.CustomItems;
 import noppes.npcs.blocks.BlockWeaponRack;
 import noppes.npcs.blocks.tiles.TileWeaponRack;
 import noppes.npcs.client.model.blocks.ModelWeaponRack;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class BlockWeaponRackRenderer extends BlockRendererInterface{
 

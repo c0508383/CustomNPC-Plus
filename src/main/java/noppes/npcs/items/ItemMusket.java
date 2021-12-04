@@ -9,6 +9,7 @@ import noppes.npcs.CustomItems;
 import noppes.npcs.CustomNpcs;
 import noppes.npcs.constants.EnumParticleType;
 import noppes.npcs.entity.EntityProjectile;
+
 import org.lwjgl.opengl.GL11;
 
 public class ItemMusket extends ItemNpcInterface{

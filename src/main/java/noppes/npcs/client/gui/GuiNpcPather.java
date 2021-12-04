@@ -1,5 +1,9 @@
 package noppes.npcs.client.gui;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.nbt.NBTTagCompound;
 import noppes.npcs.DataAI;
@@ -11,10 +15,6 @@ import noppes.npcs.client.gui.util.GuiNpcButton;
 import noppes.npcs.client.gui.util.IGuiData;
 import noppes.npcs.constants.EnumPacketServer;
 import noppes.npcs.entity.EntityNPCInterface;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class GuiNpcPather extends GuiNPCInterface implements IGuiData{
     

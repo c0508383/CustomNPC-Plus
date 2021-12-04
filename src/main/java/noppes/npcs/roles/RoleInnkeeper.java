@@ -1,5 +1,7 @@
 package noppes.npcs.roles;
 
+import java.util.HashMap;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -7,8 +9,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ChatComponentTranslation;
 import noppes.npcs.controllers.InnDoorData;
 import noppes.npcs.entity.EntityNPCInterface;
-
-import java.util.HashMap;
 
 public class RoleInnkeeper extends RoleInterface{
 	

@@ -1,8 +1,5 @@
 package noppes.npcs.items;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,6 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import noppes.npcs.CustomItems;
 import noppes.npcs.CustomNpcs;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemSkirt extends ItemArmor{
 

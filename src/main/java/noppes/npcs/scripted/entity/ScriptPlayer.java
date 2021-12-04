@@ -146,7 +146,7 @@ public class ScriptPlayer<T extends EntityPlayerMP> extends ScriptLivingBase<T> 
 
 	@Override
 	public boolean typeOf(int type){
-		return type == EntityType.PLAYER || super.typeOf(type);
+		return type == EntityType.PLAYER?true:super.typeOf(type);
 	}
 	/**
 	 * @param faction The faction id
@@ -375,7 +375,7 @@ public class ScriptPlayer<T extends EntityPlayerMP> extends ScriptLivingBase<T> 
 	public void updatePlayerInventory() {
 		((EntityPlayerMP)this.entity).inventoryContainer.detectAndSendChanges();
 		PlayerQuestData playerdata = PlayerDataController.instance.getPlayerData(player).questData;
-		playerdata.checkQuestCompletion((EntityPlayer) this.entity, EnumQuestType.Item);
+		playerdata.checkQuestCompletion((EntityPlayer)this.entity, EnumQuestType.Item);
 	}
 
 	public boolean checkGUIOpen() {

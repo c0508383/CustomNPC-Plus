@@ -1,10 +1,10 @@
 package noppes.npcs.controllers;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-
 import java.util.HashMap;
 import java.util.Vector;
+
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 
 public class TransportCategory {
 	public int id = -1;

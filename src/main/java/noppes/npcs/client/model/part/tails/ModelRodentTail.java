@@ -1,6 +1,8 @@
 package noppes.npcs.client.model.part.tails;
 
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
 import noppes.npcs.client.model.ModelMPM;
 
 public class ModelRodentTail extends ModelRenderer {

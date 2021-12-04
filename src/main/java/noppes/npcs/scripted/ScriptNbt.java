@@ -5,11 +5,17 @@
 
 package noppes.npcs.scripted;
 
-import net.minecraft.nbt.*;
+import java.util.Iterator;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagDouble;
+import net.minecraft.nbt.NBTTagFloat;
+import net.minecraft.nbt.NBTTagInt;
+import net.minecraft.nbt.NBTTagIntArray;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
 import noppes.npcs.scripted.interfaces.INbt;
 import noppes.npcs.util.NBTJsonUtil;
-
-import java.util.Iterator;
 
 public class ScriptNbt implements INbt {
     private NBTTagCompound compound;

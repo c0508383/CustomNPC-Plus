@@ -15,6 +15,7 @@ import noppes.npcs.constants.EnumPlayerPacket;
 import noppes.npcs.containers.ContainerNPCFollower;
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.roles.RoleFollower;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 

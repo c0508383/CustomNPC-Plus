@@ -2,14 +2,15 @@ package noppes.npcs.client.model.part;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import noppes.npcs.ModelData;
+import net.minecraft.util.ResourceLocation;
 import noppes.npcs.ModelPartData;
+import noppes.npcs.ModelData;
 import noppes.npcs.client.model.ModelMPM;
+import noppes.npcs.client.model.util.ModelPartInterface;
 import noppes.npcs.client.model.part.horns.ModelAntennasBack;
 import noppes.npcs.client.model.part.horns.ModelAntennasFront;
 import noppes.npcs.client.model.part.horns.ModelAntlerHorns;
 import noppes.npcs.client.model.part.horns.ModelBullHorns;
-import noppes.npcs.client.model.util.ModelPartInterface;
 
 public class ModelHorns extends ModelPartInterface {
 	private ModelRenderer bull;

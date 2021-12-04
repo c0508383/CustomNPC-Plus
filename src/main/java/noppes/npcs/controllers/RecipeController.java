@@ -1,12 +1,5 @@
 package noppes.npcs.controllers;
 
-import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import noppes.npcs.CustomNpcs;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -15,6 +8,14 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+
+import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import noppes.npcs.CustomNpcs;
 
 public class RecipeController {
 	private static Collection<RecipeCarpentry> prevRecipes;

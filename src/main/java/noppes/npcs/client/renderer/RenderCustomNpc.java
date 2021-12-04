@@ -1,5 +1,8 @@
 package noppes.npcs.client.renderer;
 
+import java.lang.reflect.Method;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.NPCRendererHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -7,14 +10,15 @@ import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.boss.BossStatus;
 import noppes.npcs.client.model.ModelMPM;
 import noppes.npcs.client.model.util.ModelRenderPassHelper;
+import noppes.npcs.constants.EnumStandingType;
 import noppes.npcs.controllers.PixelmonHelper;
 import noppes.npcs.entity.EntityCustomNpc;
 import noppes.npcs.entity.EntityNPCInterface;
-import org.lwjgl.opengl.GL11;
 
-import java.lang.reflect.Method;
+import org.lwjgl.opengl.GL11;
 
 public class RenderCustomNpc extends RenderNPCHumanMale{
 

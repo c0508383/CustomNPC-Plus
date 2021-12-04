@@ -1,10 +1,14 @@
 package noppes.npcs.client.gui.model;
 
+import java.util.Collections;
+import java.util.Vector;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.NPCRendererHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.NPCRendererHelper;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,10 +18,8 @@ import noppes.npcs.client.gui.util.GuiNPCInterface;
 import noppes.npcs.client.gui.util.GuiNPCStringSlot;
 import noppes.npcs.client.gui.util.GuiNpcButton;
 import noppes.npcs.entity.EntityCustomNpc;
-import org.lwjgl.opengl.GL11;
 
-import java.util.Collections;
-import java.util.Vector;
+import org.lwjgl.opengl.GL11;
 
 public class GuiEntitySelection extends GuiNPCInterface
 {

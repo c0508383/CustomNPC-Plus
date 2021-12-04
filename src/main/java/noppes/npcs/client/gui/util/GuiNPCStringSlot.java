@@ -1,10 +1,16 @@
 package noppes.npcs.client.gui.util;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Vector;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiSlot;
 import net.minecraft.client.renderer.Tessellator;
-
-import java.util.*;
+import noppes.npcs.entity.EntityNPCInterface;
 
 public class GuiNPCStringSlot extends GuiSlot
 {

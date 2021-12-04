@@ -1,19 +1,20 @@
 package noppes.npcs.controllers;
 
-import net.minecraft.nbt.NBTTagCompound;
-import noppes.npcs.CustomNpcs;
-import noppes.npcs.LogWriter;
-import noppes.npcs.NBTTags;
-import noppes.npcs.entity.EntityCustomNpc;
-import noppes.npcs.entity.EntityNPCInterface;
-import noppes.npcs.util.JsonException;
-import noppes.npcs.util.NBTJsonUtil;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import net.minecraft.nbt.NBTTagCompound;
+import noppes.npcs.CustomNpcs;
+import noppes.npcs.LogWriter;
+import noppes.npcs.NBTTags;
+import noppes.npcs.NoppesUtilServer;
+import noppes.npcs.entity.EntityCustomNpc;
+import noppes.npcs.entity.EntityNPCInterface;
+import noppes.npcs.util.JsonException;
+import noppes.npcs.util.NBTJsonUtil;
 
 public class LinkedNpcController {
 	public static LinkedNpcController Instance;
@@ -178,7 +179,11 @@ public class LinkedNpcController {
 		save();
 	}
 	public void removeData(String name) {
-		list.removeIf(linkedData -> linkedData.name.equalsIgnoreCase(name));
+		Iterator<LinkedData> ita = list.iterator();
+		while(ita.hasNext()){
+			if(ita.next().name.equalsIgnoreCase(name))
+				ita.remove();
+		}
 		save();
 	}
 	

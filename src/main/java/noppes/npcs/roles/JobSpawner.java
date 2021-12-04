@@ -1,18 +1,24 @@
 package noppes.npcs.roles;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
+import noppes.npcs.CustomNpcs;
 import noppes.npcs.NoppesUtilServer;
 import noppes.npcs.controllers.PixelmonHelper;
 import noppes.npcs.entity.EntityNPCInterface;
-import org.apache.commons.lang3.RandomStringUtils;
 
-import java.util.*;
-import java.util.Map.Entry;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public class JobSpawner extends JobInterface{
 	public NBTTagCompound compound6;
@@ -267,8 +273,14 @@ public class JobSpawner extends JobInterface{
 			if(!PixelmonHelper.canBattle(player, npc))
 				return;
 			cooldown.put(player.getCommandSenderName(), System.currentTimeMillis());
-
-			cooldown.entrySet().removeIf(entry -> !isOnCooldown(entry.getKey()));
+			
+			Iterator<Entry<String,Long>> ita = cooldown.entrySet().iterator();
+			
+			while(ita.hasNext()){
+				Entry<String, Long> entry = ita.next();
+				if(!isOnCooldown(entry.getKey()))
+					ita.remove();
+			}
 		} 
 		else if (base instanceof EntityLiving)
 			((EntityLiving) base).setAttackTarget(target);

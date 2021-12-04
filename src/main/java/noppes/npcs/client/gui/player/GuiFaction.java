@@ -1,5 +1,7 @@
 package noppes.npcs.client.gui.player;
 
+import java.util.ArrayList;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -13,11 +15,11 @@ import noppes.npcs.client.gui.util.IGuiData;
 import noppes.npcs.constants.EnumPlayerPacket;
 import noppes.npcs.controllers.Faction;
 import noppes.npcs.controllers.PlayerFactionData;
+
 import org.lwjgl.opengl.GL11;
+
 import tconstruct.client.tabs.InventoryTabFactions;
 import tconstruct.client.tabs.TabRegistry;
-
-import java.util.ArrayList;
 
 public class GuiFaction extends GuiNPCInterface implements IGuiData{
 

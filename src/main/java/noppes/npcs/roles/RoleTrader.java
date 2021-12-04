@@ -1,6 +1,8 @@
 package noppes.npcs.roles;
 
-import foxz.utils.Market;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,9 +11,7 @@ import noppes.npcs.NoppesUtilServer;
 import noppes.npcs.NpcMiscInventory;
 import noppes.npcs.constants.EnumGuiType;
 import noppes.npcs.entity.EntityNPCInterface;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import foxz.utils.Market;
 
 public class RoleTrader extends RoleInterface{
 

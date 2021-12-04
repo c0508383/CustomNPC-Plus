@@ -1,10 +1,9 @@
 package net.minecraft.block.state;
 
 import com.google.common.collect.ImmutableMap;
+import java.util.Collection;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
-
-import java.util.Collection;
 
 /** This code is owned by Minecraft */
 

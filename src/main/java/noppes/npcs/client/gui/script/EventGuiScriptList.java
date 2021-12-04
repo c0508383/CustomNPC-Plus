@@ -5,15 +5,15 @@
 
 package noppes.npcs.client.gui.script;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import net.minecraft.client.gui.GuiButton;
 import noppes.npcs.controllers.ScriptContainer;
 import noppes.npcs.client.gui.util.GuiCustomScroll;
 import noppes.npcs.client.gui.util.GuiNpcButton;
 import noppes.npcs.client.gui.util.GuiNpcLabel;
 import noppes.npcs.client.gui.util.SubGuiInterface;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class EventGuiScriptList extends SubGuiInterface {
     private GuiCustomScroll scroll1;
@@ -81,15 +81,21 @@ public class EventGuiScriptList extends SubGuiInterface {
 
         if(button.id == 3) {
             this.container.scripts.clear();
+            Iterator var3 = this.scripts.iterator();
 
-            this.container.scripts.addAll(this.scripts);
+            while(var3.hasNext()) {
+                String script = (String)var3.next();
+                this.container.scripts.add(script);
+            }
 
+            this.scroll1.selected = -1;
             this.scroll1.selected = -1;
             this.initGui();
         }
 
         if(button.id == 4) {
             this.container.scripts.clear();
+            this.scroll1.selected = -1;
             this.scroll1.selected = -1;
             this.initGui();
         }

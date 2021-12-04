@@ -1,13 +1,13 @@
 package noppes.npcs.scripted.roles;
 
+import java.util.ArrayList;
+
 import net.minecraft.entity.EntityLivingBase;
 import noppes.npcs.controllers.ScriptController;
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.roles.JobSpawner;
-import noppes.npcs.scripted.constants.JobType;
 import noppes.npcs.scripted.entity.ScriptLivingBase;
-
-import java.util.ArrayList;
+import noppes.npcs.scripted.constants.JobType;
 
 public class ScriptJobSpawner extends ScriptJobInterface{
 	private JobSpawner job;

@@ -1,8 +1,12 @@
 package noppes.npcs.client.model.part;
 
-import net.minecraft.client.model.ModelRenderer;
-import noppes.npcs.client.model.ModelMPM;
 import org.lwjgl.opengl.GL11;
+
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import noppes.npcs.client.model.ModelMPM;
+import noppes.npcs.client.model.util.ModelPartInterface;
 
 public class ModelDuckBeak extends ModelRenderer {
 	ModelRenderer Top3;

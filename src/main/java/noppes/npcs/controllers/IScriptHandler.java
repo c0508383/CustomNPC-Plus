@@ -5,11 +5,10 @@
 
 package noppes.npcs.controllers;
 
-import cpw.mods.fml.common.eventhandler.Event;
-import noppes.npcs.constants.EnumScriptType;
-
 import java.util.List;
 import java.util.Map;
+import cpw.mods.fml.common.eventhandler.Event;
+import noppes.npcs.constants.EnumScriptType;
 
 public interface IScriptHandler {
     void callScript(EnumScriptType var1, Event var2, Object... obs);

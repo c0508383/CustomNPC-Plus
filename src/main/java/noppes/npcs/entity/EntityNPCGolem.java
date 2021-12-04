@@ -4,6 +4,7 @@
 
 package noppes.npcs.entity;
 
+import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import noppes.npcs.ModelData;

@@ -1,10 +1,9 @@
 package noppes.npcs.scripted.interfaces;
 
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import noppes.npcs.scripted.ScriptEntityParticle;
-import noppes.npcs.scripted.ScriptItemStack;
-import noppes.npcs.scripted.ScriptScoreboard;
+import noppes.npcs.scripted.*;
 import noppes.npcs.scripted.entity.ScriptEntity;
 import noppes.npcs.scripted.entity.ScriptPlayer;
 

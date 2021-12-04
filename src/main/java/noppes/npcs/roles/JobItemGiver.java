@@ -1,5 +1,10 @@
 package noppes.npcs.roles;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Vector;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -7,13 +12,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import noppes.npcs.NBTTags;
 import noppes.npcs.NpcMiscInventory;
-import noppes.npcs.controllers.*;
+import noppes.npcs.controllers.Availability;
+import noppes.npcs.controllers.GlobalDataController;
+import noppes.npcs.controllers.Line;
+import noppes.npcs.controllers.PlayerDataController;
+import noppes.npcs.controllers.PlayerItemGiverData;
 import noppes.npcs.entity.EntityNPCInterface;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Vector;
 
 public class JobItemGiver extends JobInterface{
 
@@ -164,7 +168,7 @@ public class JobItemGiver extends JobInterface{
 		if(isOnTimer()){
 			if(!data.hasInteractedBefore(this))
 				return true;
-			return data.getTime(this) + (cooldown* 1000L) < System.currentTimeMillis();
+			return data.getTime(this) + (cooldown*1000) < System.currentTimeMillis();
 		}
 		else if(isGiveOnce()){
 			return !data.hasInteractedBefore(this);

@@ -1,5 +1,8 @@
 package noppes.npcs.ai;
 
+import java.util.Iterator;
+import java.util.List;
+
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.MathHelper;
@@ -9,9 +12,6 @@ import noppes.npcs.ai.selector.NPCInteractSelector;
 import noppes.npcs.constants.AiMutex;
 import noppes.npcs.controllers.Line;
 import noppes.npcs.entity.EntityNPCInterface;
-
-import java.util.Iterator;
-import java.util.List;
 
 public class EntityAIWander extends EntityAIBase
 {
@@ -67,7 +67,12 @@ public class EntityAIWander extends EntityAIBase
     }
     private EntityNPCInterface getNearbyNPC() {
 		List<EntityNPCInterface> list = entity.worldObj.getEntitiesWithinAABBExcludingEntity(entity, entity.boundingBox.expand(entity.ai.walkingRange, entity.ai.walkingRange > 7?7:entity.ai.walkingRange, entity.ai.walkingRange), selector);
-        list.removeIf(npc -> !npc.ai.stopAndInteract || npc.isAttacking() || !npc.isEntityAlive() || entity.faction.isAggressiveToNpc(npc));
+		Iterator<EntityNPCInterface> ita = list.iterator();
+		while(ita.hasNext()){
+			EntityNPCInterface npc = ita.next();
+			if(!npc.ai.stopAndInteract || npc.isAttacking() || !npc.isEntityAlive() || entity.faction.isAggressiveToNpc(npc))
+				ita.remove();
+		}
 		
 		if(list.isEmpty())
 			return null;

@@ -1,6 +1,15 @@
 package noppes.npcs.client;
 
 import io.netty.buffer.ByteBuf;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
+import java.util.Vector;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.GuiScreen;
@@ -27,14 +36,8 @@ import noppes.npcs.controllers.Dialog;
 import noppes.npcs.controllers.DialogController;
 import noppes.npcs.controllers.Quest;
 import noppes.npcs.entity.EntityNPCInterface;
-import org.lwjgl.Sys;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.util.HashMap;
-import java.util.Random;
-import java.util.Vector;
+import org.lwjgl.Sys;
 
 public class NoppesUtil {
 

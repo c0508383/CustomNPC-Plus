@@ -4,6 +4,7 @@
 
 package noppes.npcs.entity.old;
 
+import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;

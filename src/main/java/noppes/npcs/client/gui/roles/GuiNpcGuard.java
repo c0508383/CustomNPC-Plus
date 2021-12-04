@@ -1,9 +1,16 @@
 package noppes.npcs.client.gui.roles;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.management.relation.RoleStatus;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.biome.BiomeGenBase;
 import noppes.npcs.client.Client;
 import noppes.npcs.client.gui.util.GuiCustomScroll;
 import noppes.npcs.client.gui.util.GuiNPCInterface2;
@@ -12,9 +19,6 @@ import noppes.npcs.client.gui.util.GuiNpcLabel;
 import noppes.npcs.constants.EnumPacketServer;
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.roles.JobGuard;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GuiNpcGuard extends GuiNPCInterface2{	
 	private JobGuard role;

@@ -1,7 +1,9 @@
 package noppes.npcs.client.renderer;
 
-import com.mojang.authlib.minecraft.MinecraftProfileTexture;
-import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
+import java.io.File;
+import java.security.MessageDigest;
+import java.util.Map;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.FontRenderer;
@@ -23,11 +25,11 @@ import noppes.npcs.constants.EnumAnimation;
 import noppes.npcs.constants.EnumStandingType;
 import noppes.npcs.entity.EntityCustomNpc;
 import noppes.npcs.entity.EntityNPCInterface;
+
 import org.lwjgl.opengl.GL11;
 
-import java.io.File;
-import java.security.MessageDigest;
-import java.util.Map;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
 
 
 public class RenderNPCInterface extends RenderLiving{	

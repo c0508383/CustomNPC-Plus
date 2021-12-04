@@ -1,5 +1,8 @@
 package noppes.npcs.items;
 
+import java.awt.Color;
+import java.util.List;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,9 +11,6 @@ import net.minecraft.item.ItemStack;
 import noppes.npcs.CustomItems;
 import noppes.npcs.CustomNpcs;
 import noppes.npcs.constants.EnumNpcToolMaterial;
-
-import java.awt.*;
-import java.util.List;
 
 public class ItemElementalStaff extends ItemStaff{
 	public ItemElementalStaff(int par1, EnumNpcToolMaterial material) {

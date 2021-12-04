@@ -5,18 +5,17 @@
 
 package noppes.npcs.entity.data;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import noppes.npcs.EventHooks;
-import noppes.npcs.controllers.PlayerData;
-import noppes.npcs.entity.EntityNPCInterface;
-import noppes.npcs.scripted.CustomNPCsException;
-import noppes.npcs.scripted.interfaces.ITimers;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import noppes.npcs.EventHooks;
+import noppes.npcs.entity.EntityNPCInterface;
+import noppes.npcs.scripted.interfaces.ITimers;
+import noppes.npcs.controllers.PlayerData;
+import noppes.npcs.scripted.CustomNPCsException;
 
 public class DataTimers implements ITimers {
     private Object parent;
@@ -58,8 +57,10 @@ public class DataTimers implements ITimers {
 
     public void writeToNBT(NBTTagCompound compound) {
         NBTTagList list = new NBTTagList();
+        Iterator var3 = this.timers.values().iterator();
 
-        for (Timer timer : this.timers.values()) {
+        while(var3.hasNext()) {
+            DataTimers.Timer timer = (DataTimers.Timer)var3.next();
             NBTTagCompound c = new NBTTagCompound();
             c.setInteger("ID", timer.id);
             c.setInteger("TimerTicks", timer.id);
@@ -88,9 +89,10 @@ public class DataTimers implements ITimers {
     }
 
     public void update() {
+        Iterator var1 = (new ArrayList(this.timers.values())).iterator();
 
-        for (Object o : new ArrayList(this.timers.values())) {
-            Timer timer = (Timer) o;
+        while(var1.hasNext()) {
+            DataTimers.Timer timer = (DataTimers.Timer)var1.next();
             timer.update();
         }
     }

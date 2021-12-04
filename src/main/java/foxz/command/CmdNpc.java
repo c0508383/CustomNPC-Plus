@@ -1,12 +1,11 @@
 package foxz.command;
 
-import foxz.commandhelper.ChMcLogger;
-import foxz.commandhelper.annotations.Command;
-import foxz.commandhelper.annotations.SubCommand;
-import foxz.commandhelper.permissions.OpOnly;
-import foxz.commandhelper.permissions.PlayerOnly;
+import java.util.List;
+
+import scala.actors.threadpool.Arrays;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.command.PlayerSelector;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
@@ -18,8 +17,11 @@ import noppes.npcs.entity.EntityCustomNpc;
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.roles.RoleCompanion;
 import noppes.npcs.roles.RoleFollower;
-
-import java.util.List;
+import foxz.commandhelper.ChMcLogger;
+import foxz.commandhelper.annotations.Command;
+import foxz.commandhelper.annotations.SubCommand;
+import foxz.commandhelper.permissions.OpOnly;
+import foxz.commandhelper.permissions.PlayerOnly;
 
 @Command(
         name="npc",

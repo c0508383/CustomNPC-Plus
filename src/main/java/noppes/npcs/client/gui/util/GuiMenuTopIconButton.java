@@ -1,5 +1,9 @@
 package noppes.npcs.client.gui.util;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -8,12 +12,9 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 
 public class GuiMenuTopIconButton extends GuiMenuTopButton{
     private static final ResourceLocation resource = new ResourceLocation("textures/gui/container/creative_inventory/tabs.png");
@@ -95,12 +96,15 @@ public class GuiMenuTopIconButton extends GuiMenuTopButton{
             GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glDisable(GL11.GL_DEPTH_TEST);
             int k = 0;
+            Iterator iterator = p_146283_1_.iterator();
 
-            for (Object o : p_146283_1_) {
-                String s = (String) o;
+            while (iterator.hasNext())
+            {
+                String s = (String)iterator.next();
                 int l = font.getStringWidth(s);
 
-                if (l > k) {
+                if (l > k)
+                {
                     k = l;
                 }
             }
