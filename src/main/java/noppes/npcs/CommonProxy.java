@@ -158,4 +158,8 @@ public class CommonProxy implements IGuiHandler {
 	public String getAchievementDesc(Achievement achievement) {
 		return "";
 	}
+
+	public boolean isGUIOpen(){
+		return false;
+	}
 }

@@ -47,11 +47,10 @@ public class ClientTickHandler{
 
 	@SubscribeEvent
 	public void onMouse(InputEvent.MouseInputEvent event){
-		Minecraft mc = Minecraft.getMinecraft();
-		if(mc.currentScreen != null || (Mouse.getEventButton() == -1 && Mouse.getDWheel() == 0))
+		if(Mouse.getEventButton() == -1 && Mouse.getDWheel() == 0)
 			return;
 
-		NoppesUtilPlayer.sendData(EnumPlayerPacket.MouseClicked, new Object[]{Mouse.getEventButton(),Mouse.getEventDWheel()});
+		NoppesUtilPlayer.sendData(EnumPlayerPacket.MouseClicked, new Object[]{Mouse.getEventButton(),Mouse.getEventDWheel(),Mouse.isButtonDown(Mouse.getEventButton())});
 	}
 
 	@SubscribeEvent
@@ -66,23 +65,20 @@ public class ClientTickHandler{
 
 		int key = Keyboard.getEventKey();
 		long time = Keyboard.getEventNanoseconds();
+
 		if(Keyboard.getEventKeyState()) {
 			if(!this.isIgnoredKey(key)) {
 				this.buttonTime = time;
-				this.buttonPressed = key;
 			}
-		} else {
-			Minecraft mc = Minecraft.getMinecraft();
-			if(key == this.buttonPressed && time - this.buttonTime < 500000000L && mc.currentScreen == null) {
-				boolean isCtrlPressed = Keyboard.isKeyDown(157) || Keyboard.isKeyDown(29);
-				boolean isShiftPressed = Keyboard.isKeyDown(54) || Keyboard.isKeyDown(42);
-				boolean isAltPressed = Keyboard.isKeyDown(184) || Keyboard.isKeyDown(56);
-				boolean isMetaPressed = Keyboard.isKeyDown(220) || Keyboard.isKeyDown(219);
-				NoppesUtilPlayer.sendData(EnumPlayerPacket.KeyPressed, new Object[]{Integer.valueOf(key), Boolean.valueOf(isCtrlPressed), Boolean.valueOf(isShiftPressed), Boolean.valueOf(isAltPressed), Boolean.valueOf(isMetaPressed)});
-			}
+		}
 
-			this.buttonPressed = -1;
-			this.buttonTime = 0L;
+		if(time-this.buttonTime == 0 || !Keyboard.getEventKeyState()) {
+			boolean isCtrlPressed = Keyboard.isKeyDown(157) || Keyboard.isKeyDown(29);
+			boolean isShiftPressed = Keyboard.isKeyDown(54) || Keyboard.isKeyDown(42);
+			boolean isAltPressed = Keyboard.isKeyDown(184) || Keyboard.isKeyDown(56);
+			boolean isMetaPressed = Keyboard.isKeyDown(220) || Keyboard.isKeyDown(219);
+			boolean keyDown = Keyboard.isKeyDown(key);
+			NoppesUtilPlayer.sendData(EnumPlayerPacket.KeyPressed, new Object[]{Integer.valueOf(key), Boolean.valueOf(isCtrlPressed), Boolean.valueOf(isShiftPressed), Boolean.valueOf(isAltPressed), Boolean.valueOf(isMetaPressed), Boolean.valueOf(keyDown)});
 		}
 	}
 

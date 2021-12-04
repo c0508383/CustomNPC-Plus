@@ -19,6 +19,7 @@ import cpw.mods.fml.common.network.FMLNetworkEvent;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
@@ -170,7 +171,7 @@ public class ScriptPlayerEventHandler {
 
     @SubscribeEvent
     public void invoke(PlayerOpenContainerEvent event) {
-        if(event.entityPlayer.worldObj instanceof WorldServer) {
+        if(event.entityPlayer.worldObj instanceof WorldServer && !(event.entityPlayer.openContainer instanceof ContainerPlayer)) {
             PlayerDataScript handler = PlayerData.get(event.entityPlayer).scriptData;
             EventHooks.onPlayerContainerOpen(handler, event.entityPlayer.openContainer);
         }
@@ -450,25 +451,4 @@ public class ScriptPlayerEventHandler {
             }
         }
     }
-
-    /*@SubscribeEvent
-    public void forgeTick(TickEvent.ServerTickEvent event){
-        if(event.side == Side.SERVER && event.phase == TickEvent.Phase.START) {
-            EventHooks.onForgeEvent(new ForgeEvent(event), event);
-        }
-    }
-
-    @SubscribeEvent
-    public void forgeTick(TickEvent.WorldTickEvent event){
-        if(event.side == Side.SERVER && event.phase == TickEvent.Phase.START) {
-            EventHooks.onForgeEvent(new ForgeEvent(event), event);
-        }
-    }
-
-    @SubscribeEvent
-    public void forgeTick(TickEvent.PlayerTickEvent event){
-        if(event.side == Side.SERVER && event.phase == TickEvent.Phase.START) {
-            EventHooks.onForgeEvent(new ForgeEvent(event), event);
-        }
-    }*/
 }

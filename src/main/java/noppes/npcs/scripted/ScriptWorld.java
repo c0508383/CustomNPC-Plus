@@ -361,4 +361,8 @@ public class ScriptWorld implements IWorld {
 	public WorldServer getMCWorld(){
 		return this.world;
 	}
+
+	public int getDimensionID(){
+		return world.provider.dimensionId;
+	}
 }

@@ -100,6 +100,9 @@ public class NoppesUtil {
 		World worldObj = Minecraft.getMinecraft().theWorld;
 		Entity entity = worldObj.getEntityByID(entityID);
 
+		if(entity == null)
+			return;
+
 		EntityCustomFX fx = new EntityCustomFX(
 				entity,
 				directory, HEXcolor,
@@ -285,4 +288,7 @@ public class NoppesUtil {
 		CustomNpcs.proxy.openGui(x, y, z, EnumGuiType.Waypoint, player);
 	}
 
+	public static void isGUIOpen(boolean isGUIOpen) {
+		Client.sendData(EnumPacketServer.IsGuiOpen, isGUIOpen);
+	}
 }

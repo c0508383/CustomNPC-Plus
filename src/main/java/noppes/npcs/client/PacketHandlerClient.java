@@ -244,8 +244,10 @@ public class PacketHandlerClient extends PacketHandlerServer{
 					player.addChatMessage(new ChatComponentTranslation("Current font is %s", ClientProxy.Font.getName()));
 			}
 		}
+		else if(type == EnumPacketClient.ISGUIOPEN){
+			boolean isGUIOpen = Minecraft.getMinecraft().currentScreen != null;
+
+			NoppesUtil.isGUIOpen(isGUIOpen);
+		}
 	}
-
-
-
 }

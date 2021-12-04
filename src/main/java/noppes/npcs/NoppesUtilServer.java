@@ -671,4 +671,10 @@ public class NoppesUtilServer {
 
 		return (Entity)entity;
 	}
+
+	public static void isGUIOpen(ByteBuf buffer, EntityPlayer player) throws IOException {
+		PlayerData playerdata = PlayerDataController.instance.getPlayerData(player);
+		boolean isGUIOpen = buffer.readBoolean();
+		playerdata.setGUIOpen(isGUIOpen);
+	}
 }
