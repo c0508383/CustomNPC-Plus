@@ -1,5 +1,7 @@
 package noppes.npcs.controllers;
 
+import java.util.Vector;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import noppes.npcs.Server;
@@ -7,8 +9,6 @@ import noppes.npcs.constants.EnumPacketClient;
 import noppes.npcs.constants.EnumQuestRepeat;
 import noppes.npcs.constants.EnumQuestType;
 import noppes.npcs.quests.QuestDialog;
-
-import java.util.Vector;
 
 public class PlayerQuestController {
 

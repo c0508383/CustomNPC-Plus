@@ -5,6 +5,7 @@ import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import noppes.npcs.entity.EntityNPCInterface;
+import noppes.npcs.entity.EntityNpcPony;
 
 public class EntityUtil {
 

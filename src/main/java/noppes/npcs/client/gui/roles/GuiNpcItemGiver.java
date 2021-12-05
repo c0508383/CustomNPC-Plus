@@ -1,5 +1,8 @@
 package noppes.npcs.client.gui.roles;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.nbt.NBTTagCompound;
 import noppes.npcs.client.Client;
@@ -12,9 +15,6 @@ import noppes.npcs.constants.EnumPacketServer;
 import noppes.npcs.containers.ContainerNpcItemGiver;
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.roles.JobItemGiver;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GuiNpcItemGiver extends GuiContainerNPCInterface2
 {	
@@ -34,11 +34,11 @@ public class GuiNpcItemGiver extends GuiContainerNPCInterface2
     	this.addButton(new GuiNpcButton(1, guiLeft + 6, guiTop + 29, 140,20, new String[]{"Timer","Give Only Once","Daily"},role.cooldownType));
 
     	addTextField(new GuiNpcTextField(0, this, fontRendererObj, guiLeft + 55, guiTop + 54, 90, 20, role.cooldown + ""));
-    	getTextField(0).numbersOnly = true;
+    	getTextField(0).integersOnly = true;
         addLabel(new GuiNpcLabel(0,"Cooldown:", guiLeft + 6, guiTop + 59));
         addLabel(new GuiNpcLabel(1,"Items to give", guiLeft + 46, guiTop + 79));
         
-        getTextField(0).numbersOnly = true;
+        getTextField(0).integersOnly = true;
 
         int i = 0;
         for(String line : role.lines){

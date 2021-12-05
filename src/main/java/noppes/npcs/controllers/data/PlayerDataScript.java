@@ -1,19 +1,23 @@
 package noppes.npcs.controllers.data;
 
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.Map.Entry;
+
 import com.google.common.base.Preconditions;
-import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
+import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.world.WorldServer;
 import noppes.npcs.EventHooks;
-import noppes.npcs.EventScriptContainer;
+import noppes.npcs.controllers.ScriptContainer;
 import noppes.npcs.NBTTags;
+import noppes.npcs.scripted.NpcAPI;
 import noppes.npcs.constants.EnumScriptType;
 import noppes.npcs.controllers.IScriptHandler;
 import noppes.npcs.controllers.ScriptController;
-import noppes.npcs.scripted.NpcAPI;
 import noppes.npcs.scripted.event.PlayerEvent;
 import noppes.npcs.scripted.interfaces.IPlayer;
 import noppes.npcs.scripted.interfaces.IWorld;
@@ -21,12 +25,9 @@ import noppes.npcs.scripted.wrapper.WrapperNpcAPI;
 
 import javax.annotation.CheckForNull;
 import javax.script.ScriptEngine;
-import java.lang.reflect.Array;
-import java.util.*;
-import java.util.Map.Entry;
 
 public class PlayerDataScript implements IScriptHandler {
-    public List<EventScriptContainer> scripts = new ArrayList();
+    public List<ScriptContainer> scripts = new ArrayList();
     public String scriptLanguage = "ECMAScript";
     private EntityPlayer player;
     private IPlayer playerAPI;
@@ -73,16 +74,17 @@ public class PlayerDataScript implements IScriptHandler {
 
     public void callScript(EnumScriptType type, Event event, Object... obs) {
         if(this.isEnabled()) {
-            EventScriptContainer script;
+            ScriptContainer script;
             if(ScriptController.Instance.lastLoaded > this.lastInited || ScriptController.Instance.lastPlayerUpdate > this.lastPlayerUpdate) {
                 this.lastInited = ScriptController.Instance.lastLoaded;
                 //ScriptController.Instance.playerScripts.errored.clear();
                 if(this.player != null) {
                     this.scripts.clear();
+                    Iterator i = ScriptController.Instance.playerScripts.scripts.iterator();
 
-                    for (EventScriptContainer eventScriptContainer : ScriptController.Instance.playerScripts.scripts) {
-                        script = eventScriptContainer;
-                        EventScriptContainer s = new EventScriptContainer(this);
+                    while(i.hasNext()) {
+                        script = (ScriptContainer)i.next();
+                        ScriptContainer s = new ScriptContainer(this);
                         s.readFromNBT(script.writeToNBT(new NBTTagCompound()));
 
                         this.scripts.add(s);
@@ -96,7 +98,7 @@ public class PlayerDataScript implements IScriptHandler {
             }
 
             for(int var7 = 0; var7 < this.scripts.size(); ++var7) {
-                script = (EventScriptContainer)this.scripts.get(var7);
+                script = (ScriptContainer)this.scripts.get(var7);
 
                 if(!ScriptController.Instance.playerScripts.errored.contains(Integer.valueOf(var7))) {
                     if(script == null || script.errored || !script.hasCode())
@@ -124,10 +126,12 @@ public class PlayerDataScript implements IScriptHandler {
                         ScriptController.Instance.playerScripts.errored.add(var7);
                     }
 
-                    for (Entry<Long, String> longStringEntry : script.console.entrySet()) {
-                        Entry<Long, String> entry = (Entry) longStringEntry;
+                    Iterator var8 = script.console.entrySet().iterator();
+
+                    while(var8.hasNext()) {
+                        Entry<Long, String> entry = (Entry)var8.next();
                         if (!ScriptController.Instance.playerScripts.console.containsKey(entry.getKey())) {
-                            ScriptController.Instance.playerScripts.console.put(entry.getKey(), " tab " + (var7 + 1) + ":\n" + (String) entry.getValue());
+                            ScriptController.Instance.playerScripts.console.put(entry.getKey(), " tab " + (var7 + 1) + ":\n" + (String)entry.getValue());
                         }
                     }
 
@@ -162,7 +166,7 @@ public class PlayerDataScript implements IScriptHandler {
         this.scriptLanguage = lang;
     }
 
-    public List<EventScriptContainer> getScripts() {
+    public List<ScriptContainer> getScripts() {
         return this.scripts;
     }
 

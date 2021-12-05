@@ -1,11 +1,12 @@
 package noppes.npcs.items;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import noppes.npcs.CustomItems;
+import noppes.npcs.CustomNpcs;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ItemNpcArmor extends ItemArmor{
 

@@ -4,6 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import noppes.npcs.CustomNpcs;
@@ -28,7 +29,6 @@ public class PlayerData implements IExtendedEntityProperties{
 	public PlayerItemGiverData itemgiverData = new PlayerItemGiverData();
 	public PlayerMailData mailData = new PlayerMailData();
 	public PlayerDataScript scriptData;
-	public int playerLevel = 0;
 	public DataTimers timers = new DataTimers(this);
 
 	public EntityNPCInterface editingNpc;
@@ -38,9 +38,11 @@ public class PlayerData implements IExtendedEntityProperties{
 
 	public String playername = "";
 	public String uuid = "";
-	
+
 	private EntityNPCInterface activeCompanion = null;
 	public int companionID = 0;
+
+	public boolean isGUIOpen = false;
 
 	@Override
 	public void saveNBTData(NBTTagCompound compound) {
@@ -85,6 +87,7 @@ public class PlayerData implements IExtendedEntityProperties{
 				player.worldObj.spawnEntityInWorld(npc);
 			}
 		}
+		isGUIOpen = data.getBoolean("isGUIOpen");
 	}
 	public NBTTagCompound getNBT() {
 		if(player != null){
@@ -104,6 +107,7 @@ public class PlayerData implements IExtendedEntityProperties{
 		compound.setString("PlayerName", playername);
 		compound.setString("UUID", uuid);
 		compound.setInteger("PlayerCompanionId", companionID);
+		compound.setBoolean("isGUIOpen",isGUIOpen);
 		
 		if(hasCompanion()){
 			NBTTagCompound nbt = new NBTTagCompound();
@@ -117,7 +121,17 @@ public class PlayerData implements IExtendedEntityProperties{
 	public void init(Entity entity, World world) {
 		
 	}
-	
+
+	public void setGUIOpen(boolean bool) {
+		isGUIOpen = bool;
+		saveNBTData(null);
+	}
+
+	public boolean getGUIOpen() {
+		loadNBTData(null);
+		return isGUIOpen;
+	}
+
 	public boolean hasCompanion(){
 		return activeCompanion != null && !activeCompanion.isDead;
 	}
@@ -218,7 +232,6 @@ public class PlayerData implements IExtendedEntityProperties{
 			PlayerData data = new PlayerData();
 			if (data.player == null) {
 				data.player = player;
-				data.playerLevel = player.experienceLevel;
 				data.scriptData = new PlayerDataScript(player);
 				NBTTagCompound compound = loadPlayerData(player.getPersistentID().toString());
 				if (compound.hasNoTags()) {

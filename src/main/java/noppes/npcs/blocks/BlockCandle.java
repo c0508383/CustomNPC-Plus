@@ -1,8 +1,9 @@
 package noppes.npcs.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Random;
+
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -11,8 +12,8 @@ import net.minecraft.world.World;
 import noppes.npcs.CustomItems;
 import noppes.npcs.blocks.tiles.TileCandle;
 import noppes.npcs.blocks.tiles.TileColorable;
-
-import java.util.Random;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCandle extends BlockLightable{
 	

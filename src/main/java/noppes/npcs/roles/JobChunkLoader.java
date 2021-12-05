@@ -1,5 +1,8 @@
 package noppes.npcs.roles;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
@@ -8,9 +11,6 @@ import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import noppes.npcs.controllers.ChunkController;
 import noppes.npcs.entity.EntityNPCInterface;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class JobChunkLoader extends JobInterface{
 	

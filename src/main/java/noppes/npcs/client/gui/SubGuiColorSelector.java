@@ -1,22 +1,29 @@
 package noppes.npcs.client.gui;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.resources.IResource;
-import net.minecraft.util.ResourceLocation;
-import noppes.npcs.client.gui.util.GuiNpcButton;
-import noppes.npcs.client.gui.util.GuiNpcTextField;
-import noppes.npcs.client.gui.util.ITextfieldListener;
-import noppes.npcs.client.gui.util.SubGuiInterface;
-import org.lwjgl.opengl.GL11;
-
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.imageio.ImageIO;
+
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.IResource;
+import net.minecraft.util.ResourceLocation;
+import noppes.npcs.ModelPartData;
+import noppes.npcs.client.gui.util.GuiModelInterface;
+import noppes.npcs.client.gui.util.GuiNpcButton;
+import noppes.npcs.client.gui.util.GuiNpcTextField;
+import noppes.npcs.client.gui.util.ITextfieldListener;
+import noppes.npcs.client.gui.util.SubGuiInterface;
+import noppes.npcs.entity.EntityCustomNpc;
+import noppes.npcs.entity.EntityNPCInterface;
+
+import org.lwjgl.opengl.GL11;
+
 public class SubGuiColorSelector extends SubGuiInterface implements ITextfieldListener{
 
-	private static final ResourceLocation resource = new ResourceLocation("customnpcs:textures/gui/color.png");
+	private final static ResourceLocation resource = new ResourceLocation("customnpcs:textures/gui/color.png");
 	
 	private int colorX, colorY;
 	

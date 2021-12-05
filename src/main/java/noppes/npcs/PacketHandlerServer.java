@@ -1,9 +1,14 @@
 package noppes.npcs;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
 import foxz.utils.Market;
 import io.netty.buffer.ByteBuf;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.passive.EntityVillager;
@@ -24,10 +29,38 @@ import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
-import noppes.npcs.constants.*;
+import noppes.npcs.constants.EnumCompanionStage;
+import noppes.npcs.constants.EnumGuiType;
+import noppes.npcs.constants.EnumJobType;
+import noppes.npcs.constants.EnumPacketClient;
+import noppes.npcs.constants.EnumPacketServer;
+import noppes.npcs.constants.EnumPlayerData;
+import noppes.npcs.constants.EnumRoleType;
 import noppes.npcs.containers.ContainerMail;
-import noppes.npcs.controllers.*;
+import noppes.npcs.controllers.Bank;
+import noppes.npcs.controllers.BankController;
+import noppes.npcs.controllers.Dialog;
+import noppes.npcs.controllers.DialogCategory;
+import noppes.npcs.controllers.DialogController;
+import noppes.npcs.controllers.DialogOption;
+import noppes.npcs.controllers.Faction;
+import noppes.npcs.controllers.FactionController;
+import noppes.npcs.controllers.LinkedNpcController;
 import noppes.npcs.controllers.LinkedNpcController.LinkedData;
+import noppes.npcs.controllers.PlayerData;
+import noppes.npcs.controllers.PlayerDataController;
+import noppes.npcs.controllers.PlayerMail;
+import noppes.npcs.controllers.Quest;
+import noppes.npcs.controllers.QuestCategory;
+import noppes.npcs.controllers.QuestController;
+import noppes.npcs.controllers.RecipeCarpentry;
+import noppes.npcs.controllers.RecipeController;
+import noppes.npcs.controllers.ScriptController;
+import noppes.npcs.controllers.ServerCloneController;
+import noppes.npcs.controllers.SpawnController;
+import noppes.npcs.controllers.SpawnData;
+import noppes.npcs.controllers.TransportController;
+import noppes.npcs.controllers.TransportLocation;
 import noppes.npcs.controllers.data.ForgeDataScript;
 import noppes.npcs.controllers.data.PlayerDataScript;
 import noppes.npcs.entity.EntityCustomNpc;
@@ -36,12 +69,8 @@ import noppes.npcs.roles.JobSpawner;
 import noppes.npcs.roles.RoleCompanion;
 import noppes.npcs.roles.RoleTrader;
 import noppes.npcs.roles.RoleTransporter;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
 
 public class PacketHandlerServer{
 
@@ -60,13 +89,19 @@ public class PacketHandlerServer{
 			ItemStack item = player.inventory.getCurrentItem();
 
 			EntityNPCInterface npc = NoppesUtilServer.getEditingNpc(player);
+
+			if(type == EnumPacketServer.IsGuiOpen) {
+				isGuiOpenPacket(buffer, player);
+				return;
+			}
+
 			if(type.needsNpc && npc == null){
 				
 			}
-			else if(type.hasPermission() && !CustomNpcsPermissions.hasPermission(player, type.permission)){
-				//player doesnt have permission todo this
+			else if(type.hasPermission() && !CustomNpcsPermissions.Instance.hasPermission(player, type.permission)){
+				//player doesnt have permission to do this
 			}			
-			else if(item == null )
+			else if(item == null && (type == EnumPacketServer.ScriptPlayerGet || type == EnumPacketServer.ScriptPlayerSave || type == EnumPacketServer.ScriptForgeGet || type == EnumPacketServer.ScriptForgeSave))
 				warn(player, "tried to use custom npcs without a tool in hand, probably a hacker");
 			else if(item.getItem() == CustomItems.wand)
 				wandPackets(type, buffer, player, npc);
@@ -90,7 +125,11 @@ public class PacketHandlerServer{
 			LogWriter.error("Error with EnumPacketServer." + type, e);
 		}
 	}
-	
+
+	private void isGuiOpenPacket(ByteBuf buffer, EntityPlayerMP player) throws IOException {
+		NoppesUtilServer.isGUIOpen(buffer, player);
+	}
+
 	private void scriptPackets(EnumPacketServer type, ByteBuf buffer, EntityPlayerMP player, EntityNPCInterface npc) throws Exception {
 		if(type == EnumPacketServer.ScriptDataSave){
 			npc.script.readFromNBT(Server.readNBT(buffer));

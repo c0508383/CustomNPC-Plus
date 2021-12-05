@@ -1,11 +1,7 @@
 package noppes.npcs.config;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
-
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Point;
 import java.awt.font.GlyphVector;
 import java.lang.ref.WeakReference;
 import java.text.Bidi;
@@ -13,6 +9,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.WeakHashMap;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
 
 
 /**
@@ -123,7 +125,7 @@ public class StringCache
 * be all hashed together into the same entry. The renderString() method will then substitute the correct digit glyph on
 * the fly. This special digit handling gives a significant speedup on the F3 debug screen.
 */
-    private static class Key
+    static private class Key
     {
         /**
 * A copy of the String which this Key is indexing. A copy is used to avoid creating a strong reference to the original
@@ -227,7 +229,7 @@ public class StringCache
     }
 
     /** This entry holds the layed out glyph positions for the cached string along with some relevant metadata. */
-    private static class Entry
+    static private class Entry
     {
         /** A weak reference back to the Key object in stringCache that maps to this Entry. */
         public WeakReference<Key> keyRef;
@@ -246,7 +248,7 @@ public class StringCache
     }
 
     /** Identifies the location and value of a single color code in the original string */
-    private static class ColorCode implements Comparable<Integer>
+    static private class ColorCode implements Comparable<Integer>
     {
         /** Bit flag used with renderStyle to request the underline style */
         public static final byte UNDERLINE = 1;
@@ -287,7 +289,7 @@ public class StringCache
 * and position of the pre-rendered glyph image, and includes the x/y pixel coordinates of where this glyph occurs within
 * the string to which this Glyph object belongs.
 */
-    private static class Glyph implements Comparable<Glyph>
+    static private class Glyph implements Comparable<Glyph>
     {
         /** The index into the original string (i.e. with color codes) for the character that generated this glyph. */
         public int stringIndex;

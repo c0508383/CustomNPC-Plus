@@ -2,8 +2,8 @@ package noppes.npcs.scripted.roles;
 
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.roles.JobFollower;
-import noppes.npcs.scripted.constants.JobType;
 import noppes.npcs.scripted.entity.ScriptNpc;
+import noppes.npcs.scripted.constants.JobType;
 
 public class ScriptJobFollower extends ScriptJobInterface{
 	private JobFollower job;

@@ -1,5 +1,8 @@
 package noppes.npcs.items;
 
+import org.lwjgl.opengl.GL11;
+
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,7 +21,6 @@ import noppes.npcs.enchants.EnchantInterface;
 import noppes.npcs.entity.EntityMagicProjectile;
 import noppes.npcs.entity.EntityProjectile;
 import noppes.npcs.util.IProjectileCallback;
-import org.lwjgl.opengl.GL11;
 
 public class ItemStaff extends ItemNpcInterface implements IProjectileCallback{
 

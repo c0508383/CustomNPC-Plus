@@ -1,5 +1,6 @@
 package noppes.npcs.util;
 
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 
 public class Vec3NPC extends Vec3

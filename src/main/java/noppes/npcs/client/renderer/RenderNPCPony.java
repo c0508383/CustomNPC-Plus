@@ -1,5 +1,11 @@
 package noppes.npcs.client.renderer;
 
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
@@ -11,22 +17,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
+import net.minecraft.item.*;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import noppes.npcs.client.model.ModelPony;
 import noppes.npcs.client.model.ModelPonyArmor;
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.entity.EntityNpcPony;
-import org.lwjgl.opengl.GL11;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
+import org.lwjgl.opengl.GL11;
 
 public class RenderNPCPony extends RenderNPCInterface
 {
@@ -220,7 +219,8 @@ public class RenderNPCPony extends RenderNPCInterface
             float f4 = 0.375F * f;
             GL11.glScalef(f4, -f4, f4);
         } else
-        if(itemstack.getItem() == Items.bow)
+            // CHANGE HERE
+        if(itemstack.getItem() instanceof ItemBow)
         {
             GL11.glTranslatef(0.0F, 0.125F, 0.3125F);
             GL11.glRotatef(-20F, 0.0F, 1.0F, 0.0F);

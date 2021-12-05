@@ -1,16 +1,22 @@
 package noppes.npcs.client.gui.player;
 
+import java.util.HashMap;
+import java.util.Vector;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import noppes.npcs.NoppesUtilPlayer;
-import noppes.npcs.client.gui.util.*;
+import noppes.npcs.client.gui.util.GuiCustomScroll;
+import noppes.npcs.client.gui.util.GuiNPCInterface;
+import noppes.npcs.client.gui.util.GuiNpcButton;
+import noppes.npcs.client.gui.util.GuiNpcLabel;
+import noppes.npcs.client.gui.util.ITopButtonListener;
+import noppes.npcs.client.gui.util.IScrollData;
 import noppes.npcs.constants.EnumPlayerPacket;
 import noppes.npcs.entity.EntityNPCInterface;
-import org.lwjgl.opengl.GL11;
 
-import java.util.HashMap;
-import java.util.Vector;
+import org.lwjgl.opengl.GL11;
 
 public class GuiTransportSelection extends GuiNPCInterface implements ITopButtonListener,IScrollData{
 

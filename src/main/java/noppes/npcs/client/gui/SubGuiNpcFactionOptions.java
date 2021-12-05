@@ -1,14 +1,20 @@
 package noppes.npcs.client.gui;
 
+import java.util.HashMap;
+import java.util.Vector;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.StatCollector;
 import noppes.npcs.client.Client;
-import noppes.npcs.client.gui.util.*;
+import noppes.npcs.client.gui.util.GuiCustomScroll;
+import noppes.npcs.client.gui.util.ICustomScrollListener;
+import noppes.npcs.client.gui.util.GuiNpcButton;
+import noppes.npcs.client.gui.util.GuiNpcLabel;
+import noppes.npcs.client.gui.util.GuiNpcTextField;
+import noppes.npcs.client.gui.util.IScrollData;
+import noppes.npcs.client.gui.util.SubGuiInterface;
 import noppes.npcs.constants.EnumPacketServer;
 import noppes.npcs.controllers.FactionOptions;
-
-import java.util.HashMap;
-import java.util.Vector;
 
 public class SubGuiNpcFactionOptions extends SubGuiInterface implements IScrollData,ICustomScrollListener
 {
@@ -74,7 +80,7 @@ public class SubGuiNpcFactionOptions extends SubGuiInterface implements IScrollD
             addButton(new GuiNpcButton(2, guiLeft + 4, guiTop + 60, 90, 20, new String[]{"gui.increase","gui.decrease"},0));
             
             addTextField(new GuiNpcTextField(1, this, fontRendererObj, guiLeft + 4, guiTop + 82, 110, 20, "10"));
-            getTextField(1).numbersOnly = true;
+            getTextField(1).integersOnly = true;
             getTextField(1).setMinMaxDefault(1, 100000, 10);
             
             addButton(new GuiNpcButton(3, guiLeft + 4, guiTop + 104, 60, 20, "gui.add"));

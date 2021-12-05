@@ -1,19 +1,25 @@
 package noppes.npcs.client.gui.questtypes;
 
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
-import noppes.npcs.client.gui.util.*;
+import noppes.npcs.client.gui.util.GuiCustomScroll;
+import noppes.npcs.client.gui.util.ICustomScrollListener;
+import noppes.npcs.client.gui.util.GuiNpcButton;
+import noppes.npcs.client.gui.util.GuiNpcLabel;
+import noppes.npcs.client.gui.util.GuiNpcTextField;
+import noppes.npcs.client.gui.util.ITextfieldListener;
+import noppes.npcs.client.gui.util.SubGuiInterface;
 import noppes.npcs.controllers.Quest;
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.quests.QuestKill;
-
-import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class GuiNpcQuestTypeKill extends SubGuiInterface implements ITextfieldListener, ICustomScrollListener
 {
@@ -44,7 +50,7 @@ public class GuiNpcQuestTypeKill extends SubGuiInterface implements ITextfieldLi
 		for (String name : quest.targets.keySet()) {
 			this.addTextField(new GuiNpcTextField(i, this, fontRendererObj, guiLeft + 4, guiTop + 70 + i * 22, 180, 20, name));
 			this.addTextField(new GuiNpcTextField(i + 3, this, fontRendererObj, guiLeft + 186, guiTop + 70 + i * 22, 24, 20, quest.targets.get(name) + ""));
-			this.getTextField(i+3).numbersOnly = true;
+			this.getTextField(i+3).integersOnly = true;
 			this.getTextField(i+3).setMinMaxDefault(1, Integer.MAX_VALUE, 1);
 			i++;
 		}
@@ -52,7 +58,7 @@ public class GuiNpcQuestTypeKill extends SubGuiInterface implements ITextfieldLi
 		for(;i < 3; i++){
 			this.addTextField(new GuiNpcTextField(i, this, fontRendererObj, guiLeft + 4, guiTop + 70 + i * 22, 180, 20, ""));
 			this.addTextField(new GuiNpcTextField(i + 3, this, fontRendererObj, guiLeft + 186, guiTop + 70 + i * 22, 24, 20, "1"));
-			this.getTextField(i+3).numbersOnly = true;
+			this.getTextField(i+3).integersOnly = true;
 			this.getTextField(i+3).setMinMaxDefault(1, Integer.MAX_VALUE, 1);
 		}
         Map<?,?> data = EntityList.stringToClassMapping;

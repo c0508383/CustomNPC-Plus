@@ -1,12 +1,7 @@
 package foxz.command;
 
-import foxz.commandhelper.ChMcLogger;
-import foxz.commandhelper.annotations.Command;
-import foxz.commandhelper.annotations.SubCommand;
-import foxz.commandhelper.permissions.OpOnly;
-import foxz.commandhelper.permissions.ParamCheck;
-import foxz.commandhelper.permissions.PlayerOnly;
-import foxz.utils.Utils;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.command.CommandBase;
 import net.minecraft.entity.Entity;
@@ -17,8 +12,13 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import noppes.npcs.controllers.ServerCloneController;
 import noppes.npcs.entity.EntityNPCInterface;
-
-import java.util.List;
+import foxz.commandhelper.ChMcLogger;
+import foxz.commandhelper.annotations.Command;
+import foxz.commandhelper.annotations.SubCommand;
+import foxz.commandhelper.permissions.OpOnly;
+import foxz.commandhelper.permissions.ParamCheck;
+import foxz.commandhelper.permissions.PlayerOnly;
+import foxz.utils.Utils;
 
 @Command(
         name = "clone",

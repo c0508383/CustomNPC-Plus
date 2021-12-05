@@ -1,14 +1,18 @@
 package noppes.npcs.roles;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import noppes.npcs.controllers.*;
-import noppes.npcs.entity.EntityNPCInterface;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import noppes.npcs.controllers.Availability;
+import noppes.npcs.controllers.Line;
+import noppes.npcs.controllers.PlayerQuestController;
+import noppes.npcs.controllers.Quest;
+import noppes.npcs.controllers.QuestController;
+import noppes.npcs.entity.EntityNPCInterface;
 
 public class JobConversation extends JobInterface{
 	public Availability availability = new Availability();

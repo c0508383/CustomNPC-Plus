@@ -1,5 +1,14 @@
 package noppes.npcs.controllers;
 
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.zip.GZIPInputStream;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,12 +18,6 @@ import noppes.npcs.LogWriter;
 import noppes.npcs.constants.EnumRoleType;
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.roles.RoleTransporter;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.HashMap;
 
 public class TransportController {
 	private HashMap<Integer,TransportLocation> locations = new HashMap<Integer, TransportLocation>();

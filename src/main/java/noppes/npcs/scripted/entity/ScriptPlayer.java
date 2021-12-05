@@ -16,7 +16,15 @@ import noppes.npcs.NoppesUtilPlayer;
 import noppes.npcs.Server;
 import noppes.npcs.constants.EnumPacketClient;
 import noppes.npcs.constants.EnumQuestType;
-import noppes.npcs.controllers.*;
+import noppes.npcs.controllers.PixelmonHelper;
+import noppes.npcs.controllers.PlayerData;
+import noppes.npcs.controllers.PlayerDataController;
+import noppes.npcs.controllers.PlayerDialogData;
+import noppes.npcs.controllers.PlayerQuestData;
+import noppes.npcs.controllers.Quest;
+import noppes.npcs.controllers.QuestController;
+import noppes.npcs.controllers.QuestData;
+import noppes.npcs.scripted.NpcAPI;
 import noppes.npcs.scripted.ScriptItemStack;
 import noppes.npcs.scripted.ScriptPixelmonPlayerData;
 import noppes.npcs.scripted.constants.EntityType;
@@ -26,7 +34,6 @@ import noppes.npcs.util.ValueUtil;
 
 public class ScriptPlayer<T extends EntityPlayerMP> extends ScriptLivingBase<T> implements IPlayer {
 	public T player;
-	private PlayerData data;
 	public ScriptPlayer(T player){
 		super(player);
 		this.player = player;
@@ -49,6 +56,13 @@ public class ScriptPlayer<T extends EntityPlayerMP> extends ScriptLivingBase<T> 
 	@Override
 	public void setPosition(double x, double y, double z){
 		NoppesUtilPlayer.teleportPlayer(player, x, y, z, player.dimension);
+	}
+
+	public void setPosition(double x, double y, double z, int dimensionId){
+		if (NpcAPI.Instance().getIWorld(dimensionId) == null)
+			return;
+
+		NoppesUtilPlayer.teleportPlayer(player, x, y, z, dimensionId);
 	}
 
 	public int getDimension(){
@@ -132,7 +146,7 @@ public class ScriptPlayer<T extends EntityPlayerMP> extends ScriptLivingBase<T> 
 
 	@Override
 	public boolean typeOf(int type){
-		return type == EntityType.PLAYER || super.typeOf(type);
+		return type == EntityType.PLAYER?true:super.typeOf(type);
 	}
 	/**
 	 * @param faction The faction id
@@ -214,16 +228,16 @@ public class ScriptPlayer<T extends EntityPlayerMP> extends ScriptLivingBase<T> 
 		else{
 			for(int i = 0; i < player.inventory.mainInventory.length; i++){
 				ItemStack is = player.inventory.mainInventory[i];
-				if (is != null && is.isItemEqual(item.item)){
-					if(amount > is.stackSize){
-						player.inventory.mainInventory[i] = null;
-						amount -= is.stackSize;
-					}
-					else{
-						is.splitStack(amount);
-						break;
-					}
-				}
+	            if (is != null && is.isItemEqual(item.item)){
+	            	if(amount > is.stackSize){
+	                	player.inventory.mainInventory[i] = null;
+	                	amount -= is.stackSize;
+	            	}
+	            	else{
+	            		is.splitStack(amount);
+	            		break;
+	            	}
+	            }
 			}
 		}
 		this.updatePlayerInventory();
@@ -260,7 +274,7 @@ public class ScriptPlayer<T extends EntityPlayerMP> extends ScriptLivingBase<T> 
 			return false;
 		}
 	}
-
+	
 	/**
 	 * @since 1.7.10c
 	 * @param id The items name
@@ -271,7 +285,7 @@ public class ScriptPlayer<T extends EntityPlayerMP> extends ScriptLivingBase<T> 
 	public boolean giveItem(String id, int damage, int amount){
 		Item item = (Item)Item.itemRegistry.getObject(id);
 		if(item == null)
-			return false;
+			return false;		
 		return player.inventory.addItemStackToInventory(new ItemStack(item, amount, damage));
 	}
 	
@@ -357,9 +371,16 @@ public class ScriptPlayer<T extends EntityPlayerMP> extends ScriptLivingBase<T> 
 	public ITimers getTimers() {
 		return PlayerDataController.instance.getPlayerData(player).timers;
 	}
+
 	public void updatePlayerInventory() {
 		((EntityPlayerMP)this.entity).inventoryContainer.detectAndSendChanges();
 		PlayerQuestData playerdata = PlayerDataController.instance.getPlayerData(player).questData;
-		playerdata.checkQuestCompletion((EntityPlayer) this.entity, EnumQuestType.Item);
+		playerdata.checkQuestCompletion((EntityPlayer)this.entity, EnumQuestType.Item);
+	}
+
+	public boolean checkGUIOpen() {
+		NoppesUtilPlayer.isGUIOpen(player);
+		PlayerData data = PlayerDataController.instance.getPlayerData(player);
+		return data.getGUIOpen();
 	}
 }

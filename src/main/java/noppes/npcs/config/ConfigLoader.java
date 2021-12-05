@@ -1,11 +1,16 @@
 package noppes.npcs.config;
 
-import noppes.npcs.LogWriter;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.LinkedList;
+
+import noppes.npcs.LogWriter;
 
 public class ConfigLoader {
 	private boolean updateFile = false;

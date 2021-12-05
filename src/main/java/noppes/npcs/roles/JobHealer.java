@@ -1,13 +1,14 @@
 package noppes.npcs.roles;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import noppes.npcs.NoppesUtilServer;
 import noppes.npcs.entity.EntityNPCInterface;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class JobHealer extends JobInterface{
 	private long healTicks = 0;
@@ -35,7 +36,7 @@ public class JobHealer extends JobInterface{
 	//TODO heal food, heal potion effects, heal more types of entities besides just the player and npcs
 	public boolean aiShouldExecute() {
 		healTicks++;
-		if (healTicks < speed * 10L)
+		if (healTicks < speed * 10) 
 			return false;
 		
 		for(Object plObj:  npc.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, npc.boundingBox.expand(range, range/2, range))){

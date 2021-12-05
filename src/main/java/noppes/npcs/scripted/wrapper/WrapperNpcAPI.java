@@ -1,5 +1,11 @@
 package noppes.npcs.scripted.wrapper;
 
+import java.io.File;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import com.mojang.authlib.GameProfile;
 import cpw.mods.fml.common.eventhandler.EventBus;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -7,31 +13,33 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.util.FakePlayer;
 import noppes.npcs.CustomNpcs;
 import noppes.npcs.NoppesUtilServer;
-import noppes.npcs.containers.ContainerNpcInterface;
+import noppes.npcs.client.EntityUtil;
 import noppes.npcs.controllers.PixelmonHelper;
+import noppes.npcs.controllers.ScriptController;
 import noppes.npcs.controllers.ScriptEntityData;
+import noppes.npcs.scripted.*;
+import noppes.npcs.containers.ContainerNpcInterface;
 import noppes.npcs.entity.EntityCustomNpc;
 import noppes.npcs.entity.EntityNPCInterface;
-import noppes.npcs.scripted.*;
 import noppes.npcs.scripted.entity.*;
 import noppes.npcs.scripted.interfaces.*;
 import noppes.npcs.util.LRUHashMap;
-
-import java.io.File;
-import java.util.Map;
 
 public class WrapperNpcAPI extends NpcAPI {
     private static final Map<Integer, ScriptWorld> worldCache = new LRUHashMap(10);
@@ -202,5 +210,30 @@ public class WrapperNpcAPI extends NpcAPI {
     }
     public String getRandomName(int dictionary, int gender) {
         return CustomNpcs.MARKOV_GENERATOR[dictionary].fetch(gender);
+    }
+
+    public ScriptPlayer[] getAllServerPlayers(){
+        List<EntityPlayer> list = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
+        ScriptPlayer[] arr = new ScriptPlayer[list.size()];
+        for(int i = 0; i < list.size(); i++){
+            arr[i] = (ScriptPlayer) ScriptController.Instance.getScriptForEntity(list.get(i));
+        }
+
+        return arr;
+    }
+
+    public ScriptItemStack createItem(String id, int damage, int size){
+        Item item = (Item)Item.itemRegistry.getObject(id);
+        if(item == null)
+            return null;
+        return new ScriptItemStack(new ItemStack(item, size, damage));
+    }
+
+    public ScriptEntityParticle createEntityParticle(String directory){
+        return new ScriptEntityParticle(directory);
+    }
+
+    public int getServerTime() {
+        return MinecraftServer.getServer().getTickCounter();
     }
 }

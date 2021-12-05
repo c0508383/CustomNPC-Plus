@@ -1,16 +1,24 @@
 package noppes.npcs;
 
-import com.google.common.collect.Iterables;
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.StringUtils;
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.util.ValueUtil;
 
-import java.util.Random;
+import com.google.common.collect.Iterables;
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
 
 public class DataDisplay {
 	EntityNPCInterface npc;
@@ -41,6 +49,8 @@ public class DataDisplay {
 	public boolean disableLivingAnimation = false;
 	
 	public byte showBossBar = 0;
+
+	public ArrayList<UUID> invisibleToList = new ArrayList<>();
 
 	public DataDisplay(EntityNPCInterface npc){
 		this.npc = npc;
@@ -77,7 +87,6 @@ public class DataDisplay {
 
 		markovGeneratorId = new Random().nextInt(CustomNpcs.MARKOV_GENERATOR.length-1);
 		name = getRandomName();
-
 	}
 
 	public String getRandomName() {
@@ -111,6 +120,13 @@ public class DataDisplay {
 		nbttagcompound.setBoolean("NoLivingAnimation", disableLivingAnimation);
 		nbttagcompound.setByte("BossBar", showBossBar);
 
+		NBTTagList list = new NBTTagList();
+		for(UUID uuid : invisibleToList){
+			list.appendTag(new NBTTagString(uuid.toString()));
+		}
+
+		nbttagcompound.setTag("InvisibleToList", list);
+
 		return nbttagcompound;
 	}
 	public void readToNBT(NBTTagCompound nbttagcompound) {
@@ -142,7 +158,7 @@ public class DataDisplay {
 		cloakTexture = nbttagcompound.getString("CloakTexture");
 		glowTexture = nbttagcompound.getString("GlowTexture");
 		
-		modelSize = ValueUtil.CorrectInt(nbttagcompound.getInteger("Size"), 1, 30);
+		modelSize = ValueUtil.CorrectInt(nbttagcompound.getInteger("Size"), 1, Integer.MAX_VALUE);
 		modelType = nbttagcompound.getInteger("modelType");
 		
 		showName = nbttagcompound.getInteger("ShowName");
@@ -150,6 +166,18 @@ public class DataDisplay {
 
 		disableLivingAnimation = nbttagcompound.getBoolean("NoLivingAnimation");
 		showBossBar = nbttagcompound.getByte("BossBar");
+
+		NBTTagList tagList = (NBTTagList)nbttagcompound.getTag("InvisibleToList");
+		if(tagList != null) {
+			invisibleToList.clear();
+			for (int i = 0; i < tagList.tagCount(); i++) {
+				String nbtTagString = tagList.getStringTagAt(i);
+				invisibleToList.add(UUID.fromString(nbtTagString));
+			}
+		}
+		else {
+			invisibleToList = new ArrayList<>();
+		}
 
 		if(prevSkinType != skinType || !texture.equals(prevTexture))
 			npc.textureLocation = null;

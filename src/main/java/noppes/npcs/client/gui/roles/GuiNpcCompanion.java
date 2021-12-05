@@ -1,18 +1,24 @@
 package noppes.npcs.client.gui.roles;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.nbt.NBTTagCompound;
 import noppes.npcs.client.Client;
 import noppes.npcs.client.gui.player.companion.GuiNpcCompanionTalents.GuiTalent;
-import noppes.npcs.client.gui.util.*;
+import noppes.npcs.client.gui.util.GuiNPCInterface2;
+import noppes.npcs.client.gui.util.GuiNpcButton;
+import noppes.npcs.client.gui.util.GuiNpcLabel;
+import noppes.npcs.client.gui.util.GuiNpcSlider;
+import noppes.npcs.client.gui.util.GuiNpcTextField;
+import noppes.npcs.client.gui.util.ISliderListener;
+import noppes.npcs.client.gui.util.ITextfieldListener;
 import noppes.npcs.constants.EnumCompanionStage;
 import noppes.npcs.constants.EnumCompanionTalent;
 import noppes.npcs.constants.EnumPacketServer;
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.roles.RoleCompanion;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GuiNpcCompanion extends GuiNPCInterface2 implements ITextfieldListener, ISliderListener{	
 	private RoleCompanion role;
@@ -36,7 +42,7 @@ public class GuiNpcCompanion extends GuiNPCInterface2 implements ITextfieldListe
     	addLabel(new GuiNpcLabel(2, "companion.age", guiLeft + 4, y + 5));
     	if(role.canAge){
 	    	addTextField(new GuiNpcTextField(2, this, guiLeft + 162, y, 140, 20, role.ticksActive + ""));
-	    	getTextField(2).numbersOnly = true;
+	    	getTextField(2).integersOnly = true;
 	    	getTextField(2).setMinMaxDefault(0, Integer.MAX_VALUE, 0);
     	}
 

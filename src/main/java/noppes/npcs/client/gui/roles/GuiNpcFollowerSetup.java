@@ -1,17 +1,21 @@
 package noppes.npcs.client.gui.roles;
 
+import java.util.HashMap;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import noppes.npcs.client.Client;
-import noppes.npcs.client.gui.util.*;
+import noppes.npcs.client.gui.util.GuiContainerNPCInterface2;
+import noppes.npcs.client.gui.util.GuiNpcButton;
+import noppes.npcs.client.gui.util.GuiNpcButtonYesNo;
+import noppes.npcs.client.gui.util.GuiNpcLabel;
+import noppes.npcs.client.gui.util.GuiNpcTextField;
 import noppes.npcs.constants.EnumPacketServer;
 import noppes.npcs.containers.ContainerNPCFollowerSetup;
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.roles.RoleFollower;
-
-import java.util.HashMap;
 
 
 public class GuiNpcFollowerSetup extends GuiContainerNPCInterface2
@@ -33,7 +37,7 @@ public class GuiNpcFollowerSetup extends GuiContainerNPCInterface2
         	int y = guiTop + 37;
         	y += i * 25;
         	GuiNpcTextField tf = new GuiNpcTextField(i,this, fontRendererObj,x, y, 24, 20, "1");
-        	tf.numbersOnly = true;
+        	tf.integersOnly = true;
         	tf.setMinMaxDefault(1, Integer.MAX_VALUE, 1);
         	addTextField(tf);
         }

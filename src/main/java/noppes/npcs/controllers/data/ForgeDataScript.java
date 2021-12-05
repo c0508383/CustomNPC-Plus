@@ -1,9 +1,21 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
 package noppes.npcs.controllers.data;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.Map.Entry;
 
 import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.nbt.NBTTagCompound;
 import noppes.npcs.EventHooks;
-import noppes.npcs.EventScriptContainer;
+import noppes.npcs.controllers.ScriptContainer;
 import noppes.npcs.NBTTags;
 import noppes.npcs.constants.EnumScriptType;
 import noppes.npcs.controllers.IScriptHandler;
@@ -11,14 +23,9 @@ import noppes.npcs.controllers.ScriptController;
 import noppes.npcs.scripted.wrapper.WrapperNpcAPI;
 
 import javax.script.ScriptEngine;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
 
 public class ForgeDataScript implements IScriptHandler {
-    private List<EventScriptContainer> scripts = new ArrayList();
+    private List<ScriptContainer> scripts = new ArrayList();
     private String scriptLanguage = "ECMAScript";
     public long lastInited = -1L;
     private boolean enabled = false;
@@ -58,20 +65,22 @@ public class ForgeDataScript implements IScriptHandler {
                     }
                 }
 
-            for (EventScriptContainer script : this.scripts) {
-                script.setEngine(scriptLanguage);
-                if (script.engine == null)
-                    return;
+                Iterator var3 = this.scripts.iterator();
 
-                Event result = (Event) script.engine.get("event");
-                if (result == null)
-                    script.engine.put("event", event);
-                script.engine.put("API", new WrapperNpcAPI());
+                while (var3.hasNext()) {
+                    ScriptContainer script = (ScriptContainer) var3.next();
 
-                ScriptEngine engine = script.engine;
+                    script.setEngine(scriptLanguage);
+                    if(script.engine == null)
+                        return;
 
-                script.run(type, event);
-            }
+                    Event result = (Event) script.engine.get("event");
+                    if(result == null)
+                        script.engine.put("event", event);
+                    script.engine.put("API", new WrapperNpcAPI());
+
+                    script.run(type, event);
+                }
             //});
         }
     }
@@ -100,7 +109,7 @@ public class ForgeDataScript implements IScriptHandler {
         this.scriptLanguage = lang;
     }
 
-    public List<EventScriptContainer> getScripts() {
+    public List<ScriptContainer> getScripts() {
         return this.scripts;
     }
 
@@ -111,13 +120,16 @@ public class ForgeDataScript implements IScriptHandler {
     public Map<Long, String> getConsoleText() {
         TreeMap map = new TreeMap();
         int tab = 0;
+        Iterator var3 = this.getScripts().iterator();
 
-        for (EventScriptContainer script : this.getScripts()) {
+        while(var3.hasNext()) {
+            ScriptContainer script = (ScriptContainer)var3.next();
             ++tab;
+            Iterator var5 = script.console.entrySet().iterator();
 
-            for (Entry<Long, String> longStringEntry : script.console.entrySet()) {
-                Entry entry = (Entry) longStringEntry;
-                map.put(entry.getKey(), " tab " + tab + ":\n" + (String) entry.getValue());
+            while(var5.hasNext()) {
+                Entry entry = (Entry)var5.next();
+                map.put(entry.getKey(), " tab " + tab + ":\n" + (String)entry.getValue());
             }
         }
 
@@ -125,8 +137,10 @@ public class ForgeDataScript implements IScriptHandler {
     }
 
     public void clearConsole() {
+        Iterator var1 = this.getScripts().iterator();
 
-        for (EventScriptContainer script : this.getScripts()) {
+        while(var1.hasNext()) {
+            ScriptContainer script = (ScriptContainer)var1.next();
             script.console.clear();
         }
 

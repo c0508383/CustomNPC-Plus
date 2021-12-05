@@ -1,7 +1,9 @@
 package noppes.npcs.client.renderer;
 
-import com.mojang.authlib.minecraft.MinecraftProfileTexture;
-import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
+import java.io.File;
+import java.security.MessageDigest;
+import java.util.Map;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.FontRenderer;
@@ -23,11 +25,11 @@ import noppes.npcs.constants.EnumAnimation;
 import noppes.npcs.constants.EnumStandingType;
 import noppes.npcs.entity.EntityCustomNpc;
 import noppes.npcs.entity.EntityNPCInterface;
+
 import org.lwjgl.opengl.GL11;
 
-import java.io.File;
-import java.security.MessageDigest;
-import java.util.Map;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
 
 
 public class RenderNPCInterface extends RenderLiving{	
@@ -71,7 +73,7 @@ public class RenderNPCInterface extends RenderLiving{
     
     public void doRenderShadowAndFire(Entity par1Entity, double par2, double par4, double par6, float par8, float par9){
     	EntityNPCInterface npc = (EntityNPCInterface) par1Entity;
-    	if(!npc.isKilled())
+    	if(!npc.isKilled() && !npc.scriptInvisibleToPlayer(Minecraft.getMinecraft().thePlayer))
     		super.doRenderShadowAndFire(par1Entity, par2, par4, par6, par8, par9);
     }
     

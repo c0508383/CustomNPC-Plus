@@ -1,12 +1,16 @@
 package noppes.npcs.client.model;
 
+import java.util.Random;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
+import noppes.npcs.CustomItems;
 import noppes.npcs.ModelPartConfig;
 import noppes.npcs.ModelPartData;
 import noppes.npcs.client.ClientProxy;
@@ -19,9 +23,8 @@ import noppes.npcs.constants.EnumAnimation;
 import noppes.npcs.constants.EnumJobType;
 import noppes.npcs.entity.EntityCustomNpc;
 import noppes.npcs.roles.JobPuppet;
-import org.lwjgl.opengl.GL11;
 
-import java.util.Random;
+import org.lwjgl.opengl.GL11;
 
 public class ModelMPM extends ModelNPCMale{
 	private ModelPartInterface wings;
@@ -293,6 +296,9 @@ public class ModelMPM extends ModelNPCMale{
 	@Override
 	public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7){
 		EntityCustomNpc npc = (EntityCustomNpc) par1Entity;
+		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+		if(npc.scriptInvisibleToPlayer(Minecraft.getMinecraft().thePlayer) && (player.getHeldItem() == null || player.getHeldItem().getItem() != CustomItems.wand))
+			return;
 
 		if(entityModel != null){
 			if(!isArmor){
@@ -310,7 +316,8 @@ public class ModelMPM extends ModelNPCMale{
 			}
 		}
 		else{
-			alpha = npc.isInvisible() && !npc.isInvisibleToPlayer(Minecraft.getMinecraft().thePlayer)?0.15f:1;
+			alpha = npc.isInvisible() && !npc.isInvisibleToPlayer(player) ? 0.15f : 1;
+
 			setPlayerData(npc);
 			currentlyPlayerTexture = true;
 			setRotationAngles(par2, par3, par4, par5, par6, par7, par1Entity);

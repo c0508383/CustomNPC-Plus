@@ -1,14 +1,15 @@
 package noppes.npcs.scripted.event;
 
 import cpw.mods.fml.common.eventhandler.Cancelable;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import noppes.npcs.scripted.NpcAPI;
-import noppes.npcs.scripted.ScriptItemStack;
+import noppes.npcs.scripted.*;
 import noppes.npcs.scripted.entity.ScriptLivingBase;
 import noppes.npcs.scripted.interfaces.*;
 
@@ -35,25 +36,29 @@ public class PlayerEvent extends CustomNPCsEvent {
         public final boolean isAltPressed;
         public final boolean isShiftPressed;
         public final boolean isMetaPressed;
+        public final boolean keyDown;
 
-        public KeyPressedEvent(IPlayer player, int key, boolean isCtrlPressed, boolean isAltPressed, boolean isShiftPressed, boolean isMetaPressed) {
+        public KeyPressedEvent(IPlayer player, int key, boolean isCtrlPressed, boolean isAltPressed, boolean isShiftPressed, boolean isMetaPressed, boolean keyDown) {
             super(player);
             this.key = key;
             this.isCtrlPressed = isCtrlPressed;
             this.isAltPressed = isAltPressed;
             this.isShiftPressed = isShiftPressed;
             this.isMetaPressed = isMetaPressed;
+            this.keyDown = keyDown;
         }
     }
 
     public static class MouseClickedEvent extends PlayerEvent {
         public final int button;
         public final int mouseWheel;
+        public final boolean buttonDown;
 
-        public MouseClickedEvent(IPlayer player, int button, int mouseWheel){
+        public MouseClickedEvent(IPlayer player, int button, int mouseWheel, boolean buttonDown){
             super(player);
             this.button = button;
             this.mouseWheel = mouseWheel;
+            this.buttonDown = buttonDown;
         }
     }
 

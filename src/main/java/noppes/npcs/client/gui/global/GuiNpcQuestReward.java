@@ -3,10 +3,15 @@ package noppes.npcs.client.gui.global;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.ResourceLocation;
 import noppes.npcs.client.NoppesUtil;
-import noppes.npcs.client.gui.util.*;
+import noppes.npcs.client.gui.util.GuiContainerNPCInterface;
+import noppes.npcs.client.gui.util.GuiNpcButton;
+import noppes.npcs.client.gui.util.GuiNpcLabel;
+import noppes.npcs.client.gui.util.GuiNpcTextField;
+import noppes.npcs.client.gui.util.ITextfieldListener;
 import noppes.npcs.containers.ContainerNpcQuestReward;
 import noppes.npcs.controllers.Quest;
 import noppes.npcs.entity.EntityNPCInterface;
+
 import org.lwjgl.opengl.GL11;
 
 public class GuiNpcQuestReward extends GuiContainerNPCInterface implements ITextfieldListener
@@ -27,8 +32,8 @@ public class GuiNpcQuestReward extends GuiContainerNPCInterface implements IText
         
         addLabel(new GuiNpcLabel(1, "quest.exp", guiLeft + 4, guiTop + 45));
         addTextField(new GuiNpcTextField(0, this, this.fontRendererObj, guiLeft + 4, guiTop + 55, 60, 20, quest.rewardExp + ""));
-        getTextField(0).numbersOnly = true;
-        getTextField(0).setMinMaxDefault(0, 99999, 0);
+        getTextField(0).integersOnly = true;
+        getTextField(0).setMinMaxDefault(0, Integer.MAX_VALUE, 0);
     }
 
     public void actionPerformed(GuiButton guibutton){

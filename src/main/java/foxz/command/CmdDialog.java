@@ -1,10 +1,8 @@
 package foxz.command;
 
-import foxz.commandhelper.ChMcLogger;
-import foxz.commandhelper.annotations.Command;
-import foxz.commandhelper.annotations.SubCommand;
-import foxz.commandhelper.permissions.OpOnly;
-import foxz.commandhelper.permissions.ParamCheck;
+import java.util.Arrays;
+import java.util.List;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.entity.player.EntityPlayer;
 import noppes.npcs.NoppesUtilServer;
@@ -14,8 +12,11 @@ import noppes.npcs.controllers.DialogController;
 import noppes.npcs.controllers.DialogOption;
 import noppes.npcs.controllers.PlayerData;
 import noppes.npcs.entity.EntityDialogNpc;
-
-import java.util.List;
+import foxz.commandhelper.ChMcLogger;
+import foxz.commandhelper.annotations.Command;
+import foxz.commandhelper.annotations.SubCommand;
+import foxz.commandhelper.permissions.OpOnly;
+import foxz.commandhelper.permissions.ParamCheck;
 
 @Command(
         name="dialog",

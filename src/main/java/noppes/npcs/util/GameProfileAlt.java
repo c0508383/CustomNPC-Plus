@@ -1,9 +1,10 @@
 package noppes.npcs.util;
 
-import com.mojang.authlib.GameProfile;
+import java.util.UUID;
+
 import noppes.npcs.entity.EntityNPCInterface;
 
-import java.util.UUID;
+import com.mojang.authlib.GameProfile;
 
 public class GameProfileAlt extends GameProfile{
 	private static final UUID id = UUID.randomUUID();

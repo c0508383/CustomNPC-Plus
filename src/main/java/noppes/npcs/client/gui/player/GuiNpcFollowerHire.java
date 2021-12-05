@@ -13,6 +13,7 @@ import noppes.npcs.constants.EnumPlayerPacket;
 import noppes.npcs.containers.ContainerNPCFollowerHire;
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.roles.RoleFollower;
+
 import org.lwjgl.opengl.GL11;
 
 public class GuiNpcFollowerHire extends GuiContainerNPCInterface

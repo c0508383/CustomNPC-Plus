@@ -2,22 +2,33 @@ package noppes.npcs;
 
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Vector;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.InputEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
@@ -31,22 +42,15 @@ import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.event.world.WorldEvent.PotentialSpawns;
-import noppes.npcs.controllers.PixelmonHelper;
 import noppes.npcs.controllers.PlayerData;
 import noppes.npcs.controllers.PlayerDataController;
-import noppes.npcs.controllers.ScriptController;
 import noppes.npcs.controllers.data.PlayerDataScript;
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.scripted.NpcAPI;
 import noppes.npcs.scripted.event.ForgeEvent;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Vector;
+import noppes.npcs.controllers.PixelmonHelper;
+import noppes.npcs.controllers.ScriptController;
+import org.lwjgl.input.Mouse;
 
 public class ScriptPlayerEventHandler {
     public ScriptPlayerEventHandler() {
@@ -165,7 +169,7 @@ public class ScriptPlayerEventHandler {
 
     @SubscribeEvent
     public void invoke(PlayerOpenContainerEvent event) {
-        if(event.entityPlayer.worldObj instanceof WorldServer) {
+        if(event.entityPlayer.worldObj instanceof WorldServer && !(event.entityPlayer.openContainer instanceof ContainerPlayer)) {
             PlayerDataScript handler = PlayerData.get(event.entityPlayer).scriptData;
             EventHooks.onPlayerContainerOpen(handler, event.entityPlayer.openContainer);
         }
@@ -445,25 +449,4 @@ public class ScriptPlayerEventHandler {
             }
         }
     }
-
-    /*@SubscribeEvent
-    public void forgeTick(TickEvent.ServerTickEvent event){
-        if(event.side == Side.SERVER && event.phase == TickEvent.Phase.START) {
-            EventHooks.onForgeEvent(new ForgeEvent(event), event);
-        }
-    }
-
-    @SubscribeEvent
-    public void forgeTick(TickEvent.WorldTickEvent event){
-        if(event.side == Side.SERVER && event.phase == TickEvent.Phase.START) {
-            EventHooks.onForgeEvent(new ForgeEvent(event), event);
-        }
-    }
-
-    @SubscribeEvent
-    public void forgeTick(TickEvent.PlayerTickEvent event){
-        if(event.side == Side.SERVER && event.phase == TickEvent.Phase.START) {
-            EventHooks.onForgeEvent(new ForgeEvent(event), event);
-        }
-    }*/
 }

@@ -1,8 +1,17 @@
 package noppes.npcs.containers;
 
+import java.util.Iterator;
+
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ContainerChest;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+import noppes.npcs.CustomNpcs;
+import noppes.npcs.client.gui.player.GuiMailmanWrite;
+import noppes.npcs.constants.EnumGuiType;
 import noppes.npcs.controllers.PlayerDataController;
 import noppes.npcs.controllers.PlayerMail;
 import noppes.npcs.controllers.PlayerMailData;
@@ -89,12 +98,14 @@ public class ContainerMail extends ContainerNpcInterface{
         super.onContainerClosed(player);
         if(!canEdit && !player.worldObj.isRemote){
 			PlayerMailData data = PlayerDataController.instance.getPlayerData(player).mailData;
-            for (PlayerMail mail : data.playermail) {
-                if (mail.time == this.mail.time && mail.sender.equals(this.mail.sender)) {
-                    mail.readNBT(this.mail.writeNBT());
-                    break;
-                }
-            }
+			Iterator<PlayerMail> it = data.playermail.iterator();
+			while(it.hasNext()){
+				PlayerMail mail = it.next();
+				if(mail.time == this.mail.time && mail.sender.equals(this.mail.sender)){
+					mail.readNBT(this.mail.writeNBT());
+					break;
+				}
+			}
         }
     }
 

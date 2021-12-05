@@ -1,9 +1,15 @@
 package noppes.npcs;
 
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+
+import java.io.EOFException;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+import com.google.common.base.Charsets;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.CompressedStreamTools;
@@ -12,11 +18,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.village.MerchantRecipeList;
 import noppes.npcs.constants.EnumPacketClient;
-
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Map;
+import cpw.mods.fml.common.network.ByteBufUtils;
+import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
+import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
 public class Server {
 
@@ -114,7 +118,7 @@ public class Server {
 	}
 	
 	public static void writeString(ByteBuf buffer, String s){
-        byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
+        byte[] bytes = s.getBytes(Charsets.UTF_8);
 		buffer.writeShort((short)bytes.length);
 		buffer.writeBytes(bytes);
 	}
@@ -123,7 +127,7 @@ public class Server {
 		try{
 			byte[] bytes = new byte[buffer.readShort()];
 			buffer.readBytes(bytes);
-			return new String(bytes, StandardCharsets.UTF_8);
+			return new String(bytes, Charsets.UTF_8);
 		}
 		catch(IndexOutOfBoundsException ex){
 			return null;

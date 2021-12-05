@@ -1,10 +1,8 @@
 package foxz.command;
 
-import foxz.commandhelper.ChMcLogger;
-import foxz.commandhelper.annotations.Command;
-import foxz.commandhelper.annotations.SubCommand;
-import foxz.commandhelper.permissions.OpOnly;
-import foxz.commandhelper.permissions.PlayerOnly;
+import java.util.Arrays;
+import java.util.Set;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockIce;
 import net.minecraft.block.BlockLeavesBase;
@@ -14,9 +12,11 @@ import noppes.npcs.CustomNpcs;
 import noppes.npcs.Server;
 import noppes.npcs.constants.EnumPacketClient;
 import noppes.npcs.controllers.ChunkController;
-
-import java.util.Arrays;
-import java.util.Set;
+import foxz.commandhelper.ChMcLogger;
+import foxz.commandhelper.annotations.Command;
+import foxz.commandhelper.annotations.SubCommand;
+import foxz.commandhelper.permissions.OpOnly;
+import foxz.commandhelper.permissions.PlayerOnly;
 
 @Command(
         name="config",
@@ -188,8 +188,8 @@ public class CmdConfig extends ChMcLogger {
     		}
     	}
 		String font = "";
-		for (String arg : args) {
-			font += " " + arg;
+		for(int i = 0; i < args.length; i++){
+			font += " " + args[i];
 		}
     	Server.sendData((EntityPlayerMP)this.pcParam, EnumPacketClient.CONFIG, 0, font.trim(), size);
     }

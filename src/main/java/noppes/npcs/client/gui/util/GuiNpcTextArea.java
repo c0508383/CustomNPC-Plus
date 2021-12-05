@@ -1,5 +1,8 @@
 package noppes.npcs.client.gui.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
@@ -7,12 +10,10 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.MathHelper;
 import noppes.npcs.client.ClientProxy;
 import noppes.npcs.client.ClientProxy.FontContainer;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GuiNpcTextArea extends GuiNpcTextField implements IGui{
 	public boolean inMenu = true;

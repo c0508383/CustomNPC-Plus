@@ -3,6 +3,7 @@ package noppes.npcs.entity.old;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import noppes.npcs.ModelData;
+import noppes.npcs.constants.EnumAnimation;
 import noppes.npcs.entity.EntityCustomNpc;
 import noppes.npcs.entity.EntityNPCInterface;
 

@@ -4,7 +4,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import noppes.npcs.ICompatibilty;
 import noppes.npcs.VersionCompatibility;
-import noppes.npcs.constants.*;
+import noppes.npcs.constants.EnumAvailabilityDialog;
+import noppes.npcs.constants.EnumAvailabilityFaction;
+import noppes.npcs.constants.EnumAvailabilityFactionType;
+import noppes.npcs.constants.EnumAvailabilityQuest;
+import noppes.npcs.constants.EnumDayTime;
 
 public class Availability implements ICompatibilty {
 	public int version = VersionCompatibility.ModRev;

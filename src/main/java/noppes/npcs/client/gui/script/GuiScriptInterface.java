@@ -1,5 +1,10 @@
 package noppes.npcs.client.gui.script;
 
+import java.io.IOException;
+import java.lang.reflect.Modifier;
+import java.util.*;
+import java.util.Map.Entry;
+
 import com.google.common.reflect.ClassPath;
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -13,7 +18,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import noppes.npcs.EventScriptContainer;
+import noppes.npcs.controllers.ScriptContainer;
 import noppes.npcs.NoppesStringUtils;
 import noppes.npcs.client.NoppesUtil;
 import noppes.npcs.client.gui.swing.GuiJTextArea;
@@ -23,11 +28,6 @@ import noppes.npcs.controllers.ScriptController;
 import noppes.npcs.controllers.data.ForgeDataScript;
 import noppes.npcs.controllers.data.PlayerDataScript;
 import org.apache.commons.lang3.StringUtils;
-
-import java.io.IOException;
-import java.lang.reflect.Modifier;
-import java.util.*;
-import java.util.Map.Entry;
 
 public class GuiScriptInterface extends GuiNPCInterface implements GuiYesNoCallback, IGuiData, ITextChangeListener, ICustomScrollListener, IJTextAreaListener, ITextfieldListener {
     private int activeTab = 0;
@@ -149,8 +149,9 @@ public class GuiScriptInterface extends GuiNPCInterface implements GuiYesNoCallb
                     if(c.isEmpty()) {
                         c.add(infoClass);
                     }
-                    for (Object o : c) {
-                        Class c1 = (Class) o;
+                    Iterator var10 = c.iterator();
+                    while(var10.hasNext()) {
+                        Class c1 = (Class) var10.next();
                         if (!EntityEvent.EntityConstructing.class.isAssignableFrom(c1) && !WorldEvent.PotentialSpawns.class.isAssignableFrom(c1) && !TickEvent.RenderTickEvent.class.isAssignableFrom(c1) && !TickEvent.ClientTickEvent.class.isAssignableFrom(c1) && !FMLNetworkEvent.ClientCustomPacketEvent.class.isAssignableFrom(c1) && !ItemTooltipEvent.class.isAssignableFrom(c1) && Event.class.isAssignableFrom(c1) && !Modifier.isAbstract(c1.getModifiers()) && Modifier.isPublic(c1.getModifiers())) {
                             String eventName = c1.getName();
                             int i = eventName.lastIndexOf(".");
@@ -168,7 +169,7 @@ public class GuiScriptInterface extends GuiNPCInterface implements GuiYesNoCallb
             hookLabel.color = 0xaaaaaa;
             addLabel(hookLabel);
 
-            EventScriptContainer var7 = (EventScriptContainer)this.handler.getScripts().get(this.activeTab - 1);
+            ScriptContainer var7 = (ScriptContainer)this.handler.getScripts().get(this.activeTab - 1);
             GuiNpcTextArea left = new GuiNpcTextArea(2, this, this.guiLeft + yoffset, this.guiTop + yoffset, this.xSize - 110 - yoffset, (int)((double)this.ySize * 0.96D) - yoffset * 2, var7 == null?"":var7.script);
             this.addTextField(left);
             int left1 = this.guiLeft + this.xSize - 104;
@@ -212,9 +213,21 @@ public class GuiScriptInterface extends GuiNPCInterface implements GuiYesNoCallb
         this.ySize = 256;
     }
 
+    public String previousHookClicked = "";
     @Override
     public void customScrollClicked(int i, int j, int k, GuiCustomScroll scroll) {
-        //this.handler.getScripts().get(this.activeTab - 1).setType(scroll.getSelected().replace("playerscript.",""));
+        String hook = scroll.getSelected();
+        if(previousHookClicked.equals(hook)){
+            String addString = "";
+            if(!this.getTextField(2).getText().isEmpty())
+                addString += "\n";
+            addString += "function "+hook+"(event) {\n    \n}\n";
+
+            this.getTextField(2).setText(this.getTextField(2).getText()+addString);
+            previousHookClicked = "";
+        } else {
+            previousHookClicked = hook;
+        }
     }
 
     @Override
@@ -224,22 +237,14 @@ public class GuiScriptInterface extends GuiNPCInterface implements GuiYesNoCallb
         }*/
     }
 
-    /*private int getScriptHook(EventScriptContainer eventScriptContainer, List<String> list) {
-        for(String s : list) {
-            if (s.replace("playerscript.", "").equals(eventScriptContainer.type)) {
-                return list.indexOf(s);
-            }
-        }
-        return 0;
-    }*/
-
     private String getConsoleText() {
         Map<Long, String> map = this.handler.getConsoleText();
         StringBuilder builder = new StringBuilder();
+        Iterator var3 = map.entrySet().iterator();
 
-        for (Entry<Long, String> longStringEntry : map.entrySet()) {
-            Entry<Long, String> entry = (Entry) longStringEntry;
-            builder.insert(0, new Date((Long) entry.getKey()) + (String) entry.getValue() + "\n");
+        while(var3.hasNext()) {
+            Entry<Long, String> entry = (Entry)var3.next();
+            builder.insert(0, new Date((Long)entry.getKey()) + (String)entry.getValue() + "\n");
         }
 
         return builder.toString();
@@ -294,7 +299,7 @@ public class GuiScriptInterface extends GuiNPCInterface implements GuiYesNoCallb
         }
 
         if(guibutton.id == scriptLimit) {
-            this.handler.getScripts().add(new EventScriptContainer(this.handler));
+            this.handler.getScripts().add(new ScriptContainer(this.handler));
             this.activeTab = this.handler.getScripts().size();
             this.initGui();
         }
@@ -323,10 +328,10 @@ public class GuiScriptInterface extends GuiNPCInterface implements GuiYesNoCallb
             (this.getTextField(2)).setText(NoppesStringUtils.getClipboardContents());
         }
 
-        EventScriptContainer container;
+        ScriptContainer container;
         if(guibutton.id == 102) {
             if(this.activeTab > 0) {
-                container = (EventScriptContainer)this.handler.getScripts().get(this.activeTab - 1);
+                container = (ScriptContainer)this.handler.getScripts().get(this.activeTab - 1);
                 container.script = "";
             } else {
                 this.handler.clearConsole();
@@ -353,16 +358,16 @@ public class GuiScriptInterface extends GuiNPCInterface implements GuiYesNoCallb
         }
 
         if(guibutton.id == 107) {
-            container = (EventScriptContainer)this.handler.getScripts().get(this.activeTab - 1);
+            container = (ScriptContainer)this.handler.getScripts().get(this.activeTab - 1);
             if(container == null) {
-                this.handler.getScripts().add(container = new EventScriptContainer(this.handler));
+                this.handler.getScripts().add(container = new ScriptContainer(this.handler));
             }
 
             this.setSubGui(new EventGuiScriptList((List)this.languages.get(this.handler.getLanguage()), container));
         }
 
         if(guibutton.id == 108) {
-            container = (EventScriptContainer)this.handler.getScripts().get(this.activeTab - 1);
+            container = (ScriptContainer)this.handler.getScripts().get(this.activeTab - 1);
             if(container != null) {
                 this.setScript();
                 this.AWTWindow = new GuiJTextArea(container.script).setListener(this);
@@ -373,9 +378,9 @@ public class GuiScriptInterface extends GuiNPCInterface implements GuiYesNoCallb
 
     private void setScript() {
         if(this.activeTab > 0) {
-            EventScriptContainer container = (EventScriptContainer)this.handler.getScripts().get(this.activeTab - 1);
+            ScriptContainer container = (ScriptContainer)this.handler.getScripts().get(this.activeTab - 1);
             if(container == null) {
-                this.handler.getScripts().add(container = new EventScriptContainer(this.handler));
+                this.handler.getScripts().add(container = new ScriptContainer(this.handler));
             }
 
             String text = (this.getTextField(2)).getText();
@@ -411,7 +416,7 @@ public class GuiScriptInterface extends GuiNPCInterface implements GuiYesNoCallb
     }
 
     public void textUpdate(String text) {
-        EventScriptContainer container = (EventScriptContainer)this.handler.getScripts().get(this.activeTab - 1);
+        ScriptContainer container = (ScriptContainer)this.handler.getScripts().get(this.activeTab - 1);
         if(container != null) {
             container.script = text;
         }
@@ -420,7 +425,7 @@ public class GuiScriptInterface extends GuiNPCInterface implements GuiYesNoCallb
 
     @Override
     public void saveText(String text) {
-        EventScriptContainer container = handler.getScripts().get(activeTab);
+        ScriptContainer container = handler.getScripts().get(activeTab);
         if(container != null)
             container.script = text;
         initGui();

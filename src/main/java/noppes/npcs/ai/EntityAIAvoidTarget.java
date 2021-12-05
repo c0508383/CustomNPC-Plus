@@ -1,8 +1,11 @@
 package noppes.npcs.ai;
 
+import java.util.List;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
@@ -10,8 +13,6 @@ import net.minecraft.util.Vec3;
 import noppes.npcs.constants.AiMutex;
 import noppes.npcs.constants.EnumNavType;
 import noppes.npcs.entity.EntityNPCInterface;
-
-import java.util.List;
 
 public class EntityAIAvoidTarget extends EntityAIBase
 {

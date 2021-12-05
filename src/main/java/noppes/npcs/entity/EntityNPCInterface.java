@@ -1,7 +1,10 @@
 package noppes.npcs.entity;
 
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import io.netty.buffer.ByteBuf;
+
+import java.io.IOException;
+import java.util.*;
+
 import net.minecraft.block.Block;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.IEntitySelector;
@@ -19,46 +22,85 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.*;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.IChatComponent;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.ServerChatEvent;
-import noppes.npcs.*;
+import noppes.npcs.CustomItems;
+import noppes.npcs.CustomNpcs;
+import noppes.npcs.DataAI;
+import noppes.npcs.DataAdvanced;
+import noppes.npcs.DataDisplay;
+import noppes.npcs.DataInventory;
+import noppes.npcs.DataScript;
+import noppes.npcs.DataStats;
+import noppes.npcs.IChatMessages;
+import noppes.npcs.NBTTags;
+import noppes.npcs.NoppesUtilServer;
+import noppes.npcs.NpcDamageSource;
+import noppes.npcs.Server;
+import noppes.npcs.VersionCompatibility;
+import noppes.npcs.ai.*;
 import noppes.npcs.ai.EntityAIMoveIndoors;
 import noppes.npcs.ai.EntityAIPanic;
 import noppes.npcs.ai.EntityAIWander;
 import noppes.npcs.ai.EntityAIWatchClosest;
-import noppes.npcs.ai.*;
 import noppes.npcs.ai.selector.NPCAttackSelector;
 import noppes.npcs.ai.target.EntityAIClearTarget;
 import noppes.npcs.ai.target.EntityAIClosestTarget;
 import noppes.npcs.ai.target.EntityAIOwnerHurtByTarget;
 import noppes.npcs.ai.target.EntityAIOwnerHurtTarget;
 import noppes.npcs.client.EntityUtil;
-import noppes.npcs.constants.*;
-import noppes.npcs.controllers.*;
+import noppes.npcs.constants.EnumAnimation;
+import noppes.npcs.constants.EnumJobType;
+import noppes.npcs.constants.EnumMovingType;
+import noppes.npcs.constants.EnumNavType;
+import noppes.npcs.constants.EnumPacketClient;
+import noppes.npcs.constants.EnumPotionType;
+import noppes.npcs.constants.EnumRoleType;
+import noppes.npcs.constants.EnumScriptType;
+import noppes.npcs.constants.EnumStandingType;
+import noppes.npcs.controllers.Dialog;
+import noppes.npcs.controllers.DialogOption;
+import noppes.npcs.controllers.Faction;
+import noppes.npcs.controllers.FactionController;
+import noppes.npcs.controllers.Line;
+import noppes.npcs.controllers.LinkedNpcController;
 import noppes.npcs.controllers.LinkedNpcController.LinkedData;
+import noppes.npcs.controllers.PlayerDataController;
+import noppes.npcs.controllers.PlayerQuestData;
+import noppes.npcs.controllers.QuestData;
+import noppes.npcs.controllers.TransformData;
 import noppes.npcs.entity.data.DataTimers;
-import noppes.npcs.roles.*;
+import noppes.npcs.roles.JobBard;
+import noppes.npcs.roles.JobFollower;
+import noppes.npcs.roles.JobInterface;
+import noppes.npcs.roles.RoleCompanion;
+import noppes.npcs.roles.RoleFollower;
+import noppes.npcs.roles.RoleInterface;
 import noppes.npcs.scripted.entity.ScriptNpc;
+import noppes.npcs.scripted.entity.ScriptPlayer;
 import noppes.npcs.scripted.event.ScriptEventAttack;
 import noppes.npcs.scripted.event.ScriptEventDamaged;
 import noppes.npcs.scripted.event.ScriptEventKilled;
 import noppes.npcs.scripted.event.ScriptEventTarget;
 import noppes.npcs.scripted.interfaces.ICustomNpc;
 import noppes.npcs.util.GameProfileAlt;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
 public abstract class EntityNPCInterface extends EntityCreature implements IEntityAdditionalSpawnData, ICommandSender, IRangedAttackMob, IBossDisplayData{
 	public ICustomNpc wrappedNPC;
@@ -154,7 +196,7 @@ public abstract class EntityNPCInterface extends EntityCreature implements IEnti
 
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(stats.maxHealth);
         this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(CustomNpcs.NpcNavRange);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.getSpeed());
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(this.getSpeed());
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(stats.getAttackStrength());
     }
 
@@ -557,15 +599,17 @@ public abstract class EntityNPCInterface extends EntityCreature implements IEnti
 
         this.tasks.addTask(0, new EntityAIWaterNav(this));
 
-//		if(canFly()){
-//			this.moveHelper = new FlyingMoveHelper(this);
-//			this.navigator = new PathNavigateFlying(this, worldObj);
-//		}
-//		else{
-//			this.moveHelper = new EntityMoveHelper(this);
-//			this.navigator = new PathNavigateGround(this, worldObj);
-//			this.tasks.addTask(0, new EntityAIWaterNav(this));
-//		}
+		if(canFly()){
+			//this.moveHelper = new FlyingMoveHelper(this);
+			//this.navigator = new PathNavigateFlying(this, worldObj);
+			this.getNavigator().setCanSwim(true);
+			this.tasks.addTask(0, new EntityAISwimming(this));
+		}
+		else{
+			//this.moveHelper = new EntityMoveHelper(this);
+			//this.navigator = new PathNavigateGround(this, worldObj);
+			this.tasks.addTask(0, new EntityAIWaterNav(this));
+		}
 
 		this.taskCount = 1;
 		this.doorInteractType();
@@ -1223,8 +1267,9 @@ public abstract class EntityNPCInterface extends EntityCreature implements IEnti
 
 	@Override
 	public IIcon getItemIcon(ItemStack par1ItemStack, int par2){
-        if (par1ItemStack.getItem() == Items.bow){
-            return Items.bow.getIcon(par1ItemStack, par2);
+    	// Change Here
+        if (par1ItemStack.getItem() instanceof ItemBow){
+            return par1ItemStack.getItem().getIcon(par1ItemStack, par2);
         }
 		EntityPlayer player = CustomNpcs.proxy.getPlayer();
 		if(player == null)
@@ -1407,7 +1452,7 @@ public abstract class EntityNPCInterface extends EntityCreature implements IEnti
 	public NBTTagCompound writeSpawnData() {
 		NBTTagCompound compound = new NBTTagCompound();
 		display.writeToNBT(compound);
-		compound.setInteger("MaxHealth", stats.maxHealth);
+		compound.setDouble("MaxHealth", stats.maxHealth);
 		compound.setTag("Armor", NBTTags.nbtItemStackList(inventory.getArmor()));
 		compound.setTag("Weapons", NBTTags.nbtItemStackList(inventory.getWeapons()));
 		compound.setInteger("Speed", ai.getWalkingSpeed());
@@ -1446,7 +1491,7 @@ public abstract class EntityNPCInterface extends EntityCreature implements IEnti
 		} 
 	}
 	public void readSpawnData(NBTTagCompound compound) {
-		stats.maxHealth = compound.getInteger("MaxHealth");
+		stats.maxHealth = compound.getDouble("MaxHealth");
 		ai.setWalkingSpeed(compound.getInteger("Speed"));
 		stats.hideKilledBody = compound.getBoolean("DeadBody");
 		ai.standingType = EnumStandingType.values()[compound.getInteger("StandingState") % EnumStandingType.values().length];
@@ -1556,8 +1601,12 @@ public abstract class EntityNPCInterface extends EntityCreature implements IEnti
 
 	@Override
     public boolean isInvisibleToPlayer(EntityPlayer player){
-        return display.visible == 1 && (player.getHeldItem() == null || player.getHeldItem().getItem() != CustomItems.wand);
+        return (scriptInvisibleToPlayer(player) || display.visible == 1) && (player.getHeldItem() == null || player.getHeldItem().getItem() != CustomItems.wand);
     }
+
+	public boolean scriptInvisibleToPlayer(EntityPlayer player){
+		return display.invisibleToList != null && display.invisibleToList.contains(player.getPersistentID());
+	}
 
 	@Override
 	public boolean isInvisible(){

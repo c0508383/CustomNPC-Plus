@@ -5,7 +5,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import noppes.npcs.DataAI;
 import noppes.npcs.client.Client;
 import noppes.npcs.client.gui.SubGuiNpcMovement;
-import noppes.npcs.client.gui.util.*;
+import noppes.npcs.client.gui.util.GuiNPCInterface2;
+import noppes.npcs.client.gui.util.GuiNpcButton;
+import noppes.npcs.client.gui.util.GuiNpcLabel;
+import noppes.npcs.client.gui.util.GuiNpcTextField;
+import noppes.npcs.client.gui.util.IGuiData;
+import noppes.npcs.client.gui.util.ITextfieldListener;
 import noppes.npcs.constants.EnumNavType;
 import noppes.npcs.constants.EnumPacketServer;
 import noppes.npcs.entity.EntityNPCInterface;
@@ -47,7 +52,7 @@ public class GuiNpcAI extends GuiNPCInterface2 implements ITextfieldListener, IG
 		if (ai.useRangeMelee >= 1){
 			addLabel(new GuiNpcLabel(20,"gui.minrange", guiLeft + 300, guiTop + 115));
 			addTextField(new GuiNpcTextField(6,this, fontRendererObj, guiLeft + 380, guiTop + 110, 30, 20, ai.distanceToMelee + ""));
-	    	getTextField(6).numbersOnly = true;
+	    	getTextField(6).integersOnly = true;
 	        getTextField(6).setMinMaxDefault(1, npc.stats.aggroRange, 5);
 		}
 		addLabel(new GuiNpcLabel(19,"ai.tacticalvariant", guiLeft + 150, guiTop + 140));
@@ -65,7 +70,7 @@ public class GuiNpcAI extends GuiNPCInterface2 implements ITextfieldListener, IG
     		}
     		addLabel(new GuiNpcLabel(21, label, guiLeft + 300, guiTop + 140));
     		addTextField(new GuiNpcTextField(3,this, fontRendererObj, guiLeft + 380, guiTop + 135, 30, 20, ai.tacticalRadius + ""));
-	    	getTextField(3).numbersOnly = true;
+	    	getTextField(3).integersOnly = true;
 	        getTextField(3).setMinMaxDefault(1, npc.stats.aggroRange, 5);
     	}
 

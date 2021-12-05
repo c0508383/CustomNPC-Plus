@@ -1,5 +1,11 @@
 package noppes.npcs.client.gui.model;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.IResource;
@@ -9,17 +15,13 @@ import noppes.npcs.client.gui.util.GuiModelInterface;
 import noppes.npcs.client.gui.util.GuiNpcTextField;
 import noppes.npcs.client.gui.util.ITextfieldListener;
 import noppes.npcs.entity.EntityCustomNpc;
-import org.lwjgl.opengl.GL11;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
+import org.lwjgl.opengl.GL11;
 
 public class GuiModelColor extends GuiModelInterface implements ITextfieldListener{
 
 	private GuiScreen parent;
-	private static final ResourceLocation color = new ResourceLocation("customnpcs:textures/gui/color.png");
+	private final static ResourceLocation color = new ResourceLocation("customnpcs:textures/gui/color.png");
 	
 	private int colorX, colorY;
 	

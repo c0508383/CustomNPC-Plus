@@ -1,5 +1,7 @@
 package noppes.npcs.blocks.tiles;
 
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -8,8 +10,6 @@ import net.minecraft.util.AxisAlignedBB;
 import noppes.npcs.CustomNpcs;
 import noppes.npcs.blocks.BlockNpcRedstone;
 import noppes.npcs.controllers.Availability;
-
-import java.util.List;
 
 public class TileRedstoneBlock extends TileEntity {
 	public int onRange = 6;
