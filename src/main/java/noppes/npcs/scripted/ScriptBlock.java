@@ -1,6 +1,5 @@
 package noppes.npcs.scripted;
 
-import java.util.Map;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,6 +10,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import noppes.npcs.scripted.interfaces.*;
 import noppes.npcs.util.LRUHashMap;
+
+import java.util.Map;
 
 public class ScriptBlock implements IBlock {
     private static final Map<String, ScriptBlock> blockCache = new LRUHashMap(400);

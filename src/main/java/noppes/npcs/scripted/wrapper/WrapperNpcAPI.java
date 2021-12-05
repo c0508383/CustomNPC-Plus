@@ -1,11 +1,5 @@
 package noppes.npcs.scripted.wrapper;
 
-import java.io.File;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import com.mojang.authlib.GameProfile;
 import cpw.mods.fml.common.eventhandler.EventBus;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -26,20 +20,22 @@ import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.util.FakePlayer;
 import noppes.npcs.CustomNpcs;
 import noppes.npcs.NoppesUtilServer;
-import noppes.npcs.client.EntityUtil;
+import noppes.npcs.containers.ContainerNpcInterface;
 import noppes.npcs.controllers.PixelmonHelper;
 import noppes.npcs.controllers.ScriptController;
 import noppes.npcs.controllers.ScriptEntityData;
-import noppes.npcs.scripted.*;
-import noppes.npcs.containers.ContainerNpcInterface;
 import noppes.npcs.entity.EntityCustomNpc;
 import noppes.npcs.entity.EntityNPCInterface;
+import noppes.npcs.scripted.*;
 import noppes.npcs.scripted.entity.*;
 import noppes.npcs.scripted.interfaces.*;
 import noppes.npcs.util.LRUHashMap;
+
+import java.io.File;
+import java.util.List;
+import java.util.Map;
 
 public class WrapperNpcAPI extends NpcAPI {
     private static final Map<Integer, ScriptWorld> worldCache = new LRUHashMap(10);

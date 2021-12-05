@@ -1,5 +1,6 @@
 package noppes.npcs;
 
+import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,30 +11,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 import noppes.npcs.blocks.tiles.TileNpcContainer;
 import noppes.npcs.constants.EnumGuiType;
-import noppes.npcs.containers.ContainerCarpentryBench;
-import noppes.npcs.containers.ContainerCrate;
-import noppes.npcs.containers.ContainerMail;
-import noppes.npcs.containers.ContainerManageBanks;
-import noppes.npcs.containers.ContainerManageRecipes;
-import noppes.npcs.containers.ContainerMerchantAdd;
-import noppes.npcs.containers.ContainerNPCBankLarge;
-import noppes.npcs.containers.ContainerNPCBankSmall;
-import noppes.npcs.containers.ContainerNPCBankUnlock;
-import noppes.npcs.containers.ContainerNPCBankUpgrade;
-import noppes.npcs.containers.ContainerNPCCompanion;
-import noppes.npcs.containers.ContainerNPCFollower;
-import noppes.npcs.containers.ContainerNPCFollowerHire;
-import noppes.npcs.containers.ContainerNPCFollowerSetup;
-import noppes.npcs.containers.ContainerNPCInv;
-import noppes.npcs.containers.ContainerNPCTrader;
-import noppes.npcs.containers.ContainerNPCTraderSetup;
-import noppes.npcs.containers.ContainerNpcItemGiver;
-import noppes.npcs.containers.ContainerNpcQuestReward;
-import noppes.npcs.containers.ContainerNpcQuestTypeItem;
+import noppes.npcs.containers.*;
 import noppes.npcs.controllers.PlayerData;
-import noppes.npcs.entity.EntityCustomNpc;
 import noppes.npcs.entity.EntityNPCInterface;
-import cpw.mods.fml.common.network.IGuiHandler;
 import noppes.npcs.scripted.interfaces.IWorld;
 
 public class CommonProxy implements IGuiHandler {

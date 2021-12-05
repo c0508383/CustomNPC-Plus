@@ -1,13 +1,10 @@
 package noppes.npcs.client.fx;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import noppes.npcs.client.ClientProxy;
-import org.lwjgl.Sys;
 import org.lwjgl.opengl.GL11;
 
 public class EntityCustomFX extends EntityFX {

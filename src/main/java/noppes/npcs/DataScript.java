@@ -1,9 +1,5 @@
 package noppes.npcs;
 
-import java.util.*;
-
-import javax.script.ScriptEngine;
-
 import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,19 +7,22 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import noppes.npcs.constants.EnumScriptType;
-import noppes.npcs.controllers.ScriptContainer;
 import noppes.npcs.controllers.IScriptHandler;
+import noppes.npcs.controllers.ScriptContainer;
 import noppes.npcs.controllers.ScriptController;
 import noppes.npcs.entity.EntityCustomNpc;
 import noppes.npcs.entity.EntityNPCInterface;
-import noppes.npcs.scripted.event.ScriptEvent;
-import noppes.npcs.scripted.entity.ScriptNpc;
 import noppes.npcs.scripted.ScriptWorld;
 import noppes.npcs.scripted.constants.EntityType;
 import noppes.npcs.scripted.constants.JobType;
 import noppes.npcs.scripted.constants.RoleType;
+import noppes.npcs.scripted.entity.ScriptNpc;
+import noppes.npcs.scripted.event.ScriptEvent;
 import noppes.npcs.scripted.interfaces.IWorld;
 import noppes.npcs.scripted.wrapper.WrapperNpcAPI;
+
+import javax.script.ScriptEngine;
+import java.util.*;
 
 public class DataScript implements IScriptHandler {
 	public List<ScriptContainer> scripts = new ArrayList();

@@ -4,8 +4,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import noppes.npcs.controllers.ScriptController;
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.roles.RoleFollower;
-import noppes.npcs.scripted.entity.ScriptPlayer;
 import noppes.npcs.scripted.constants.RoleType;
+import noppes.npcs.scripted.entity.ScriptPlayer;
 
 public class ScriptRoleFollower extends ScriptRoleInterface{
 	private RoleFollower role;

@@ -3,7 +3,6 @@ package nikedemos.markovnames;
 import nikedemos.markovnames.generators.*;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map.Entry;
 
 public class Main {

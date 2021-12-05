@@ -1,14 +1,14 @@
 package noppes.npcs;
 
-import java.util.*;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
 import net.minecraft.nbt.NBTTagList;
-import noppes.npcs.controllers.ScriptContainer;
 import noppes.npcs.controllers.IScriptHandler;
+import noppes.npcs.controllers.ScriptContainer;
+
+import java.util.*;
 
 public class NBTTags {
 

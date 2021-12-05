@@ -1,10 +1,5 @@
 package noppes.npcs.client.gui.script;
 
-import java.io.IOException;
-import java.lang.reflect.Modifier;
-import java.util.*;
-import java.util.Map.Entry;
-
 import com.google.common.reflect.ClassPath;
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -18,16 +13,21 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import noppes.npcs.controllers.ScriptContainer;
 import noppes.npcs.NoppesStringUtils;
 import noppes.npcs.client.NoppesUtil;
 import noppes.npcs.client.gui.swing.GuiJTextArea;
 import noppes.npcs.client.gui.util.*;
 import noppes.npcs.controllers.IScriptHandler;
+import noppes.npcs.controllers.ScriptContainer;
 import noppes.npcs.controllers.ScriptController;
 import noppes.npcs.controllers.data.ForgeDataScript;
 import noppes.npcs.controllers.data.PlayerDataScript;
 import org.apache.commons.lang3.StringUtils;
+
+import java.io.IOException;
+import java.lang.reflect.Modifier;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class GuiScriptInterface extends GuiNPCInterface implements GuiYesNoCallback, IGuiData, ITextChangeListener, ICustomScrollListener, IJTextAreaListener, ITextfieldListener {
     private int activeTab = 0;
