@@ -21,6 +21,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
@@ -111,12 +112,19 @@ public abstract class EntityNPCInterface extends EntityCreature implements IEnti
 	public boolean updateAI = false;
 
 //	 Fly Change
-//	public EntityMoveHelper moveHelper;
-//	public PathNavigate navigator;
+	public FlyingMoveHelper flyMoveHelper = new FlyingMoveHelper(this);
+	public PathNavigate flyNavigator = new PathNavigateFlying(this, worldObj);
 
 	public EntityNPCInterface(World world) {
 		super(world);
 		try{
+			if (canFly()) {
+				this.getNavigator().setCanSwim(true);
+				this.tasks.addTask(0, new EntityAISwimming(this));
+			} else {
+				this.tasks.addTask(0, new EntityAIWaterNav(this));
+			}
+
 			dialogs = new HashMap<Integer, DialogOption>();
 			if(!CustomNpcs.DefaultInteractLine.isEmpty())
 				advanced.interactLines.lines.put(0, new Line(CustomNpcs.DefaultInteractLine));
@@ -360,6 +368,29 @@ public abstract class EntityNPCInterface extends EntityCreature implements IEnti
 		
 		return true;
 	}
+
+	public PathNavigate getNavigator() {
+		if(canFly() && !this.onGround)
+			return this.flyNavigator;
+		else {
+			return super.getNavigator();
+		}
+	}
+
+	public EntityMoveHelper getMoveHelper() {
+		if(canFly() && !this.onGround)
+			return this.flyMoveHelper;
+		else {
+			return super.getMoveHelper();
+		}
+	}
+
+	protected void updateAITasks()
+	{
+		super.updateAITasks();
+		this.getNavigator().onUpdateNavigation();
+		this.getMoveHelper().onUpdateMoveHelper();
+	}
 	
 	public void addInteract(EntityLivingBase entity){
 		if( !ai.stopAndInteract || isAttacking() || !entity.isEntityAlive())
@@ -555,17 +586,10 @@ public abstract class EntityNPCInterface extends EntityCreature implements IEnti
         this.targetTasks.addTask(3, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(4, new EntityAIOwnerHurtTarget(this));
 
-        this.tasks.addTask(0, new EntityAIWaterNav(this));
-
-		if(canFly()){
-			//this.moveHelper = new FlyingMoveHelper(this);
-			//this.navigator = new PathNavigateFlying(this, worldObj);
+		if (canFly()) {
 			this.getNavigator().setCanSwim(true);
 			this.tasks.addTask(0, new EntityAISwimming(this));
-		}
-		else{
-			//this.moveHelper = new EntityMoveHelper(this);
-			//this.navigator = new PathNavigateGround(this, worldObj);
+		} else {
 			this.tasks.addTask(0, new EntityAIWaterNav(this));
 		}
 
