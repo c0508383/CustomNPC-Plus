@@ -36,6 +36,8 @@ import noppes.npcs.ai.EntityAIPanic;
 import noppes.npcs.ai.EntityAIWander;
 import noppes.npcs.ai.EntityAIWatchClosest;
 import noppes.npcs.ai.*;
+import noppes.npcs.ai.pathfinder.FlyingMoveHelper;
+import noppes.npcs.ai.pathfinder.PathNavigateFlying;
 import noppes.npcs.ai.selector.NPCAttackSelector;
 import noppes.npcs.ai.target.EntityAIClearTarget;
 import noppes.npcs.ai.target.EntityAIClosestTarget;
