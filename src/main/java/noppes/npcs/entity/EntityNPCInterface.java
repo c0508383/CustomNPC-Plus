@@ -370,7 +370,7 @@ public abstract class EntityNPCInterface extends EntityCreature implements IEnti
 	}
 
 	public PathNavigate getNavigator() {
-		if(canFly() && !this.onGround)
+		if(canFly())
 			return this.flyNavigator;
 		else {
 			return super.getNavigator();
@@ -378,7 +378,7 @@ public abstract class EntityNPCInterface extends EntityCreature implements IEnti
 	}
 
 	public EntityMoveHelper getMoveHelper() {
-		if(canFly() && !this.onGround)
+		if(canFly())
 			return this.flyMoveHelper;
 		else {
 			return super.getMoveHelper();
@@ -888,13 +888,6 @@ public abstract class EntityNPCInterface extends EntityCreature implements IEnti
     public boolean getAlwaysRenderNameTagForRender(){
     	return true;
     }
-
-	@Override
-	public void addVelocity(double d, double d1, double d2) {
-		if (isWalking() && !isKilled())
-			super.addVelocity(d, d1, d2);
-	}
-
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound compound) {

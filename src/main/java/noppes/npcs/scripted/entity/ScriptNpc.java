@@ -22,11 +22,11 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class ScriptNpc<T extends EntityNPCInterface> extends ScriptLiving<T> implements ICustomNpc {
-	public EntityCustomNpc npc;
+	public EntityNPCInterface npc;
 
 	public ScriptNpc(T npc){
 		super(npc);
-		this.npc = (EntityCustomNpc)npc;
+		this.npc = npc;
 	}
 		
 	/**
@@ -775,35 +775,43 @@ public class ScriptNpc<T extends EntityNPCInterface> extends ScriptLiving<T> imp
 	}
 	
 	public void setHeadScale(float x, float y, float z){
-		npc.modelData.head.scaleX = ValueUtil.correctFloat(x, 0.5f, 1.5f);
-		npc.modelData.head.scaleY = ValueUtil.correctFloat(y, 0.5f, 1.5f);
-		npc.modelData.head.scaleZ = ValueUtil.correctFloat(z, 0.5f, 1.5f);
-		
-		npc.script.clientNeedsUpdate = true;
+		if(npc instanceof EntityCustomNpc) {
+			((EntityCustomNpc) this.npc).modelData.head.scaleX = ValueUtil.correctFloat(x, 0.5f, 1.5f);
+			((EntityCustomNpc) this.npc).modelData.head.scaleY = ValueUtil.correctFloat(y, 0.5f, 1.5f);
+			((EntityCustomNpc) this.npc).modelData.head.scaleZ = ValueUtil.correctFloat(z, 0.5f, 1.5f);
+
+			npc.script.clientNeedsUpdate = true;
+		}
 	}
 
 	public void setBodyScale(float x, float y, float z){
-		npc.modelData.body.scaleX = ValueUtil.correctFloat(x, 0.5f, 1.5f);
-		npc.modelData.body.scaleY = ValueUtil.correctFloat(y, 0.5f, 1.5f);
-		npc.modelData.body.scaleZ = ValueUtil.correctFloat(z, 0.5f, 1.5f);
-		
-		npc.script.clientNeedsUpdate = true;
+		if(npc instanceof EntityCustomNpc) {
+			((EntityCustomNpc) this.npc).modelData.body.scaleX = ValueUtil.correctFloat(x, 0.5f, 1.5f);
+			((EntityCustomNpc) this.npc).modelData.body.scaleY = ValueUtil.correctFloat(y, 0.5f, 1.5f);
+			((EntityCustomNpc) this.npc).modelData.body.scaleZ = ValueUtil.correctFloat(z, 0.5f, 1.5f);
+
+			npc.script.clientNeedsUpdate = true;
+		}
 	}
 	
 	public void setArmsScale(float x, float y, float z){
-		npc.modelData.arms.scaleX = ValueUtil.correctFloat(x, 0.5f, 1.5f);
-		npc.modelData.arms.scaleY = ValueUtil.correctFloat(y, 0.5f, 1.5f);
-		npc.modelData.arms.scaleZ = ValueUtil.correctFloat(z, 0.5f, 1.5f);
-		
-		npc.script.clientNeedsUpdate = true;
+		if(npc instanceof EntityCustomNpc) {
+			((EntityCustomNpc) this.npc).modelData.arms.scaleX = ValueUtil.correctFloat(x, 0.5f, 1.5f);
+			((EntityCustomNpc) this.npc).modelData.arms.scaleY = ValueUtil.correctFloat(y, 0.5f, 1.5f);
+			((EntityCustomNpc) this.npc).modelData.arms.scaleZ = ValueUtil.correctFloat(z, 0.5f, 1.5f);
+
+			npc.script.clientNeedsUpdate = true;
+		}
 	}
 	
 	public void setLegsScale(float x, float y, float z){
-		npc.modelData.legs.scaleX = ValueUtil.correctFloat(x, 0.5f, 1.5f);
-		npc.modelData.legs.scaleY = ValueUtil.correctFloat(y, 0.5f, 1.5f);
-		npc.modelData.legs.scaleZ = ValueUtil.correctFloat(z, 0.5f, 1.5f);
-		
-		npc.script.clientNeedsUpdate = true;
+		if(npc instanceof EntityCustomNpc) {
+			((EntityCustomNpc) this.npc).modelData.legs.scaleX = ValueUtil.correctFloat(x, 0.5f, 1.5f);
+			((EntityCustomNpc) this.npc).modelData.legs.scaleY = ValueUtil.correctFloat(y, 0.5f, 1.5f);
+			((EntityCustomNpc) this.npc).modelData.legs.scaleZ = ValueUtil.correctFloat(z, 0.5f, 1.5f);
+
+			npc.script.clientNeedsUpdate = true;
+		}
 	}
 
     /**
@@ -930,6 +938,19 @@ public class ScriptNpc<T extends EntityNPCInterface> extends ScriptLiving<T> imp
 
 	public double getFlySpeed(double flySpeed){
 		return npc.ai.flySpeed;
+	}
+
+	public void setFlyGravity(double flyGravity){
+		if(flyGravity < 0.0D)
+			flyGravity = 0.0D;
+		if(flyGravity > 1.0D)
+			flyGravity = 1.0D;
+
+		npc.ai.flyGravity = flyGravity;
+	}
+
+	public double getFlyGravity(double flySpeed){
+		return npc.ai.flyGravity;
 	}
 
 	public void setSkinType(byte type) {
