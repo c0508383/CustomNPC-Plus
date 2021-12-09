@@ -1692,4 +1692,8 @@ public abstract class EntityNPCInterface extends EntityCreature implements IEnti
 	{
 		this.display.modelType = val;
 	}
+
+	public boolean hasPoweredTexture() {
+		return !("".equals(this.display.poweredTexture));
+	}
 }

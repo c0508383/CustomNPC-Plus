@@ -1,24 +1,20 @@
 package noppes.npcs.ai.pathfinder;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityMoveHelper;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import noppes.npcs.entity.EntityNPCInterface;
 
 // Fly Change
 
 public class FlyingMoveHelper extends EntityMoveHelper{
-    private EntityNPCInterface entity;
+    private final EntityNPCInterface entity;
 
     private double posX;
     private double posY;
     private double posZ;
     private double speed;
     private boolean update;
-    private static final String __OBFID = "CL_00001573";
 
     public FlyingMoveHelper(EntityNPCInterface entity){
         super(entity);
@@ -50,6 +46,9 @@ public class FlyingMoveHelper extends EntityMoveHelper{
                     if(verticalSpeed > speed * speedMult)
                         verticalSpeed = speed * speedMult;
                     verticalSpeed += this.entity.ai.flySpeed/2.0D;
+
+                    if(verticalSpeed > Math.abs(this.entity.posY - this.posY))
+                        verticalSpeed = Math.abs(this.entity.posY - this.posY);
 
                     this.entity.motionY -= Math.signum(this.entity.posY - this.posY) * verticalSpeed;
                 }
