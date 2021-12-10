@@ -15,21 +15,7 @@ import noppes.npcs.scripted.constants.AnimationType;
 import noppes.npcs.scripted.constants.EntityType;
 import noppes.npcs.scripted.interfaces.ICustomNpc;
 import noppes.npcs.scripted.interfaces.ITimers;
-import noppes.npcs.scripted.roles.ScriptJobBard;
-import noppes.npcs.scripted.roles.ScriptJobConversation;
-import noppes.npcs.scripted.roles.ScriptJobFollower;
-import noppes.npcs.scripted.roles.ScriptJobGuard;
-import noppes.npcs.scripted.roles.ScriptJobHealer;
-import noppes.npcs.scripted.roles.ScriptJobInterface;
-import noppes.npcs.scripted.roles.ScriptJobItemGiver;
-import noppes.npcs.scripted.roles.ScriptJobPuppet;
-import noppes.npcs.scripted.roles.ScriptJobSpawner;
-import noppes.npcs.scripted.roles.ScriptRoleBank;
-import noppes.npcs.scripted.roles.ScriptRoleFollower;
-import noppes.npcs.scripted.roles.ScriptRoleInterface;
-import noppes.npcs.scripted.roles.ScriptRoleMailman;
-import noppes.npcs.scripted.roles.ScriptRoleTrader;
-import noppes.npcs.scripted.roles.ScriptRoleTransporter;
+import noppes.npcs.scripted.roles.*;
 import noppes.npcs.util.ValueUtil;
 
 import java.util.ArrayList;
@@ -239,7 +225,7 @@ public class ScriptNpc<T extends EntityNPCInterface> extends ScriptLiving<T> imp
 
 	@Override
 	public boolean typeOf(int type){
-		return type == EntityType.NPC?true:super.typeOf(type);
+		return type == EntityType.NPC || super.typeOf(type);
 	}
 	
 	/**

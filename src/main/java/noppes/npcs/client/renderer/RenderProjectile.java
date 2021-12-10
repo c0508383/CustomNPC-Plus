@@ -1,5 +1,7 @@
 package noppes.npcs.client.renderer;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -17,20 +19,16 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import noppes.npcs.entity.EntityProjectile;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderProjectile extends Render
 {
 	
 	public boolean renderWithColor = true;
-	private static final ResourceLocation field_110780_a = new ResourceLocation("textures/entity/arrow.png");
-	private static final ResourceLocation field_110798_h = new ResourceLocation("textures/misc/enchanted_item_glint.png");
+	private static final ResourceLocation arrowTextures = new ResourceLocation("textures/entity/arrow.png");
+	private static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
 	private RenderBlocks itemRenderBlocks = new RenderBlocks();
 
     public void doRenderProjectile(EntityProjectile par1EntityProjectile, double par2, double par4, double par6, float par8, float par9)
@@ -271,7 +269,7 @@ public class RenderProjectile extends Render
         {
             GL11.glDepthFunc(GL11.GL_EQUAL);
             GL11.glDisable(GL11.GL_LIGHTING);
-            this.renderManager.renderEngine.bindTexture(field_110798_h);
+            this.renderManager.renderEngine.bindTexture(RES_ITEM_GLINT);
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
             float f13 = 0.76F;
@@ -306,7 +304,7 @@ public class RenderProjectile extends Render
 
 	protected ResourceLocation func_110779_a(EntityProjectile par1EntityProjectile)
     {
-        return par1EntityProjectile.isArrow() ? field_110780_a : this.renderManager.renderEngine.getResourceLocation(par1EntityProjectile.getItemDisplay().getItemSpriteNumber());
+        return par1EntityProjectile.isArrow() ? arrowTextures : this.renderManager.renderEngine.getResourceLocation(par1EntityProjectile.getItemDisplay().getItemSpriteNumber());
     }
 
     @Override

@@ -1,13 +1,13 @@
 package noppes.npcs.quests;
 
-import java.util.Vector;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import noppes.npcs.controllers.PlayerDataController;
 import noppes.npcs.controllers.PlayerQuestData;
 import noppes.npcs.controllers.QuestData;
+
+import java.util.Vector;
 
 public class QuestLocation extends QuestInterface{
 	public String location = "";
@@ -74,9 +74,7 @@ public class QuestLocation extends QuestInterface{
 			return false;
 		if(!location2.isEmpty() && !data.extraData.getBoolean("Location2Found"))
 			return false;
-		if(!location3.isEmpty() && !data.extraData.getBoolean("Location3Found"))
-			return false;
-		return true;
+		return location3.isEmpty() || data.extraData.getBoolean("Location3Found");
 	}
 	public boolean setFound(QuestData data, String location) {
 		if(location.equalsIgnoreCase(this.location) && !data.extraData.getBoolean("LocationFound")){

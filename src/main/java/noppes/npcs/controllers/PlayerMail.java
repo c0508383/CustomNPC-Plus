@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import noppes.npcs.NoppesUtilServer;
-import noppes.npcs.NpcMiscInventory;
 
 public class PlayerMail implements IInventory{
 	public String subject = "";
@@ -162,19 +161,16 @@ public class PlayerMail implements IInventory{
 
 	@Override
 	public String getInventoryName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean hasCustomInventoryName() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void markDirty() {
-		// TODO Auto-generated method stub
 		
 	}
 

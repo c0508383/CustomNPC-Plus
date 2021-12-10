@@ -1,14 +1,14 @@
 package noppes.npcs;
 
-import java.util.*;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
 import net.minecraft.nbt.NBTTagList;
-import noppes.npcs.controllers.ScriptContainer;
 import noppes.npcs.controllers.IScriptHandler;
+import noppes.npcs.controllers.ScriptContainer;
+
+import java.util.*;
 
 public class NBTTags {
 
@@ -395,10 +395,9 @@ public class NBTTags {
 		if(map == null) {
 			return nbttaglist;
 		} else {
-			Iterator var2 = map.keySet().iterator();
 
-			while(var2.hasNext()) {
-				long slot = ((Long)var2.next()).longValue();
+			for (Long aLong : map.keySet()) {
+				long slot = aLong;
 				NBTTagCompound nbttagcompound = new NBTTagCompound();
 				nbttagcompound.setLong("Long", slot);
 				nbttagcompound.setString("String", (String) map.get(Long.valueOf(slot)));
@@ -424,10 +423,8 @@ public class NBTTags {
 
 	public static NBTTagList NBTScript(List<ScriptContainer> scripts) {
 		NBTTagList list = new NBTTagList();
-		Iterator var2 = scripts.iterator();
 
-		while(var2.hasNext()) {
-			ScriptContainer script = (ScriptContainer)var2.next();
+		for (ScriptContainer script : scripts) {
 			NBTTagCompound compound = new NBTTagCompound();
 			script.writeToNBT(compound);
 			list.appendTag(compound);

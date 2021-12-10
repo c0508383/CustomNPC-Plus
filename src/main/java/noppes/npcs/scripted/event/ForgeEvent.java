@@ -1,14 +1,9 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package noppes.npcs.scripted.event;
 
 import cpw.mods.fml.common.eventhandler.Cancelable;
 import cpw.mods.fml.common.eventhandler.Event;
-import noppes.npcs.scripted.interfaces.IWorld;
 import noppes.npcs.scripted.interfaces.IEntity;
+import noppes.npcs.scripted.interfaces.IWorld;
 
 @Cancelable
 public class ForgeEvent extends CustomNPCsEvent {

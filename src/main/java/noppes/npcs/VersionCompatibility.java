@@ -1,8 +1,5 @@
 package noppes.npcs;
 
-import java.util.Collection;
-import java.util.List;
-
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagInt;
@@ -10,6 +7,9 @@ import net.minecraft.nbt.NBTTagList;
 import noppes.npcs.controllers.Line;
 import noppes.npcs.controllers.Lines;
 import noppes.npcs.entity.EntityNPCInterface;
+
+import java.util.Collection;
+import java.util.List;
 
 public class VersionCompatibility {
 	public static int ModRev = 16;
@@ -71,9 +71,9 @@ public class VersionCompatibility {
 		if(npc.npcVersion == 12){
 			NBTTagList list = compound.getTagList("StartPos", 3);
 			if(list.tagCount() == 3){
-				int z = ((NBTTagInt) list.removeTag(2)).func_150287_d();
-				int y = ((NBTTagInt) list.removeTag(1)).func_150287_d();
-				int x = ((NBTTagInt) list.removeTag(0)).func_150287_d();
+				int z = ((NBTTagInt) list.removeTag(2)).func_150287_d(); //getInt()
+				int y = ((NBTTagInt) list.removeTag(1)).func_150287_d(); //getInt()
+				int x = ((NBTTagInt) list.removeTag(0)).func_150287_d(); //getInt()
 				
 				compound.setIntArray("StartPosNew", new int[]{x,y,z});
 			}

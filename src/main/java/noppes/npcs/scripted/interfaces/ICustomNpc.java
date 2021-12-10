@@ -6,12 +6,12 @@
 package noppes.npcs.scripted.interfaces;
 
 import net.minecraft.entity.EntityCreature;
-import noppes.npcs.constants.EnumNavType;
 import noppes.npcs.scripted.ScriptFaction;
 import noppes.npcs.scripted.ScriptItemStack;
 import noppes.npcs.scripted.entity.ScriptLivingBase;
 import noppes.npcs.scripted.entity.ScriptPlayer;
-import noppes.npcs.scripted.roles.*;
+import noppes.npcs.scripted.roles.ScriptJobInterface;
+import noppes.npcs.scripted.roles.ScriptRoleInterface;
 
 public interface ICustomNpc<T extends EntityCreature> extends IEntityLiving<T> {
     /**

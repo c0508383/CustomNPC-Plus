@@ -1,8 +1,5 @@
 package noppes.npcs.scripted;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -15,6 +12,9 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import noppes.npcs.scripted.interfaces.IItemStack;
 import noppes.npcs.scripted.interfaces.INbt;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ScriptItemStack implements IItemStack {
 	public ItemStack item;
@@ -119,9 +119,9 @@ public class ScriptItemStack implements IItemStack {
 		if(tag == null)
 			return null;
 		if(tag instanceof NBTPrimitive)
-			return ((NBTPrimitive)tag).func_150286_g();
+			return ((NBTPrimitive)tag).func_150286_g(); //getDouble
 		if(tag instanceof NBTTagString)
-			return ((NBTTagString)tag).func_150285_a_();
+			return ((NBTTagString)tag).func_150285_a_(); //getString
 		return tag;
 	}
 	
@@ -196,9 +196,7 @@ public class ScriptItemStack implements IItemStack {
 	 */
 	public boolean isBlock(){
 		Block block = Block.getBlockFromItem(item.getItem());
-		if(block == null || block == Blocks.air)
-			return false;
-		return true;
+		return block != null && block != Blocks.air;
 	}
 
 	public INbt getNbt() {

@@ -1,16 +1,15 @@
 package noppes.npcs.client.gui.util;
 
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
 
 public class GuiCustomScroll extends GuiScreen
 {
@@ -231,7 +230,6 @@ public class GuiCustomScroll extends GuiScreen
         drawTexturedModalRect(i, k, xSize, 11, 5, 1);
     }
 	public boolean hasSelected() {
-		// TODO Auto-generated method stub
 		return selected >= 0;
 	}
 	public void setList(List<String> list){

@@ -1,11 +1,5 @@
 package noppes.npcs.client.model;
 
-import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -20,8 +14,12 @@ import noppes.npcs.client.model.util.ModelPlaneRenderer;
 import noppes.npcs.constants.EnumAnimation;
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.entity.EntityNpcPony;
-
 import org.lwjgl.opengl.GL11;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class ModelPony extends ModelBase
 {
@@ -364,14 +362,11 @@ public class ModelPony extends ModelBase
         RightArm.rotateAngleZ = 0.0F;
         unicornarm.rotateAngleZ = 0.0F;
         LeftArm.rotateAngleZ = 0.0F;
-        for(int i = 0; i < Tail.length; i++)
-        {
-            if(rainboom)
-            {
-                Tail[i].rotateAngleZ = 0.0F;
-            } else
-            {
-                Tail[i].rotateAngleZ = MathHelper.cos(f * 0.8F) * 0.2F * f1;
+        for (ModelPlaneRenderer modelPlaneRenderer : Tail) {
+            if (rainboom) {
+                modelPlaneRenderer.rotateAngleZ = 0.0F;
+            } else {
+                modelPlaneRenderer.rotateAngleZ = MathHelper.cos(f * 0.8F) * 0.2F * f1;
             }
         }
 
@@ -385,24 +380,20 @@ public class ModelPony extends ModelBase
             f12 = MathHelper.sin(MathHelper.sqrt_float(f5) * 3.141593F * 2.0F) * 0.2F;
         }
         Body.rotateAngleY = (float)((double)f12 * 0.20000000000000001D);
-        for(int j = 0; j < Bodypiece.length; j++)
-        {
-            Bodypiece[j].rotateAngleY = (float)((double)f12 * 0.20000000000000001D);
+        for (ModelPlaneRenderer modelPlaneRenderer : Bodypiece) {
+            modelPlaneRenderer.rotateAngleY = (float) ((double) f12 * 0.20000000000000001D);
         }
 
-        for(int k = 0; k < LeftWing.length; k++)
-        {
-            LeftWing[k].rotateAngleY = (float)((double)f12 * 0.20000000000000001D);
+        for (ModelRenderer modelRenderer : LeftWing) {
+            modelRenderer.rotateAngleY = (float) ((double) f12 * 0.20000000000000001D);
         }
 
-        for(int l = 0; l < RightWing.length; l++)
-        {
-            RightWing[l].rotateAngleY = (float)((double)f12 * 0.20000000000000001D);
+        for (ModelRenderer modelRenderer : RightWing) {
+            modelRenderer.rotateAngleY = (float) ((double) f12 * 0.20000000000000001D);
         }
 
-        for(int i1 = 0; i1 < Tail.length; i1++)
-        {
-            Tail[i1].rotateAngleY = f12;
+        for (ModelPlaneRenderer modelPlaneRenderer : Tail) {
+            modelPlaneRenderer.rotateAngleY = f12;
         }
 
         float f13 = MathHelper.sin(Body.rotateAngleY) * 5F;
@@ -468,22 +459,20 @@ public class ModelPony extends ModelBase
             Body.rotateAngleX = f17;
             Body.rotationPointY = f23;
             Body.rotationPointZ = f29;
-            for(int i3 = 0; i3 < Bodypiece.length; i3++)
-            {
-                Bodypiece[i3].rotateAngleX = f17;
-                Bodypiece[i3].rotationPointY = f23;
-                Bodypiece[i3].rotationPointZ = f29;
+            for (ModelPlaneRenderer planeRenderer : Bodypiece) {
+                planeRenderer.rotateAngleX = f17;
+                planeRenderer.rotationPointY = f23;
+                planeRenderer.rotationPointZ = f29;
             }
 
             float f34 = 3.5F;
             float f37 = 6F;
-            for(int i4 = 0; i4 < LeftWingExt.length; i4++)
-            {
-                LeftWingExt[i4].rotateAngleX = (float)((double)f17 + 2.3561947345733643D);
-                LeftWingExt[i4].rotationPointY = f23 + f34;
-                LeftWingExt[i4].rotationPointZ = f29 + f37;
-                LeftWingExt[i4].rotateAngleX = 2.5F;
-                LeftWingExt[i4].rotateAngleZ = -6F;
+            for (ModelRenderer modelRenderer : LeftWingExt) {
+                modelRenderer.rotateAngleX = (float) ((double) f17 + 2.3561947345733643D);
+                modelRenderer.rotationPointY = f23 + f34;
+                modelRenderer.rotationPointZ = f29 + f37;
+                modelRenderer.rotateAngleX = 2.5F;
+                modelRenderer.rotateAngleZ = -6F;
             }
 
             float f40 = 4.5F;
@@ -542,12 +531,11 @@ public class ModelPony extends ModelBase
             float f60 = 9F - f54;
             float f62 = -4F - f56;
             float f63 = 0.0F;
-            for(int i6 = 0; i6 < Tail.length; i6++)
-            {
-                Tail[i6].rotationPointX = f58;
-                Tail[i6].rotationPointY = f60;
-                Tail[i6].rotationPointZ = f62;
-                Tail[i6].rotateAngleX = f63;
+            for (ModelPlaneRenderer modelPlaneRenderer : Tail) {
+                modelPlaneRenderer.rotationPointX = f58;
+                modelPlaneRenderer.rotationPointY = f60;
+                modelPlaneRenderer.rotationPointZ = f62;
+                modelPlaneRenderer.rotateAngleX = f63;
             }
 
         } else
@@ -558,49 +546,44 @@ public class ModelPony extends ModelBase
             Body.rotateAngleX = f18;
             Body.rotationPointY = f24;
             Body.rotationPointZ = f30;
-            for(int j3 = 0; j3 < Bodypiece.length; j3++)
-            {
-                Bodypiece[j3].rotateAngleX = f18;
-                Bodypiece[j3].rotationPointY = f24;
-                Bodypiece[j3].rotationPointZ = f30;
+            for (ModelPlaneRenderer modelPlaneRenderer : Bodypiece) {
+                modelPlaneRenderer.rotateAngleX = f18;
+                modelPlaneRenderer.rotationPointY = f24;
+                modelPlaneRenderer.rotationPointZ = f30;
             }
 
             if(isPegasus)
             {
                 if(!isFlying)
                 {
-                    for(int k3 = 0; k3 < LeftWing.length; k3++)
-                    {
-                        LeftWing[k3].rotateAngleX = (float)((double)f18 + 1.5707964897155762D);
-                        LeftWing[k3].rotationPointY = f24 + 13F;
-                        LeftWing[k3].rotationPointZ = f30 - 3F;
+                    for (ModelRenderer modelRenderer : LeftWing) {
+                        modelRenderer.rotateAngleX = (float) ((double) f18 + 1.5707964897155762D);
+                        modelRenderer.rotationPointY = f24 + 13F;
+                        modelRenderer.rotationPointZ = f30 - 3F;
                     }
 
-                    for(int l3 = 0; l3 < RightWing.length; l3++)
-                    {
-                        RightWing[l3].rotateAngleX = (float)((double)f18 + 1.5707964897155762D);
-                        RightWing[l3].rotationPointY = f24 + 13F;
-                        RightWing[l3].rotationPointZ = f30 - 3F;
+                    for (ModelRenderer modelRenderer : RightWing) {
+                        modelRenderer.rotateAngleX = (float) ((double) f18 + 1.5707964897155762D);
+                        modelRenderer.rotationPointY = f24 + 13F;
+                        modelRenderer.rotationPointZ = f30 - 3F;
                     }
 
                 } else
                 {
                     float f35 = 5.5F;
                     float f38 = 3F;
-                    for(int j4 = 0; j4 < LeftWingExt.length; j4++)
-                    {
-                        LeftWingExt[j4].rotateAngleX = (float)((double)f18 + 1.5707964897155762D);
-                        LeftWingExt[j4].rotationPointY = f24 + f35;
-                        LeftWingExt[j4].rotationPointZ = f30 + f38;
+                    for (ModelRenderer modelRenderer : LeftWingExt) {
+                        modelRenderer.rotateAngleX = (float) ((double) f18 + 1.5707964897155762D);
+                        modelRenderer.rotationPointY = f24 + f35;
+                        modelRenderer.rotationPointZ = f30 + f38;
                     }
 
                     float f41 = 6.5F;
                     float f44 = 3F;
-                    for(int j5 = 0; j5 < RightWingExt.length; j5++)
-                    {
-                        RightWingExt[j5].rotateAngleX = (float)((double)f18 + 1.5707964897155762D);
-                        RightWingExt[j5].rotationPointY = f24 + f41;
-                        RightWingExt[j5].rotationPointZ = f30 + f44;
+                    for (ModelRenderer modelRenderer : RightWingExt) {
+                        modelRenderer.rotateAngleX = (float) ((double) f18 + 1.5707964897155762D);
+                        modelRenderer.rotationPointY = f24 + f41;
+                        modelRenderer.rotationPointZ = f30 + f44;
                     }
 
                 }
@@ -617,16 +600,14 @@ public class ModelPony extends ModelBase
             {
                 WingRotateAngleY = MathHelper.sin(f2 * 0.067F * 8F) * 1.0F;
                 WingRotateAngleZ = MathHelper.sin(f2 * 0.067F * 8F) * 1.0F;
-                for(int k4 = 0; k4 < LeftWingExt.length; k4++)
-                {
-                    LeftWingExt[k4].rotateAngleX = 2.5F;
-                    LeftWingExt[k4].rotateAngleZ = -WingRotateAngleZ - 4.712F - 0.4F;
+                for (ModelRenderer modelRenderer : LeftWingExt) {
+                    modelRenderer.rotateAngleX = 2.5F;
+                    modelRenderer.rotateAngleZ = -WingRotateAngleZ - 4.712F - 0.4F;
                 }
 
-                for(int l4 = 0; l4 < RightWingExt.length; l4++)
-                {
-                    RightWingExt[l4].rotateAngleX = 2.5F;
-                    RightWingExt[l4].rotateAngleZ = WingRotateAngleZ + 4.712F + 0.4F;
+                for (ModelRenderer modelRenderer : RightWingExt) {
+                    modelRenderer.rotateAngleX = 2.5F;
+                    modelRenderer.rotateAngleZ = WingRotateAngleZ + 4.712F + 0.4F;
                 }
 
             }
@@ -666,25 +647,20 @@ public class ModelPony extends ModelBase
             float f57 = 9F - f51;
             float f59 = 0.0F - f53;
             float f61 = 0.5F * f1;
-            for(int k5 = 0; k5 < Tail.length; k5++)
-            {
-                Tail[k5].rotationPointX = f55;
-                Tail[k5].rotationPointY = f57;
-                Tail[k5].rotationPointZ = f59;
-                if(rainboom)
-                {
-                    Tail[k5].rotateAngleX = 1.571F + 0.1F * MathHelper.sin(f);
-                } else
-                {
-                    Tail[k5].rotateAngleX = f61;
+            for (ModelPlaneRenderer modelPlaneRenderer : Tail) {
+                modelPlaneRenderer.rotationPointX = f55;
+                modelPlaneRenderer.rotationPointY = f57;
+                modelPlaneRenderer.rotationPointZ = f59;
+                if (rainboom) {
+                    modelPlaneRenderer.rotateAngleX = 1.571F + 0.1F * MathHelper.sin(f);
+                } else {
+                    modelPlaneRenderer.rotateAngleX = f61;
                 }
             }
 
-            for(int l5 = 0; l5 < Tail.length; l5++)
-            {
-                if(!rainboom)
-                {
-                    Tail[l5].rotateAngleX += f39;
+            for (ModelPlaneRenderer modelPlaneRenderer : Tail) {
+                if (!rainboom) {
+                    modelPlaneRenderer.rotateAngleX += f39;
                 }
             }
 
@@ -703,10 +679,9 @@ public class ModelPony extends ModelBase
         Bodypiece[12].rotateAngleX = Bodypiece[12].rotateAngleX + 0.5F;
         if(rainboom)
         {
-            for(int j1 = 0; j1 < Tail.length; j1++)
-            {
-                Tail[j1].rotationPointY = Tail[j1].rotationPointY + 6F;
-                Tail[j1].rotationPointZ = Tail[j1].rotationPointZ + 1.0F;
+            for (ModelPlaneRenderer modelPlaneRenderer : Tail) {
+                modelPlaneRenderer.rotationPointY = modelPlaneRenderer.rotationPointY + 6F;
+                modelPlaneRenderer.rotationPointZ = modelPlaneRenderer.rotationPointZ + 1.0F;
             }
 
         }
@@ -870,44 +845,38 @@ public class ModelPony extends ModelBase
         }
         Helmet.render(scale);
         Body.render(scale);
-        for(int i = 0; i < Bodypiece.length; i++)
-        {
-            Bodypiece[i].render(scale);
+        for (ModelPlaneRenderer modelPlaneRenderer : Bodypiece) {
+            modelPlaneRenderer.render(scale);
         }
 
         LeftArm.render(scale);
         RightArm.render(scale);
         LeftLeg.render(scale);
         RightLeg.render(scale);
-        for(int j = 0; j < Tail.length; j++)
-        {
-            Tail[j].render(scale);
+        for (ModelPlaneRenderer modelPlaneRenderer : Tail) {
+            modelPlaneRenderer.render(scale);
         }
 
         if(isPegasus)
         {
             if(isFlying || isSneak)
             {
-                for(int k = 0; k < LeftWingExt.length; k++)
-                {
-                    LeftWingExt[k].render(scale);
+                for (ModelRenderer modelRenderer : LeftWingExt) {
+                    modelRenderer.render(scale);
                 }
 
-                for(int l = 0; l < RightWingExt.length; l++)
-                {
-                    RightWingExt[l].render(scale);
+                for (ModelRenderer modelRenderer : RightWingExt) {
+                    modelRenderer.render(scale);
                 }
 
             } else
             {
-                for(int i1 = 0; i1 < LeftWing.length; i1++)
-                {
-                    LeftWing[i1].render(scale);
+                for (ModelRenderer modelRenderer : LeftWing) {
+                    modelRenderer.render(scale);
                 }
 
-                for(int j1 = 0; j1 < RightWing.length; j1++)
-                {
-                    RightWing[j1].render(scale);
+                for (ModelRenderer modelRenderer : RightWing) {
+                    modelRenderer.render(scale);
                 }
 
             }
@@ -951,7 +920,6 @@ public class ModelPony extends ModelBase
             tessellator.draw();
             GL11.glDisable(32826 /*GL_RESCALE_NORMAL_EXT*/);
             GL11.glPopMatrix();
-            return;
         }
     }
 }

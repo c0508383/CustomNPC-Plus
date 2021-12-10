@@ -1,15 +1,6 @@
 package noppes.npcs.roles;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.ChunkCoordIntPair;
-import net.minecraftforge.common.ForgeChunkManager;
-import net.minecraftforge.common.ForgeChunkManager.Ticket;
-import noppes.npcs.controllers.ChunkController;
 import noppes.npcs.entity.EntityNPCInterface;
 import noppes.npcs.util.ValueUtil;
 
@@ -72,10 +63,8 @@ public class JobPuppet extends JobInterface{
 	public boolean isActive() {
 		if(!npc.isEntityAlive())
 			return false;
-		
-		if(whileAttacking && npc.isAttacking() || whileMoving && npc.isWalking() || whileStanding && !npc.isWalking())
-			return true;
-		return false;
+
+		return whileAttacking && npc.isAttacking() || whileMoving && npc.isWalking() || whileStanding && !npc.isWalking();
 	}
 	
 	public static class PartConfig{

@@ -1,19 +1,6 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package noppes.npcs.scripted;
 
-import java.util.Iterator;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagDouble;
-import net.minecraft.nbt.NBTTagFloat;
-import net.minecraft.nbt.NBTTagInt;
-import net.minecraft.nbt.NBTTagIntArray;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
+import net.minecraft.nbt.*;
 import noppes.npcs.scripted.interfaces.INbt;
 import noppes.npcs.util.NBTJsonUtil;
 
@@ -200,14 +187,13 @@ public class ScriptNbt implements INbt {
     }
 
     public boolean isEqual(INbt nbt) {
-        return nbt == null?false:this.compound.equals(nbt.getMCNBT());
+        return nbt != null && this.compound.equals(nbt.getMCNBT());
     }
 
     public void clear() {
-        Iterator var1 = this.compound.func_150296_c().iterator();
 
-        while(var1.hasNext()) {
-            String name = (String)var1.next();
+        for (Object o : this.compound.func_150296_c()) {
+            String name = (String) o;
             this.compound.removeTag(name);
         }
 

@@ -1,9 +1,6 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package noppes.npcs.client.gui.util;
+
+import noppes.npcs.config.TrueTypeFont;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -11,7 +8,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import noppes.npcs.config.TrueTypeFont;
 
 public class TextContainer {
     private static final char colorChar = '\uffff';
@@ -126,7 +122,7 @@ public class TextContainer {
     }
 
     public boolean compareMarkUps(TextContainer.MarkUp mu1, TextContainer.MarkUp mu2) {
-        return mu1 == null?true:mu1.start > mu2.start;
+        return mu1 == null || mu1.start > mu2.start;
     }
 
     public void addMakeUp(int start, int end, char c, int level) {

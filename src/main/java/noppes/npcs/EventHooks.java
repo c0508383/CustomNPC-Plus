@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package noppes.npcs;
 
 import cpw.mods.fml.common.eventhandler.Event;
@@ -18,26 +13,23 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.world.WorldEvent;
+import noppes.npcs.constants.EnumScriptType;
+import noppes.npcs.controllers.PlayerData;
 import noppes.npcs.controllers.ScriptController;
 import noppes.npcs.controllers.data.ForgeDataScript;
 import noppes.npcs.controllers.data.PlayerDataScript;
 import noppes.npcs.entity.EntityNPCInterface;
-import noppes.npcs.scripted.*;
-import noppes.npcs.scripted.event.*;
-import noppes.npcs.scripted.event.PlayerEvent.ChatEvent;
-import noppes.npcs.scripted.event.PlayerEvent.ContainerOpen;
-import noppes.npcs.scripted.event.PlayerEvent.DamagedEntityEvent;
-import noppes.npcs.scripted.event.PlayerEvent.KeyPressedEvent;
-import noppes.npcs.scripted.event.PlayerEvent.LoginEvent;
-import noppes.npcs.scripted.event.PlayerEvent.LogoutEvent;
-import noppes.npcs.scripted.event.PlayerEvent.PickUpEvent;
-import noppes.npcs.scripted.event.PlayerEvent.DropEvent;
+import noppes.npcs.scripted.NpcAPI;
+import noppes.npcs.scripted.ScriptItemStack;
+import noppes.npcs.scripted.event.ForgeEvent;
+import noppes.npcs.scripted.event.NpcEvent;
+import noppes.npcs.scripted.event.PlayerEvent;
+import noppes.npcs.scripted.event.PlayerEvent.*;
+import noppes.npcs.scripted.event.ScriptEventTimer;
 import noppes.npcs.scripted.interfaces.IEntity;
 import noppes.npcs.scripted.interfaces.IItemStack;
 import noppes.npcs.scripted.interfaces.IWorld;
 import noppes.npcs.scripted.wrapper.WrapperNpcAPI;
-import noppes.npcs.constants.EnumScriptType;
-import noppes.npcs.controllers.PlayerData;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;

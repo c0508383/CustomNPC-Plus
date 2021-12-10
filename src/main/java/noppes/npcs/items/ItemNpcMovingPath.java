@@ -1,7 +1,8 @@
 package noppes.npcs.items;
 
-import java.util.List;
-
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,9 +18,8 @@ import noppes.npcs.CustomNpcsPermissions;
 import noppes.npcs.NoppesUtilServer;
 import noppes.npcs.constants.EnumGuiType;
 import noppes.npcs.entity.EntityNPCInterface;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 
 
@@ -31,7 +31,7 @@ public class ItemNpcMovingPath extends Item{
 
 	@Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer){
-		if(par2World.isRemote || !CustomNpcsPermissions.Instance.hasPermission(par3EntityPlayer, CustomNpcsPermissions.TOOL_MOUNTER))
+		if(par2World.isRemote || !CustomNpcsPermissions.hasPermission(par3EntityPlayer, CustomNpcsPermissions.TOOL_MOUNTER))
 			return par1ItemStack;
 		EntityNPCInterface npc = getNpc(par1ItemStack, par2World);
 		if(npc != null)
@@ -41,7 +41,7 @@ public class ItemNpcMovingPath extends Item{
     
 	@Override
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer player, World par3World, int x, int y, int z, int par7, float par8, float par9, float par10){		
-		if(par3World.isRemote || !CustomNpcsPermissions.Instance.hasPermission(player, CustomNpcsPermissions.TOOL_MOUNTER))
+		if(par3World.isRemote || !CustomNpcsPermissions.hasPermission(player, CustomNpcsPermissions.TOOL_MOUNTER))
 			return false;
 		EntityNPCInterface npc = getNpc(par1ItemStack, par3World);
 		if(npc == null)

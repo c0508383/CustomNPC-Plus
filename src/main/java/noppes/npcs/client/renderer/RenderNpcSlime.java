@@ -3,7 +3,6 @@ package noppes.npcs.client.renderer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.EntityLivingBase;
 import noppes.npcs.entity.EntityNPCInterface;
-
 import org.lwjgl.opengl.GL11;
 
 public class RenderNpcSlime extends RenderNPCInterface
@@ -52,7 +51,7 @@ public class RenderNpcSlime extends RenderNPCInterface
 //    protected void scaleSlime(EntityNPCInterface par1EntitySlime, float par2)
 //    {
 //        float var3 = (float)par1EntitySlime.getSlimeSize();
-//        float var4 = (par1EntitySlime.field_70812_c + (par1EntitySlime.field_70811_b - par1EntitySlime.field_70812_c) * par2) / (var3 * 0.5F + 1.0F);
+//        float var4 = (par1EntitySlime.prevSquishFactor + (par1EntitySlime.squishFactor - par1EntitySlime.prevSquishFactor) * par2) / (var3 * 0.5F + 1.0F);
 //        float var5 = 1.0F / (var4 + 1.0F);
 //        GL11.glScalef(var5 * var3, 1.0F / var5 * var3, var5 * var3);
 //    }

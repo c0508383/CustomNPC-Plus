@@ -1,20 +1,14 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package noppes.npcs.scripted.event;
 
 import cpw.mods.fml.common.eventhandler.Cancelable;
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import noppes.npcs.scripted.*;
+import noppes.npcs.scripted.NpcAPI;
+import noppes.npcs.scripted.ScriptItemStack;
 import noppes.npcs.scripted.entity.ScriptLivingBase;
 import noppes.npcs.scripted.interfaces.*;
 

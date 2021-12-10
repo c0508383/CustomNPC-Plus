@@ -1,9 +1,5 @@
 package noppes.npcs.scripted;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -19,7 +15,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import noppes.npcs.NoppesUtilServer;
 import noppes.npcs.blocks.tiles.TileBigSign;
@@ -29,6 +24,10 @@ import noppes.npcs.scripted.entity.ScriptEntity;
 import noppes.npcs.scripted.entity.ScriptPlayer;
 import noppes.npcs.scripted.interfaces.IBlock;
 import noppes.npcs.scripted.interfaces.IWorld;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ScriptWorld implements IWorld {
 	private static Map<String,Object> tempData = new HashMap<String,Object>();
@@ -253,8 +252,8 @@ public class ScriptWorld implements IWorld {
 			return null;
 		NBTBase base = compound.getTag(key);
 		if(base instanceof NBTPrimitive)
-			return ((NBTPrimitive)base).func_150286_g();
-		return ((NBTTagString)base).func_150285_a_();
+			return ((NBTPrimitive)base).func_150286_g(); //getDouble
+		return ((NBTTagString)base).func_150285_a_(); //getString
 	}
 	
 	/**

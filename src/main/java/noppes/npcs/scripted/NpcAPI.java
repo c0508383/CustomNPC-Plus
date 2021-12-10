@@ -1,20 +1,10 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package noppes.npcs.scripted;
-
-import java.io.File;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.EventBus;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -23,6 +13,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import noppes.npcs.scripted.entity.ScriptPlayer;
 import noppes.npcs.scripted.interfaces.*;
+
+import java.io.File;
 
 public abstract class NpcAPI {
     private static NpcAPI instance = null;

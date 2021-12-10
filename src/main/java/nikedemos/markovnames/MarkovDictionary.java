@@ -1,8 +1,8 @@
 package nikedemos.markovnames;
 
-import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModContainer;
+import net.minecraft.util.ResourceLocation;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -106,11 +106,8 @@ public class MarkovDictionary {
 		int allEntries = 0;
 
 		// first iteration: we count top level entries. There's just no other way.
-		Iterator<Entry<String, Map<String, Integer>>> i = occurrences.mMap.entrySet().iterator();
 
-		while (i.hasNext()) {
-			Entry<String, Map<String, Integer>> pair = (Entry<String, Map<String, Integer>>) i.next();
-
+		for (Entry<String, Map<String, Integer>> pair : occurrences.mMap.entrySet()) {
 			String k = pair.getKey();
 			if (k.startsWith("_[") && k.endsWith("_")) // dealing with meta entry here
 			{
@@ -165,10 +162,7 @@ public class MarkovDictionary {
 			// and count their total occurrences
 			int subSize = 0;
 
-			Iterator<Entry<String, Integer>> j = occurrences.mMap.get(sequence.toString()).entrySet().iterator();
-
-			while (j.hasNext()) {
-				Entry<String, Integer> entry = j.next();
+			for (Entry<String, Integer> entry : occurrences.mMap.get(sequence.toString()).entrySet()) {
 				subSize += entry.getValue();
 			}
 
@@ -216,7 +210,7 @@ public class MarkovDictionary {
 
 		ResourceLocation resource = new ResourceLocation("customnpcs:markovnames/" + dictionaryFile);
 
-		BufferedReader readIn = new BufferedReader(new InputStreamReader(getResource(resource), "UTF-8"));
+		BufferedReader readIn = new BufferedReader(new InputStreamReader(getResource(resource), StandardCharsets.UTF_8));
 		// Thread.currentThread().getContextClassLoader().getResourceAsStream("path/to/resource/file.ext");
 
 		for (String line = readIn.readLine(); line != null; line = readIn.readLine()) {
@@ -245,10 +239,10 @@ public class MarkovDictionary {
 			incrementSafe(seqCurr, seqNext);
 			// aux counters
 
-			StringBuilder meta = new StringBuilder("_").append(seqCurr).append("_");
-
 			// String aux1="_"+seqCurr+"_";
-			incrementSafe(meta.toString(), "_TOTAL_");
+			incrementSafe("_" + seqCurr + "_"
+					// String aux1="_"+seqCurr+"_";
+					, "_TOTAL_");
 			// String aux2="_"+seqNext+"_";
 			// incrementSafe(aux1, aux2);
 

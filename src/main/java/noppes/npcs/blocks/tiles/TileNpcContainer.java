@@ -167,7 +167,7 @@ public abstract class TileNpcContainer extends TileColorable implements IInvento
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-        return player.isDead || this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : player.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+        return !player.isDead && this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) == this && player.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
 	}
 
 	@Override

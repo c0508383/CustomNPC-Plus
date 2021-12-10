@@ -1,16 +1,11 @@
 package noppes.npcs.config;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import noppes.npcs.LogWriter;
+
+import java.io.*;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.LinkedList;
-
-import noppes.npcs.LogWriter;
 
 public class ConfigLoader {
 	private boolean updateFile = false;
@@ -136,16 +131,13 @@ public class ConfigLoader {
 					out.write(name + "=" + field.get(null).toString() + System.getProperty( "line.separator" ));
 					out.write(System.getProperty( "line.separator" ));
 				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+							e.printStackTrace();
 				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+							e.printStackTrace();
 				}
 			}
 			out.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

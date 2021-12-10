@@ -1,8 +1,5 @@
 package noppes.npcs.ai.target;
 
-import java.util.Collections;
-import java.util.List;
-
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,6 +11,9 @@ import net.minecraft.util.MathHelper;
 import noppes.npcs.CustomNpcs;
 import noppes.npcs.entity.EntityNPCInterface;
 
+import java.util.Collections;
+import java.util.List;
+
 public class EntityAIClosestTarget extends EntityAITarget
 {
     private final Class targetClass;
@@ -21,7 +21,7 @@ public class EntityAIClosestTarget extends EntityAITarget
 
     /** Instance of EntityAINearestAttackableTargetSorter. */
     private final EntityAINearestAttackableTarget.Sorter theNearestAttackableTargetSorter;
-    private final IEntitySelector field_82643_g;
+    private final IEntitySelector targetEntitySelector;
     private EntityLivingBase targetEntity;
 
     public EntityAIClosestTarget(EntityCreature par1EntityCreature, Class par2Class, int par3, boolean par4)
@@ -41,7 +41,7 @@ public class EntityAIClosestTarget extends EntityAITarget
         this.targetChance = par3;
         this.theNearestAttackableTargetSorter = new EntityAINearestAttackableTarget.Sorter(par1EntityCreature);
         this.setMutexBits(1);
-        this.field_82643_g = par6IEntitySelector;
+        this.targetEntitySelector = par6IEntitySelector;
     }
 
     /**
@@ -57,7 +57,7 @@ public class EntityAIClosestTarget extends EntityAITarget
         {
             taskOwner.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(((EntityNPCInterface) taskOwner).stats.aggroRange);
             double d0 = this.getTargetDistance();
-            List list = this.taskOwner.worldObj.selectEntitiesWithinAABB(this.targetClass, this.taskOwner.boundingBox.expand(d0,  MathHelper.ceiling_double_int(d0 / 2.0D), d0), this.field_82643_g);
+            List list = this.taskOwner.worldObj.selectEntitiesWithinAABB(this.targetClass, this.taskOwner.boundingBox.expand(d0,  MathHelper.ceiling_double_int(d0 / 2.0D), d0), this.targetEntitySelector);
             Collections.sort(list, this.theNearestAttackableTargetSorter);
             taskOwner.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(CustomNpcs.NpcNavRange);
             if (list.isEmpty())

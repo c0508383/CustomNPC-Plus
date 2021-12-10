@@ -1,8 +1,5 @@
 package noppes.npcs.roles;
 
-import java.util.HashMap;
-import java.util.UUID;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
@@ -14,6 +11,9 @@ import noppes.npcs.NpcMiscInventory;
 import noppes.npcs.constants.EnumGuiType;
 import noppes.npcs.constants.EnumJobType;
 import noppes.npcs.entity.EntityNPCInterface;
+
+import java.util.HashMap;
+import java.util.UUID;
 
 public class RoleFollower extends RoleInterface{
 	
@@ -85,7 +85,7 @@ public class RoleFollower extends RoleInterface{
 		try{
 	        UUID uuid = UUID.fromString(ownerUUID);
 	        if(uuid != null)
-	        	return npc.worldObj.func_152378_a(uuid);
+	        	return npc.worldObj.func_152378_a(uuid); // getPlayerEntityByUUID
 		}
 		catch(IllegalArgumentException ex){
 			

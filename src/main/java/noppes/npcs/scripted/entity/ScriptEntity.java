@@ -1,10 +1,5 @@
 package noppes.npcs.scripted.entity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -29,6 +24,11 @@ import noppes.npcs.scripted.ScriptItemStack;
 import noppes.npcs.scripted.constants.EntityType;
 import noppes.npcs.scripted.interfaces.IEntity;
 import noppes.npcs.scripted.interfaces.INbt;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ScriptEntity<T extends Entity> implements IEntity {
 	protected T entity;
@@ -263,8 +263,8 @@ public class ScriptEntity<T extends Entity> implements IEntity {
 			return null;
 		NBTBase base = compound.getTag(key);
 		if(base instanceof NBTPrimitive)
-			return ((NBTPrimitive)base).func_150286_g();
-		return ((NBTTagString)base).func_150285_a_();
+			return ((NBTPrimitive)base).func_150286_g(); //getDouble
+		return ((NBTTagString)base).func_150285_a_(); //getString
 	}
 
 	/**
